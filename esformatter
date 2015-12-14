@@ -1,0 +1,39 @@
+{
+  "preset": "default",
+
+  "quotes": {
+    "type": "single"
+  },
+
+  "collapseObjects": {
+    "ObjectExpression": {
+      "maxLineLength": 79,
+      "maxKeys": 1
+    }
+  },
+
+  "indent" : {
+    "value": "  "
+  },
+
+  "lineBreak": {
+    "before": {
+      "AssignmentExpression": 0
+    }
+  },
+
+  "whiteSpace": {
+    "before": {
+      "ObjectExpressionClosingBrace": 0,
+      "ModuleSpecifierClosingBrace": 0,
+      "CatchClosingBrace": 0,
+      "CatchKeyword": 0
+    },
+    "after": {
+      "ObjectExpressionOpeningBrace": 0,
+      "ModuleSpecifierOpeningBrace": 0,
+      "CatchKeyword": 0,
+      "CatchOpeningBrace": 0
+    }
+  }
+}
