@@ -1,6 +1,5 @@
 " vim-plug
 set nocompatible
-filetype off
 call plug#begin('~/.vim/plugged')
 Plug 'lambdatoast/elm.vim'
 Plug 'alunny/pegjs-vim'
@@ -16,7 +15,6 @@ Plug 'groenewege/vim-less'
 Plug 'mindriot101/vim-yapf'
 Plug 'millermedeiros/vim-esformatter'
 call plug#end()
-
 
 " Enable syntax highlighting
 syntax enable
@@ -58,5 +56,6 @@ au BufNewFile,BufRead *.tpl :set ft=html
 " for airline to work
 set laststatus=2
 
-" remove autocommenting
-autocmd FileType javascript set formatoptions-=ro
+" remove autoindent, autocomment
+filetype plugin off
+filetype indent off
