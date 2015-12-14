@@ -1,11 +1,34 @@
+" vim-plug
+set nocompatible
+filetype off
+call plug#begin('~/.vim/plugged')
+Plug 'lambdatoast/elm.vim'
+Plug 'alunny/pegjs-vim'
+Plug 'scrooloose/syntastic'
+Plug 'bling/vim-airline'
+Plug 'kchmck/vim-coffee-script'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'ap/vim-css-color'
+Plug 'isRuslan/vim-es6'
+Plug 'fatih/vim-go'
+Plug 'mxw/vim-jsx'
+Plug 'groenewege/vim-less'
+Plug 'mindriot101/vim-yapf'
+Plug 'millermedeiros/vim-esformatter'
+call plug#end()
+
+
 " Enable syntax highlighting
 syntax enable
 let g:jsx_ext_required = 0
 
 " Syntastic specific options
+let g:syntastic_aggregate_errors = 1
+" python
 let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['python', 'mypy']
-let g:syntastic_aggregate_errors = 1
+" js
+
 
 " go.vim
 let g:go_fmt_command = "goimports"
@@ -32,25 +55,8 @@ set rtp+=$GOROOT/misc/vim
 " .tpl files as html
 au BufNewFile,BufRead *.tpl :set ft=html
 
-" vundle
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'lambdatoast/elm.vim.git'
-Plugin 'alunny/pegjs-vim'
-Plugin 'scrooloose/syntastic.git'
-Plugin 'bling/vim-airline'
-Plugin 'kchmck/vim-coffee-script.git'
-Plugin 'hail2u/vim-css3-syntax.git'
-Plugin 'ap/vim-css-color.git'
-Plugin 'isRuslan/vim-es6.git'
-Plugin 'fatih/vim-go.git'
-Plugin 'mxw/vim-jsx.git'
-Plugin 'groenewege/vim-less'
-Plugin 'mindriot101/vim-yapf'
-call vundle#end()
-filetype plugin indent on
-
 " for airline to work
 set laststatus=2
+
+" remove autocommenting
+autocmd FileType javascript set formatoptions-=ro
