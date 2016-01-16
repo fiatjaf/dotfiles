@@ -1,3 +1,7 @@
+if $SHELL =~ 'fish'
+  set shell='/bin/sh'
+endif
+
 " vim-plug
 set nocompatible
 call plug#begin('~/.vim/plugged')
@@ -14,6 +18,8 @@ Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
 Plug 'mindriot101/vim-yapf'
 Plug 'millermedeiros/vim-esformatter'
+Plug 'wavded/vim-stylus'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
 " Enable syntax highlighting
@@ -25,8 +31,8 @@ let g:syntastic_aggregate_errors = 1
 " python
 let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['python', 'mypy']
-" js
-
+" javascript
+let g:syntastic_javascript_checkers = ['standard']
 
 " go.vim
 let g:go_fmt_command = "goimports"
@@ -56,6 +62,6 @@ au BufNewFile,BufRead *.tpl :set ft=html
 " for airline to work
 set laststatus=2
 
-" remove autoindent, autocomment
+" remove autoindent, autocomment, autobizarrethings
 filetype plugin off
 filetype indent off

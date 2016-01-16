@@ -1,3 +1,9 @@
+set fisher_home ~/comp/fisherman
+set fisher_config ~/.config/fisherman
+source $fisher_home/config.fish
+
+set -x EDITOR vim
+
 set -x GOPATH /home/fiatjaf/comp/go
 set -x GOROOT /usr/local/go
 set -x PATH $PATH $GOROOT/bin
