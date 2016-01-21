@@ -1,0 +1,17 @@
+# Move an element to inside another
+
+var target = document.getElementById('target')
+document.querySelector('body > main').appendChild(target)
+
+## Prepend instead of appending
+var target
+var elementBeingMoved
+target.insertBefore(elementBeingMoved, target.firstChild)
+
+
+# Remove an element from the DOM
+var parent
+var child
+parent.removeChild(child)
+/* or */
+child.parentNode.removeChild(child)
