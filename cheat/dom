@@ -8,10 +8,16 @@ var target
 var elementBeingMoved
 target.insertBefore(elementBeingMoved, target.firstChild)
 
-
 # Remove an element from the DOM
 var parent
 var child
 parent.removeChild(child)
 /* or */
 child.parentNode.removeChild(child)
+
+# Scroll to bottom
+window.scrollTo(0, document.body.scrollHeight)
+
+# Replace element
+var parent
+parent.replaceChild(newChild, oldChild)

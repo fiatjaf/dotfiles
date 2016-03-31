@@ -19,6 +19,7 @@ Plug 'groenewege/vim-less'
 Plug 'mindriot101/vim-yapf'
 Plug 'millermedeiros/vim-esformatter'
 Plug 'wavded/vim-stylus'
+Plug 'vim-scripts/fish-syntax'
 Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
@@ -33,6 +34,8 @@ let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['python', 'mypy']
 " javascript
 let g:syntastic_javascript_checkers = ['standard']
+" haskell
+let g:syntastic_haskell_checkers = ['hlint', 'hdevtools']
 
 " go.vim
 let g:go_fmt_command = "goimports"

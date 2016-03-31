@@ -10,5 +10,6 @@ ln -sf "$here/muttrc" $HOME/.muttrc
 ln -sf "$here/ranger-rc.conf" $HOME/.config/ranger/rc.conf
 ln -sf "$here/ranger-scope.sh" $HOME/.config/ranger/scope.sh
 ln -sf "$here/esformatter" $HOME/.esformatter
+ln -sf "$here/tmux.conf" $HOME/.tmux.conf
 
 vim +PlugInstall +qall
