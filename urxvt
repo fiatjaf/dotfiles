@@ -1,0 +1,51 @@
+Xcursor.theme: DMZ-White
+
+URxvt.font:                xft:Ubuntu Mono:pixelsize=15
+URxvt.boldFont:            xft:Ubuntu Mono:pixelsize=15:bold
+URxvt.italicFont:          xft:Ubuntu Mono:pixelsize=15:italic
+URxvt.boldItalicFont:      xft:Ubuntu Mono:pixelsize=15:bold:italic
+URxvt.letterSpace:         -1
+
+URxvt*color0:              #101218
+URxvt*color1:              #ee829f
+URxvt*color2:              #a5ffe1
+URxvt*color3:              #ffefcc
+URxvt*color4:              #97bbf7
+URxvt*color5:              #c0b7f9
+URxvt*color6:              #97e0ff
+URxvt*color7:              #d1d4e0
+URxvt*color8:              #7780a1
+URxvt*color9:              #ee829f
+URxvt*color10:             #a5ffe1
+URxvt*color11:             #ffefcc
+URxvt*color12:             #97bbf7
+URxvt*color13:             #c0b7f9
+URxvt*color14:             #97e0ff
+URxvt*color15:             #ffffff
+URxvt*color16:             #f99170
+URxvt*color17:             #fcc09e
+URxvt*color18:             #1f222d
+URxvt*color19:             #252936
+URxvt*color20:             #C0C5CE
+URxvt*color21:             #C9CCDB
+URxvt*background:          #101218
+URxvt*foreground:          #E6EFF7
+URxvt*cursorColor:         #E6EFF7
+
+URxvt.internalBorder:      0
+URxvt.externalBorder:      0
+
+URxvt.scrollBar:           false
+
+URxvt*fading:              30
+
+URxvt.perl-ext-common:     matcher,resize-font,foo
+
+URxvt.keysym.F11:          perl:fullscreen:switch
+
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger:  C-Up
+
+URxvt.url-launcher:        /usr/bin/google-chrome
+URxvt.keysym.M-Delete:     perl:matcher:list
+URxvt.colorUL:             #7780a1
