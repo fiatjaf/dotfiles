@@ -1,9 +1,5 @@
-set fisher_home ~/comp/fisherman
-set fisher_config ~/.config/fisherman
-source $fisher_home/config.fish
-
 set -x EDITOR vim
-set -x TERMINAL rxvt-unicode
+set -x TERMINAL urxvt
 
 set -x GOPATH /home/fiatjaf/comp/go
 set -x GOROOT /usr/local/go

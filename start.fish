@@ -13,7 +13,7 @@ ln -sf "$here/muttrc" $HOME/.muttrc
 ln -sf "$here/esformatter" $HOME/.esformatter
 ln -sf "$here/tmux.conf" $HOME/.tmux.conf
 mkdir -p $HOME/.i3
-ln -sf "$here/i3" $HOME/.i3/conf
+ln -sf "$here/i3" $HOME/.i3/config
 ln -sf "$here/urxvt" $HOME/.Xdefaults
 
 vim +PlugInstall +qall
