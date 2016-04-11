@@ -16,4 +16,5 @@ alias 'tmux' 'tmux -2'
 
 if test -f /home/fiatjaf/.autojump/share/autojump/autojump.fish; . /home/fiatjaf/.autojump/share/autojump/autojump.fish; end
 
-source ~/.config/fish/keys.fish
+touch ~/.config/fish/local.fish
+source ~/.config/fish/local.fish
