@@ -1,3 +1,4 @@
+set here (pwd)
 cd /tmp
 
 # vim-plug
@@ -23,6 +24,11 @@ sudo apt-get install fish -y
 # i3
 if [ ! (which i3) ]
   sudo aptitude install i3 dmenu rxvt-unicode -y
+end
+
+# flux
+if [ ! (which xflux) ]
+  sudo ln -s "$here/apps/xflux" /usr/local/bin
 end
 
 # basic things
