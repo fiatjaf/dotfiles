@@ -32,5 +32,5 @@ if [ ! (which xflux) ]
 end
 
 # basic things
-sudo aptitude install curl jq deluge tmux -y
+sudo aptitude install rxvt-unicode-256color curl jq tmux -y
 sudo pip install pythonpy -y
