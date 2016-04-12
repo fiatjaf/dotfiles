@@ -4,7 +4,7 @@ cd /tmp
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # vim themes
-mkdir -p ~/.vim/colors
+mkdir -p ~/.vim/colors/jellybeans.vim
 wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim -O ~/.vim/colors
 
 # ranger

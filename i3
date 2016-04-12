@@ -158,3 +158,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+exec x-www-browser
+exec --no-startup-id numlockx
+exec --no-startup-id xflux -l -19
