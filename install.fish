@@ -41,7 +41,7 @@ if [ ! (which xflux) ]
 end
 
 # basic things
-sudo aptitude install w3m rxvt-unicode-256color curl tmux atool -y
+sudo aptitude install w3m rxvt-unicode-256color curl tmux atool mosh -y
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y
