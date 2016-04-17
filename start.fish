@@ -14,6 +14,7 @@ ln -sf "$here/esformatter" $HOME/.esformatter
 ln -sf "$here/tmux.conf" $HOME/.tmux.conf
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
+ln -sf "$here/i3status" $HOME/.i3status.conf
 ln -sf "$here/urxvt" $HOME/.Xdefaults
 ln -sf "$here/irssi" $HOME/.irssi
 

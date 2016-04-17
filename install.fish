@@ -40,5 +40,9 @@ if [ ! (which xflux) ]
 end
 
 # basic things
-sudo aptitude install rxvt-unicode-256color curl jq tmux -y
-sudo pip install pythonpy -y
+sudo aptitude install w3m rxvt-unicode-256color curl tmux atool mosh -y
+sudo aptitude install jq -y
+sudo aptitude install w3m-img -y
+sudo aptitude install mediainfo poppler-utils -y
+sudo aptitude install python-pygments -y
+sudo pip install pythonpy
