@@ -15,5 +15,6 @@ ln -sf "$here/tmux.conf" $HOME/.tmux.conf
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
 ln -sf "$here/urxvt" $HOME/.Xdefaults
+ln -sf "$here/irssi" $HOME/.irssi
 
 vim +PlugInstall +qall
