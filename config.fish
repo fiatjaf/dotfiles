@@ -6,7 +6,7 @@ set -x GOROOT /usr/local/go
 set -x PATH $PATH $GOROOT/bin
 set -x PATH $PATH $GOPATH/bin
 
-set -x NPM_PACKAGES $HOME/node_modules
+set -x NPM_PACKAGES $HOME/npm_modules
 set -x PATH $PATH $NPM_PACKAGES/bin
 set -e MANPATH
 set -x MANPATH (manpath) $NPM_PACKAGES/share/man

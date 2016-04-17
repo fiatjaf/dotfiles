@@ -16,17 +16,16 @@ if [ ! (which ranger) ]
   cd ..
 end
 
-
 # update fish
 sudo apt-add-repository ppa:fish-shell/release-2 -y
 apt-get update
 sudo apt-get install fish -y
 
 # npm complicated global stuff
-mkdir -p $HOME/node_modules
+mkdir -p $HOME/npm_modules/bin
 touch $HOME/.npmrc
 if [ ! (cat ~/.npmrc | grep prefix) ]
-  echo 'prefix=${HOME}/node_modules' >> $HOME/.npmrc
+  echo 'prefix=${HOME}/npm_modules' >> $HOME/.npmrc
 end
 sudo chown -R fiatjaf.fiatjaf /usr/local/lib/
 
