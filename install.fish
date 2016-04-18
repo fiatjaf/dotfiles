@@ -8,6 +8,11 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 mkdir -p ~/.vim/colors
 wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim -O ~/.vim/colors/jellybeans.vim
 
+# update fish
+sudo apt-add-repository ppa:fish-shell/release-2 -y
+apt-get update
+sudo apt-get install fish -y
+
 # ranger
 if [ ! (which ranger) ]
   git clone https://github.com/hut/ranger.git
@@ -22,11 +27,6 @@ if [ ! (which node) ]
   sudo apt-get install -y nodejs
 end
 
-# update fish
-sudo apt-add-repository ppa:fish-shell/release-2 -y
-apt-get update
-sudo apt-get install fish -y
-
 # npm complicated global stuff
 mkdir -p $HOME/npm_modules/bin
 touch $HOME/.npmrc
@@ -34,6 +34,21 @@ if [ ! (cat ~/.npmrc | grep prefix) ]
   echo 'prefix=${HOME}/npm_modules' >> $HOME/.npmrc
 end
 sudo chown -R fiatjaf.fiatjaf /usr/local/lib/
+
+# entr
+if [ ! (which entr) ]
+  cd /tmp
+  mkdir entr
+  cd entr
+  wget http://entrproject.org/code/entr-3.5.tar.gz
+  tar -xvf entr-3.5.tar.gz
+  rm entr-3.5.tar.gz
+  cd *
+  ./configure
+  make
+  sudo make install
+  cd /tmp
+end
 
 # i3
 if [ ! (which i3) ]
