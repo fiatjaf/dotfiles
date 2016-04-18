@@ -5,8 +5,8 @@ cd /tmp
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # vim themes
-mkdir -p ~/.vim/colors/jellybeans.vim
-wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim -O ~/.vim/colors
+mkdir -p ~/.vim/colors
+wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim -O ~/.vim/colors/jellybeans.vim
 
 # ranger
 if [ ! (which ranger) ]
@@ -14,6 +14,12 @@ if [ ! (which ranger) ]
   cd ranger
   sudo make install
   cd ..
+end
+
+# nodejs
+if [ ! (which node) ]
+  curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+  sudo apt-get install -y nodejs
 end
 
 # update fish
@@ -40,9 +46,8 @@ if [ ! (which xflux) ]
 end
 
 # basic things
-sudo aptitude install w3m rxvt-unicode-256color curl tmux atool mosh -y
+sudo aptitude install w3m rxvt-unicode-256color curl tmux atool mosh silversearcher-ag python-dev vim git -y
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y
 sudo aptitude install python-pygments -y
-sudo pip install pythonpy

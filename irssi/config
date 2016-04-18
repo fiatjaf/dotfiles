@@ -84,7 +84,7 @@ chatnets = {
   Ubuntu = { type = "IRC"; };
   Freenode = {
     type = "IRC";
-    autosendcmd = "^nick fiatjaf;/^msg nickserv identify IRC_PASSWORD";
+    autosendcmd = "^nick fiatjaf;/^msg nickserv identify my_super_nice_freenode_password";
   };
 };
 

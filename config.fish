@@ -15,8 +15,11 @@ set -x MAIL /home/fiatjaf/Maildir/
 
 set -x PATH $PATH /usr/local/git-annex.linux
 
+mkdir -p $HOME/.local/bin
+set -x PATH $PATH $HOME/.local/bin
+
 alias 'git-icdiff' 'git difftool --no-prompt --extcmd icdiff ($@)'
-alias 'garret' 'ssh -t dokku@garret.alhur.es'
+alias 'garret' 'ssh -t dokku@garret.alhur.es dokku'
 alias 'tmux' 'tmux -2'
 
 if test -f /home/fiatjaf/.autojump/share/autojump/autojump.fish; . /home/fiatjaf/.autojump/share/autojump/autojump.fish; end
