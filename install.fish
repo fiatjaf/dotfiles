@@ -35,6 +35,12 @@ if [ ! (cat ~/.npmrc | grep prefix) ]
 end
 sudo chown -R fiatjaf.fiatjaf /usr/local/lib/
 
+# npm global packages
+npm install --global eslint_d
+npm install --global stylus
+npm install --global node-sass
+npm install --global instant-server
+
 # entr
 if [ ! (which entr) ]
   cd /tmp
@@ -61,7 +67,7 @@ if [ ! (which xflux) ]
 end
 
 # basic things
-sudo aptitude install w3m rxvt-unicode-256color curl tmux atool mosh silversearcher-ag python-dev vim git -y
+sudo aptitude install w3m rxvt-unicode-256color curl tmux atool mosh silversearcher-ag python-dev vim git moreutils -y
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y

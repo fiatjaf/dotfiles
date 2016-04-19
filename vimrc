@@ -33,7 +33,8 @@ let g:syntastic_aggregate_errors = 1
 let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['python', 'mypy']
 " javascript
-let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
 " haskell
 let g:syntastic_haskell_checkers = ['hlint', 'hdevtools']
 
