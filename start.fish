@@ -10,7 +10,7 @@ ln -sf "$here/cheat" $HOME/.cheat
 ln -sf "$here/bashrc" $HOME/.bashrc
 ln -sf "$here/mailcap" $HOME/.mailcap
 ln -sf "$here/muttrc" $HOME/.muttrc
-ln -sf "$here/esformatter" $HOME/.esformatter
+ln -sf "$here/eslintrc.json" $HOME/.eslintrc.json
 ln -sf "$here/tmux.conf" $HOME/.tmux.conf
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
