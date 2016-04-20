@@ -11,7 +11,7 @@ order += "load"
 order += "cpu_usage"
 order += "disk /"
 order += "ethernet eth0"
-order += "tztime local"
+order += "time"
 #order += "ipv6"
 #order += "run_watch DHCP"
 #order += "wireless wlan0"
@@ -54,6 +54,6 @@ run_watch DHCP {
     pidfile = "/var/run/dhclient*.pid"
 }
 
-tztime local {
+time {
     format = " %d/%h/%Y %H:%M"
 }
