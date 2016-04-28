@@ -38,7 +38,6 @@ sudo chown -R fiatjaf.fiatjaf /usr/local/lib/
 # npm global packages
 npm install --global eslint_d
 npm install --global stylus
-npm install --global node-sass
 npm install --global instant-server
 
 # entr
