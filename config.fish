@@ -29,3 +29,7 @@ if test -f /home/fiatjaf/.autojump/share/autojump/autojump.fish; . /home/fiatjaf
 
 touch ~/.config/fish/local.fish
 source ~/.config/fish/local.fish
+
+function settitle
+  printf "\033k$argv[1]\033\\"
+end
