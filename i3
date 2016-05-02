@@ -160,5 +160,6 @@ bar {
 }
 
 exec x-www-browser
+exec --no-startup-id syncthing
 exec --no-startup-id numlockx
 exec --no-startup-id xflux -l -19
