@@ -101,7 +101,8 @@ channels = (
   { name = "#fish"; chatnet = "oftc"; autojoin = "yes"; },
   { name = "#git-annex"; chatnet = "oftc"; autojoin = "yes"; },
   { name = "#codemirror"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#irssi"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#irssi"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#xonsh"; chatnet = "OFTC"; autojoin = "yes"; }
 );
 
 aliases = {

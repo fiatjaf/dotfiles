@@ -5,8 +5,10 @@ cd /tmp
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # vim themes
-mkdir -p ~/.vim/colors
-wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim -O ~/.vim/colors/jellybeans.vim
+if [ ! -e ~/.vim/colors/jellybeans.vim ]
+  mkdir -p ~/.vim/colors
+  wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim -O ~/.vim/colors/jellybeans.vim
+end
 
 # update fish
 sudo apt-add-repository ppa:fish-shell/release-2 -y
@@ -38,7 +40,6 @@ sudo chown -R fiatjaf.fiatjaf /usr/local/lib/
 # npm global packages
 npm install --global eslint_d
 npm install --global stylus
-npm install --global node-sass
 npm install --global instant-server
 
 # entr
@@ -66,9 +67,13 @@ if [ ! (which xflux) ]
   sudo ln -s "$here/apps/xflux" /usr/local/bin
 end
 
-# basic things
+# basic things from apt
 sudo aptitude install w3m rxvt-unicode-256color curl tmux atool mosh silversearcher-ag python-dev vim git moreutils -y
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y
 sudo aptitude install python-pygments -y
+
+# python useful modules
+# pip, virtualenv, pipsi
+# pipsi install cheat
