@@ -1,0 +1,16 @@
+[twtxt]
+nick = fiatjaf
+twtfile = ~/site/twtxt.txt
+twturl = http://fiatjaf.alhur.es/twtxt.txt
+check_following = True
+use_pager = True
+use_cache = True
+disclose_identity = True
+character_limit = 350
+character_warning = 300
+limit_timeline = 100
+timeline_update_interval = 70
+sorting = ascending
+
+[following]
+twtxt = https://buckket.org/twtxt_news.txt

@@ -72,7 +72,7 @@ sudo aptitude install w3m rxvt-unicode-256color curl tmux atool mosh silversearc
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y
-sudo aptitude install python-pygments -y
+sudo aptitude install python-pygments python-requests -y
 
 # python useful modules
 # pip, virtualenv, pipsi

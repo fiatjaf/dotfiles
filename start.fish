@@ -17,5 +17,7 @@ ln -sf "$here/i3" $HOME/.i3/config
 ln -sf "$here/i3status" $HOME/.i3status.conf
 ln -sf "$here/urxvt" $HOME/.Xdefaults
 ln -sf "$here/irssi" $HOME/.irssi
+mkdir -p $HOME/.config/twtxt
+ln -sf "$here/twtxt" $HOME/.config/twtxt/config
 
 vim +PlugInstall +qall
