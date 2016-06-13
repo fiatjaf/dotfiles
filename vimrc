@@ -5,7 +5,6 @@ endif
 " vim-plug
 set nocompatible
 call plug#begin('~/.vim/plugged')
-Plug 'lambdatoast/elm.vim'
 Plug 'alunny/pegjs-vim'
 Plug 'scrooloose/syntastic'
 Plug 'bling/vim-airline'
@@ -16,7 +15,6 @@ Plug 'isRuslan/vim-es6'
 Plug 'fatih/vim-go'
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
-Plug 'mindriot101/vim-yapf'
 Plug 'millermedeiros/vim-esformatter'
 Plug 'wavded/vim-stylus'
 Plug 'vim-scripts/fish-syntax'
@@ -31,7 +29,7 @@ let g:jsx_ext_required = 0
 let g:syntastic_aggregate_errors = 1
 " python
 let g:syntastic_python_python_exec = 'python3'
-let g:syntastic_python_checkers = ['python', 'mypy']
+let g:syntastic_python_checkers = ['python', 'flake8']
 " javascript
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'

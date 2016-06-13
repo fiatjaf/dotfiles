@@ -76,4 +76,18 @@ sudo aptitude install python-pygments python-requests -y
 
 # python useful modules
 # pip, virtualenv, pipsi
-# pipsi install cheat
+if [ ! (which pipsi) ]
+  curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python2
+end
+if [ ! (which cheat) ]
+  pipsi install cheat
+end
+if [ ! (which s3cmd) ]
+  pipsi install s3cmd
+end
+if [ ! (which flake8) ]
+  pipsi install flake8
+end
+if [ ! (which icdiff) ]
+  pipsi install icdiff
+end
