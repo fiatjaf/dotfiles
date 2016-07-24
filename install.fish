@@ -1,6 +1,10 @@
 set here (pwd)
 cd /tmp
 
+# we need this before
+sudo apt-get install aptitude -y
+sudo aptitude install make -y
+
 # vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -12,7 +16,7 @@ end
 
 # update fish
 sudo apt-add-repository ppa:fish-shell/release-2 -y
-apt-get update
+sudo apt-get update
 sudo apt-get install fish -y
 
 # ranger
@@ -68,14 +72,20 @@ if [ ! (which xflux) ]
 end
 
 # basic things from apt
-sudo aptitude install w3m rxvt-unicode-256color curl tmux atool mosh silversearcher-ag python-dev vim git moreutils -y
+sudo aptitude install w3m ttf-ubuntu-font-family rxvt-unicode-256color curl tmux atool mosh silversearcher-ag python-dev vim git moreutils -y
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y
 sudo aptitude install python-pygments python-requests -y
 
 # python useful modules
-# pip, virtualenv, pipsi
+if [ ! (which pip) ]
+  wget https://bootstrap.pypa.io/get-pip.py
+  sudo python2 get-pip.py
+end
+if [ ! (which virtualenv) ]
+  sudo pip install virtualenv
+end
 if [ ! (which pipsi) ]
   curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python2
 end
@@ -91,3 +101,4 @@ end
 if [ ! (which icdiff) ]
   pipsi install icdiff
 end
+pipsi install youtube-dl # let it run always, because updates are needed.

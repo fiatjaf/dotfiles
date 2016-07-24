@@ -14,7 +14,7 @@ set -x MANPATH (manpath) $NPM_PACKAGES/share/man
 
 set -x MAIL /home/fiatjaf/Maildir/
 
-set -x PATH $PATH /usr/local/git-annex.linux
+set -x PATH $PATH /home/fiatjaf/git-annex.linux
 
 mkdir -p $HOME/.local/bin
 set -x PATH $PATH $HOME/.local/bin
@@ -24,6 +24,7 @@ alias 'garret' 'ssh -t dokku@garret.alhur.es dokku'
 alias 'tmux' 'tmux -2'
 alias 'scss' 'node-sass'
 alias 'sass' 'node-sass'
+alias 'circ' '/usr/bin/chromium-browser --profile-directory=Default --app-id=bebigdkelppomhhjaaianniiifjbgocn'
 
 if test -f /home/fiatjaf/.autojump/share/autojump/autojump.fish; . /home/fiatjaf/.autojump/share/autojump/autojump.fish; end
 
