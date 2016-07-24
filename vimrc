@@ -37,7 +37,7 @@ let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_haskell_checkers = ['hlint', 'hdevtools']
 
 " go.vim
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "gofmt"
 
 " Theme
 set t_Co=256
