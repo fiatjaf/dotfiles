@@ -1,2 +1,4 @@
 vim/plugged
 vim/.netrwhist
+*.pyo
+*.pyc
