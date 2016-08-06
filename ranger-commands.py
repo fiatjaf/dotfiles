@@ -2,6 +2,7 @@ import ranger.api
 import ranger.api.commands
 
 import subprocess
+import json
 
 
 class ga_tag(ranger.api.commands.Command):
@@ -17,10 +18,10 @@ class ga_tag(ranger.api.commands.Command):
         for f in self.fm.thistab.get_selection():
             for tag in self.args[1:]:
                 subprocess.check_output([
-                    'git', 'annex', 'metadata', '-t', tag, f.relative_path])
+                    'git-annex', 'metadata', '-t', tag, f.path])
 
         self.fm.notify('tagged in git-annex!')
-        self.fm.reload_cwd()
+        # self.fm.reload_cwd()
 
 
 class ga_set(ranger.api.commands.Command):
@@ -40,7 +41,32 @@ class ga_set(ranger.api.commands.Command):
                     continue
 
                 subprocess.check_output([
-                    'git', 'annex', 'metadata', '-s', pair, f.relative_path])
+                    'git-annex', 'metadata', '-s', pair, f.path])
 
         self.fm.notify('set in git-annex!')
-        self.fm.reload_cwd()
+        # self.fm.reload_cwd()
+
+
+class ga_whereis(ranger.api.commands.Command):
+    """:ga_whereis
+
+    Shows in which other git-annex repos the current file is.
+    Doesn't show the present repo, since it should be clear from ranger.
+    """
+
+    def execute(self):
+        f = self.fm.thisfile
+        o = subprocess.check_output([
+            'git-annex', 'whereis', f.path, '--json'])
+
+        data = json.loads(o)
+        places = data['whereis'] + data['untrusted']
+
+        repos = []
+        for repo in places:
+            if not repo['here']:
+                spl = repo['description'].split('[')
+                name = spl[-1][:-1]
+                repos.append(name)
+
+        self.fm.notify(' | '.join(repos))

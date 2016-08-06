@@ -3,8 +3,8 @@ set here (pwd)
 mkdir -p $HOME/.config/ranger
 ln -sf "$here/ranger-rc.conf" $HOME/.config/ranger/rc.conf
 ln -sf "$here/ranger-scope.sh" $HOME/.config/ranger/scope.sh
-ln -sf "$here/ranger-plugins" $HOME/.config/ranger/plugins
 ln -sf "$here/ranger-commands.py" $HOME/.config/ranger/commands.py
+ln -sf -T "$here/ranger-plugins" $HOME/.config/ranger/plugins
 
 ln -sf "$here/config.fish" $HOME/.config/fish/config.fish
 ln -sf "$here/vim" $HOME/.vim
