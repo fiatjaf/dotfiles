@@ -75,7 +75,7 @@ class GitAnnexWhereisLinemode(ranger.core.linemode.LinemodeBase):
 
         for uuid, repo in self.repositories.items():
             spl = repo['description'].split('[')
-            name = spl[-1][:-1]
+            name = spl[-1][:-1] if len(spl) > 1 else repo['description']
             self.repositories[uuid] = name
 
     def filetitle(self, file, metadata):

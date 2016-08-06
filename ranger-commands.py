@@ -66,7 +66,7 @@ class ga_whereis(ranger.api.commands.Command):
         for repo in places:
             if not repo['here']:
                 spl = repo['description'].split('[')
-                name = spl[-1][:-1]
+                name = spl[-1][:-1] if len(spl) > 1 else repo['description']
                 repos.append(name)
 
         self.fm.notify(' | '.join(repos))
