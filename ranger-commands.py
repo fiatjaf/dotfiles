@@ -5,6 +5,29 @@ import subprocess
 import json
 
 
+class utils():
+    def probably_not_indexed(self, f, fname):
+        # let's check if the file is indexed
+        o = subprocess.check_output([
+            'git-annex', 'status', f.path, '--json'
+        ])
+        try:
+            status = json.loads(o)['status']
+            if status == '?':
+                self.fm.notify(
+                    "'{}' is not indexed or was renamed. "
+                    "You must commit the changes.".format(fname)
+                    .encode('utf-8')
+                )
+                return
+        except ValueError:
+            self.fm.notify(
+                "'{}' is probably not indexed.".format(fname)
+                .encode('utf-8')
+            )
+            return
+
+
 class ga_tag(ranger.api.commands.Command):
     """:ga_tag <tagname> [tagname...]
 
@@ -70,3 +93,80 @@ class ga_whereis(ranger.api.commands.Command):
                 repos.append(name)
 
         self.fm.notify(' | '.join(repos))
+
+
+class ga_get(ranger.api.commands.Command, utils):
+    """:ga_get
+
+    Fetches current file from a different git-annex remote (or special remote).
+    """
+
+    def execute(self):
+        for f in self.fm.thistab.get_selection():
+            fname = f.basename.decode('utf-8')
+            self.fm.notify(
+                u"fetching'{}'...".format(fname).encode('utf-8')
+            )
+            try:
+                o = subprocess.check_output([
+                    'git-annex', 'get', f.path, '--json'])
+            except subprocess.CalledProcessError as e:
+                self.fm.notify(e.output, bad=True)
+                continue
+
+            try:
+                data = json.loads(o)
+                if data['success']:
+                    self.fm.notify(
+                        u"'{}' fetched successfully.".format(fname)
+                        .encode('utf-8')
+                    )
+                else:
+                    self.fm.notify(o.encode('utf-8'), bad=True)
+            except ValueError:
+                if self.probably_not_indexed(f, fname):
+                    continue
+
+                self.fm.notify('error: ' + repr(o), bad=True)
+
+        self.fm.reload_cwd()
+
+
+class ga_drop(ranger.api.commands.Command, utils):
+    """:ga_drop
+
+    Drops current file from this git-annex repository here
+    (as long as it is present in <numcopies> other repositories).
+    """
+
+    def execute(self):
+        for f in self.fm.thistab.get_selection():
+            fname = f.basename.decode('utf-8')
+
+            self.fm.notify(
+                u"dropping '{}'...".format(fname).encode('utf-8')
+            )
+            try:
+                o = subprocess.check_output([
+                    'git-annex', 'drop', f.path, '--json'
+                ])
+            except subprocess.CalledProcessError as e:
+                self.fm.notify(e.output, bad=True)
+                continue
+
+            try:
+                data = json.loads(o)
+                if data['success']:
+                    self.fm.notify(
+                        u"'{}' dropped successfully.".format(fname)
+                        .encode('utf-8')
+                    )
+                else:
+                    self.fm.notify(o.encode('utf-8'), bad=True)
+            except ValueError:
+                if self.probably_not_indexed(f, fname):
+                    continue
+
+                self.fm.notify('error: ' + repr(o), bad=True)
+
+        self.fm.reload_cwd()
