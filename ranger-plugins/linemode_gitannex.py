@@ -55,7 +55,11 @@ class GitAnnexMetadataLinemode(ranger.core.linemode.LinemodeBase):
 class GitAnnexWhereisLinemode(ranger.core.linemode.LinemodeBase):
     name = 'git-annex-whereis'
 
-    def __init__(self):
+    @property
+    def repositories(self):
+        if self._repositories:
+            return self._repositories
+
         try:
             o = subprocess.check_output([
                 'git-annex', 'info', '--json'
@@ -65,18 +69,18 @@ class GitAnnexWhereisLinemode(ranger.core.linemode.LinemodeBase):
 
         info = json.loads(o)
 
-        self.repositories = {}
+        self._repositories = {}
         for repo in info['trusted repositories']:
-            self.repositories[repo['uuid']] = repo
+            self._repositories[repo['uuid']] = repo
         for repo in info['semitrusted repositories']:
-            self.repositories[repo['uuid']] = repo
+            self._repositories[repo['uuid']] = repo
         for repo in info['untrusted repositories']:
-            self.repositories[repo['uuid']] = repo
+            self._repositories[repo['uuid']] = repo
 
-        for uuid, repo in self.repositories.items():
+        for uuid, repo in self._repositories.items():
             spl = repo['description'].split('[')
             name = spl[-1][:-1] if len(spl) > 1 else repo['description']
-            self.repositories[uuid] = name
+            self._repositories[uuid] = name
 
     def filetitle(self, file, metadata):
         return file.relative_path

@@ -3,7 +3,7 @@ cd /tmp
 
 # we need this before
 sudo apt-get install aptitude -y
-sudo aptitude install make -y
+sudo aptitude install build-essential make software-properties-common -y
 
 # vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -34,9 +34,12 @@ end
 sudo chown -R fiatjaf.fiatjaf /usr/local/lib/
 
 # npm global packages
-npm install --global eslint_d
-npm install --global stylus
-npm install --global instant-server
+if [ ! (which eslint_d) ]
+  npm install --global eslint_d
+end
+if [ ! (which instant) ]
+  npm install --global instant-server
+end
 
 # entr
 if [ ! (which entr) ]
@@ -93,4 +96,7 @@ end
 if [ ! (which icdiff) ]
   pipsi install icdiff
 end
-pipsi install youtube-dl # let it run always, because updates are needed.
+if [ ! (which youtube-dl) ]
+  pipsi install youtube-dl
+end
+pipsi upgrade youtube-dl

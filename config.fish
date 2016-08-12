@@ -34,3 +34,12 @@ source ~/.config/fish/local.fish
 function settitle
   printf "\033k$argv[1]\033\\"
 end
+
+function r
+  set tempfile (mktemp)
+  ranger --choosedir=$tempfile
+  if test -f $tempfile
+    cd (cat $tempfile)
+  end
+  rm $tempfile
+end
