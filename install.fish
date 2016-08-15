@@ -67,7 +67,7 @@ if [ ! (which xflux) ]
 end
 
 # basic things from apt
-sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color curl tmux atool mosh silversearcher-ag python-dev vim git moreutils -y
+sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color curl tmux atool mosh silversearcher-ag python-dev vim git moreutils ncdu -y
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y
