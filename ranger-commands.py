@@ -2,7 +2,9 @@ import ranger.api
 import ranger.api.commands
 
 import subprocess
+import tempfile
 import json
+import os
 
 
 class utils():

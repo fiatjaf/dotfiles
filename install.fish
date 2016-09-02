@@ -85,7 +85,7 @@ if [ ! (which pipsi) ]
   curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python2
 end
 if [ ! (which ranger) ]
-  pipsi install git+git://git.savannah.nongnu.org/ranger.git#egg=ranger
+  pipsi install --python (which python3) git+git://git.savannah.nongnu.org/ranger.git#egg=ranger
 end
 if [ ! (which s3cmd) ]
   pipsi install s3cmd
