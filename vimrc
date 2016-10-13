@@ -19,6 +19,7 @@ Plug 'millermedeiros/vim-esformatter'
 Plug 'wavded/vim-stylus'
 Plug 'vim-scripts/fish-syntax'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'lambdatoast/elm.vim'
 call plug#end()
 
 " Enable syntax highlighting
@@ -67,3 +68,6 @@ set laststatus=2
 " remove autoindent, autocomment, autobizarrethings
 filetype plugin off
 filetype indent off
+
+" don't let the cursor be at the top or at the bottom
+set scrolloff=10
