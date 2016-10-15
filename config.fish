@@ -8,7 +8,7 @@ set -x PATH $PATH $GOROOT/bin
 set -x PATH $PATH $GOPATH/bin
 
 set -x NPM_PACKAGES $HOME/npm_modules
-set -x PATH $PATH $NPM_PACKAGES/bin
+set -x PATH $PATH $HOME/npm_modules/bin $HOME/node_modules/bin
 set -e MANPATH
 set -x MANPATH (manpath) $NPM_PACKAGES/share/man
 
