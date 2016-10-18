@@ -14,9 +14,11 @@ if [ ! -e ~/.vim/colors/jellybeans.vim ]
   wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim -O ~/.vim/colors/jellybeans.vim
 end
 
-# update fish
+# update fish and chromium
+sudo add-apt-repository ppa:canonical-chromium-builds/stage -y
 sudo apt-add-repository ppa:fish-shell/release-2 -y
 sudo apt-get update
+sudo apt-get install chromium-browser -y
 sudo apt-get install fish -y
 
 # nodejs
@@ -67,7 +69,7 @@ if [ ! (which xflux) ]
 end
 
 # basic things from apt
-sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color curl tmux atool mosh silversearcher-ag python-dev vim git moreutils ncdu -y
+sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color curl tmux atool autossh mosh silversearcher-ag python-dev vim git moreutils ncdu -y
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y
