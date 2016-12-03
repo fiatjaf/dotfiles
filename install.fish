@@ -42,6 +42,12 @@ end
 if [ ! (which instant) ]
   npm install --global instant-server
 end
+if [ ! (which seedshot) ]
+  npm install --global seedshot
+end
+if [ ! (which js-yaml) ]
+  npm install --global js-yaml
+end
 
 # entr
 if [ ! (which entr) ]
@@ -69,7 +75,7 @@ if [ ! (which xflux) ]
 end
 
 # basic things from apt
-sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color curl tmux atool autossh mosh silversearcher-ag python-dev vim git moreutils ncdu -y
+sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color curl tmux atool autossh mosh silversearcher-ag python-dev vim git moreutils ncdu scrot -y
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y
