@@ -71,3 +71,15 @@ filetype indent off
 
 " don't let the cursor be at the top or at the bottom
 set scrolloff=10
+
+" tmux
+set title
+autocmd BufEnter * call system("tmux rename-window " . expand("%:t"))
+autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+autocmd VimLeavePre * call system("tmux setw automatic-rename")
+
+let tmuxwindow = ""
+autocmd VimEnter * let tmuxwindow = system("tmux display-message -p '#I' | tr -d '\040\011\012\015'")
+autocmd BufWritePre * call system("tmux rename-window 'saving " . expand("%:t") . "'")
+autocmd BufWritePost * let &titlestring = ' ' . expand("%:t")
+autocmd BufWritePost * call system("tmux rename-window -t " . tmuxwindow . " " . expand("%:t"))
