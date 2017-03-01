@@ -9,7 +9,6 @@ ln -sf -T "$here/ranger-plugins" $HOME/.config/ranger/plugins
 ln -sf "$here/config.fish" $HOME/.config/fish/config.fish
 ln -sf "$here/vim" $HOME/.vim
 ln -sf "$here/vimrc" $HOME/.vimrc
-ln -sf "$here/cheat" $HOME/.cheat
 ln -sf "$here/bashrc" $HOME/.bashrc
 ln -sf "$here/mailcap" $HOME/.mailcap
 ln -sf "$here/muttrc" $HOME/.muttrc
