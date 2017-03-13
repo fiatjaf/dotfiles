@@ -16,7 +16,10 @@
   "globals": {
     "document": false,
     "navigator": false,
-    "window": false
+    "window": false,
+    "location": false,
+    "localStorage": false,
+    "sessionStorage": false
   },
 
   "rules": {
