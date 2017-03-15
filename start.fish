@@ -20,5 +20,6 @@ ln -sf "$here/i3status" $HOME/.i3status.conf
 ln -sf "$here/urxvt" $HOME/.Xdefaults
 mkdir -p $HOME/.config/twtxt
 ln -sf "$here/twtxt" $HOME/.config/twtxt/config
+ln -sf "$here/icons" $HOME/.icons
 
 vim +PlugInstall +qall
