@@ -21,6 +21,18 @@ sudo apt-get update
 sudo apt-get install chromium-browser -y
 sudo apt-get install fish -y
 
+# kakoune
+if [ ! (which kak) ]
+  sudo aptitude install libboost-dev libboost-regex-dev libncursesw5-dev asciidoc -y
+  wget https://github.com/mawww/kakoune/archive/master.zip
+  unzip master.zip
+  cd kakoune-master/src
+    make
+    sudo make install
+  cd -
+  rm -rf kakoune-master
+end
+
 # nodejs
 if [ ! (which node) ]
   curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
