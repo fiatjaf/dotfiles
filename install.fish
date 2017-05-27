@@ -27,6 +27,7 @@ if [ ! (which kak) ]
   wget https://github.com/mawww/kakoune/archive/master.zip
   unzip master.zip
   cd kakoune-master/src
+    sed -i "1s/yes/no/" Makefile # compile with debug=no
     make
     sudo make install
   cd -

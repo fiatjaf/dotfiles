@@ -22,4 +22,6 @@ mkdir -p $HOME/.config/twtxt
 ln -sf "$here/twtxt" $HOME/.config/twtxt/config
 ln -sf "$here/icons" $HOME/.icons
 
+ln -sf "$here/kak" $HOME/.config/kak
+
 vim +PlugInstall +qall
