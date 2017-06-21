@@ -51,6 +51,7 @@ sudo chown -R fiatjaf.fiatjaf /usr/local/lib/
 # npm global packages
 if [ ! (which eslint_d) ]
   npm install --global eslint_d
+  npm install --global eslint-plugin-react
 end
 if [ ! (which instant) ]
   npm install --global instant-server
