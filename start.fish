@@ -7,6 +7,7 @@ ln -sf "$here/ranger-commands.py" $HOME/.config/ranger/commands.py
 ln -sf -T "$here/ranger-plugins" $HOME/.config/ranger/plugins
 
 ln -sf "$here/config.fish" $HOME/.config/fish/config.fish
+ln -sf "$here/fish_functions" $HOME/.config/fish/functions
 ln -sf "$here/vim" $HOME/.vim
 ln -sf "$here/vimrc" $HOME/.vimrc
 ln -sf "$here/bashrc" $HOME/.bashrc
@@ -21,5 +22,7 @@ ln -sf "$here/urxvt" $HOME/.Xdefaults
 mkdir -p $HOME/.config/twtxt
 ln -sf "$here/twtxt" $HOME/.config/twtxt/config
 ln -sf "$here/icons" $HOME/.icons
+
+ln -sf "$here/kak" $HOME/.config/kak
 
 vim +PlugInstall +qall

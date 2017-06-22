@@ -1,6 +1,8 @@
 set -x EDITOR vim
-set -x TERMINAL urxvt
-set -x TERM rxvt-unicode-256color
+if [ $DISPLAY ]
+  set -x TERMINAL urxvt
+  set -x TERM rxvt-unicode-256color
+end
 
 set -x GOPATH /home/fiatjaf/comp/go
 set -x GOROOT /usr/local/go

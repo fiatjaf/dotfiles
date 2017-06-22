@@ -1,0 +1,3 @@
+colorscheme fiatjaf
+alias global sp tmux-new-vertical
+set global disabled_hooks .*-indent
