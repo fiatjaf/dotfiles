@@ -1,0 +1,45 @@
+command=$SCRIPT_DIR/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[volume]
+command=/usr/local/libexec/i3blocks/volume
+label=♪
+instance=Master
+#instance=PCM
+interval=once
+signal=10
+
+[memory]
+command=free -mh | grep Mem | awk '{ print("mem="$2" free="$3) }'
+interval=5
+
+[disk]
+interval=30
+command=df -h | grep sda | awk '{ print("disk="$2" free="$4) }'
+
+[netuptest]
+command=ping -w 2 -c 1 8.8.8.8 | grep time | awk '{ print($7) }' | sed 's/time/ping/'
+interval=5
+#command=if ping -w 1 -c 1 8.8.8.8 >/dev/null 2>&1; then echo "UP"; else echo "DOWN"; fi
+
+[ip]
+interval=5
+command=ip route get 1 | awk '{print $NF}'
+
+[cpu_usage]
+label=CPU
+interval=10
+min_width=CPU: 100.00%
+command=/usr/local/libexec/i3blocks/cpu_usage
+
+#[battery]
+command=/usr/local/libexec/i3blocks/battery
+#label=BAT
+##label=⚡
+##instance=1
+#interval=30
+
+[time]
+command=date '+%d/%h/%Y %H:%M'
+interval=5

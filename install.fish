@@ -20,6 +20,7 @@ sudo apt-add-repository ppa:fish-shell/release-2 -y
 sudo apt-get update
 sudo apt-get install chromium-browser -y
 sudo apt-get install fish -y
+sudo apt-get install pandoc -y # why not?
 
 # nodejs
 if [ ! (which node) ]
@@ -68,6 +69,13 @@ end
 if [ ! (which i3) ]
   sudo aptitude install i3 dmenu rxvt-unicode -y
 end
+if [ ! (which i3blocks) ]
+  git clone git://github.com/vivien/i3blocks
+  cd i3blocks
+  make clean debug
+  sudo make install
+  cd -
+end
 
 # flux
 if [ ! (which xflux) ]
@@ -79,7 +87,7 @@ sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color 
 sudo aptitude install jq -y
 sudo aptitude install w3m-img -y
 sudo aptitude install mediainfo poppler-utils -y
-sudo aptitude install python-pygments python-requests -y
+sudo aptitude install python-pygments python-requests sysstat -y
 
 # python useful modules
 if [ ! (which pip) ]
