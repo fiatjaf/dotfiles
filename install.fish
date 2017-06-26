@@ -4,6 +4,7 @@ cd /tmp
 # we need this before
 sudo apt-get install aptitude -y
 sudo aptitude install build-essential make software-properties-common -y
+sudo aptitude install ubuntu-restricted-extras -y
 
 # vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -11,6 +12,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 # vim themes
 if [ ! -e ~/.vim/colors/jellybeans.vim ]
   mkdir -p ~/.vim/colors
+  sudo chown -R fiatjaf.fiatjaf ~/.vim
   wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim -O ~/.vim/colors/jellybeans.vim
 end
 
@@ -67,9 +69,7 @@ if [ ! (which entr) ]
 end
 
 # i3
-if [ ! (which i3) ]
-  sudo aptitude install i3 dmenu rxvt-unicode -y
-end
+sudo aptitude install xinit i3 dmenu rxvt-unicode -y
 if [ ! (which i3blocks) ]
   git clone git://github.com/vivien/i3blocks
   cd i3blocks
