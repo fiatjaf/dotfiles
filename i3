@@ -162,4 +162,4 @@ bar {
 exec x-www-browser
 exec --no-startup-id syncthing
 exec --no-startup-id numlockx
-exec --no-startup-id xflux -l -19
+exec --no-startup-id redshift -l -19:-43
