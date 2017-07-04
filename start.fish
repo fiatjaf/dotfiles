@@ -17,12 +17,10 @@ ln -sf "$here/eslintrc.json" $HOME/.eslintrc.json
 ln -sf "$here/tmux.conf" $HOME/.tmux.conf
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
-ln -sf "$here/i3status" $HOME/.i3status.conf
+ln -sf "$here/i3blocks" $HOME/.i3blocks.conf
 ln -sf "$here/urxvt" $HOME/.Xdefaults
 mkdir -p $HOME/.config/twtxt
 ln -sf "$here/twtxt" $HOME/.config/twtxt/config
 ln -sf "$here/icons" $HOME/.icons
-
-ln -sf "$here/kak" $HOME/.config/kak
 
 vim +PlugInstall +qall
