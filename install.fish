@@ -19,7 +19,9 @@ end
 # update fish and chromium
 sudo add-apt-repository ppa:canonical-chromium-builds/stage -y
 sudo apt-add-repository ppa:fish-shell/release-2 -y
+sudo add-apt-repository ppa:nilarimogard/webupd8
 sudo apt-get update
+sudo apt-get install albert -y
 sudo apt-get install chromium-browser -y
 sudo apt-get install fish -y
 sudo apt-get install pandoc -y # why not?
@@ -69,7 +71,7 @@ if [ ! (which entr) ]
 end
 
 # i3
-sudo aptitude install xinit i3 dmenu rxvt-unicode -y
+sudo aptitude install xinit i3 rxvt-unicode -y
 if [ ! (which i3blocks) ]
   git clone git://github.com/vivien/i3blocks
   cd i3blocks
