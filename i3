@@ -24,7 +24,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec albert
 
 # change focus
 bindsym $mod+j focus left
@@ -162,4 +162,5 @@ bar {
 exec x-www-browser
 exec --no-startup-id syncthing
 exec --no-startup-id numlockx
-exec --no-startup-id xflux -l -19
+exec --no-startup-id albert
+exec --no-startup-id redshift -l -19:-43

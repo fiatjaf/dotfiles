@@ -4,6 +4,7 @@ cd /tmp
 # we need this before
 sudo apt-get install aptitude -y
 sudo aptitude install build-essential make software-properties-common -y
+sudo aptitude install ubuntu-restricted-extras -y
 
 # vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -11,29 +12,19 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 # vim themes
 if [ ! -e ~/.vim/colors/jellybeans.vim ]
   mkdir -p ~/.vim/colors
+  sudo chown -R fiatjaf.fiatjaf ~/.vim
   wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim -O ~/.vim/colors/jellybeans.vim
 end
 
 # update fish and chromium
 sudo add-apt-repository ppa:canonical-chromium-builds/stage -y
 sudo apt-add-repository ppa:fish-shell/release-2 -y
+sudo add-apt-repository ppa:nilarimogard/webupd8
 sudo apt-get update
+sudo apt-get install albert -y
 sudo apt-get install chromium-browser -y
 sudo apt-get install fish -y
 sudo apt-get install pandoc -y # why not?
-
-# kakoune
-if [ ! (which kak) ]
-  sudo aptitude install libboost-dev libboost-regex-dev libncursesw5-dev asciidoc -y
-  wget https://github.com/mawww/kakoune/archive/master.zip
-  unzip master.zip
-  cd kakoune-master/src
-    sed -i "1s/yes/no/" Makefile # compile with debug=no
-    make
-    sudo make install
-  cd -
-  rm -rf kakoune-master
-end
 
 # nodejs
 if [ ! (which node) ]
@@ -73,9 +64,7 @@ if [ ! (which entr) ]
 end
 
 # i3
-if [ ! (which i3) ]
-  sudo aptitude install i3 dmenu rxvt-unicode -y
-end
+sudo aptitude install xinit i3 rxvt-unicode -y
 if [ ! (which i3blocks) ]
   git clone git://github.com/vivien/i3blocks
   cd i3blocks
@@ -84,15 +73,10 @@ if [ ! (which i3blocks) ]
   cd -
 end
 
-# flux
-if [ ! (which xflux) ]
-  sudo ln -s "$here/apps/xflux" /usr/local/bin
-end
-
 # basic things from apt
 sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color curl tmux atool autossh mosh silversearcher-ag python-dev vim git moreutils ncdu scrot -y
 sudo aptitude install jq -y
-sudo aptitude install w3m-img -y
+sudo aptitude install w3m-img redshift -y
 sudo aptitude install mediainfo poppler-utils -y
 sudo aptitude install python-pygments python-requests sysstat -y
 

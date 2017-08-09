@@ -36,6 +36,8 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 " haskell
 let g:syntastic_haskell_checkers = ['hlint', 'hdevtools']
+" go
+let g:syntastic_go_checkers = ['go', 'golint']
 
 " go.vim
 let g:go_fmt_command = "goimports"
