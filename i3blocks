@@ -11,7 +11,7 @@ interval=once
 signal=10
 
 [memory]
-command=free -mh | grep Mem | awk '{ print("mem="$2" free="$3) }'
+command=free -mh | grep Mem | awk '{ print("mem="$2" free="$4) }'
 interval=5
 
 [disk]

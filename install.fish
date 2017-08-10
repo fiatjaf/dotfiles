@@ -41,19 +41,12 @@ end
 sudo chown -R fiatjaf.fiatjaf /usr/local/lib/
 
 # npm global packages
-if [ ! (which eslint_d) ]
-  npm install --global eslint_d
-  npm install --global eslint-plugin-react
-end
-if [ ! (which instant) ]
-  npm install --global instant-server
-end
-if [ ! (which seedshot) ]
-  npm install --global seedshot
-end
-if [ ! (which js-yaml) ]
-  npm install --global js-yaml
-end
+npm install --global eslint_d
+npm install --global eslint-plugin-react
+npm install --global instant-server
+npm install --global seedshot
+npm install --global js-yaml
+npm install --global gtop
 
 # entr
 if [ ! (which entr) ]
