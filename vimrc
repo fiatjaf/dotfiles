@@ -21,6 +21,7 @@ Plug 'vim-scripts/fish-syntax'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'lambdatoast/elm.vim'
 Plug 'martingms/vipsql'
+Plug 'posva/vim-vue'
 call plug#end()
 
 " Enable syntax highlighting

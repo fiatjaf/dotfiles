@@ -1,4 +1,7 @@
 {
+  "extends": [
+    "plugin:vue/recommended"
+  ],
   "parserOptions": {
     "ecmaVersion": 8,
     "ecmaFeatures": {
