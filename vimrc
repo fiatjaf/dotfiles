@@ -69,6 +69,10 @@ au BufNewFile,BufRead *.tpl :set ft=html
 " for airline to work
 set laststatus=2
 
+" vipsql bindings
+vnoremap <leader>psql :VipsqlSendSelection<CR>
+nnoremap <leader>psql :VipsqlSendCurrentLine<CR>
+
 " remove autoindent, autocomment, autobizarrethings
 filetype plugin off
 filetype indent off
