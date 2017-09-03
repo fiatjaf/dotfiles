@@ -20,6 +20,7 @@ Plug 'wavded/vim-stylus'
 Plug 'vim-scripts/fish-syntax'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'lambdatoast/elm.vim'
+Plug 'martingms/vipsql'
 call plug#end()
 
 " Enable syntax highlighting
@@ -66,6 +67,10 @@ au BufNewFile,BufRead *.tpl :set ft=html
 
 " for airline to work
 set laststatus=2
+
+" vipsql bindings
+vnoremap <leader>psql :VipsqlSendSelection<CR>
+nnoremap <leader>psql :VipsqlSendCurrentLine<CR>
 
 " remove autoindent, autocomment, autobizarrethings
 filetype plugin off
