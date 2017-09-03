@@ -82,7 +82,7 @@ end
 
 # basic things from apt
 sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color curl tmux atool autossh mosh silversearcher-ag python-dev vim git moreutils ncdu scrot -y
-sudo aptitude install jq -y
+sudo aptitude install jq tree -y
 sudo aptitude install w3m-img redshift -y
 sudo aptitude install mediainfo poppler-utils -y
 sudo aptitude install python-pygments python-requests sysstat -y
