@@ -160,6 +160,7 @@ bar {
 }
 
 exec x-www-browser
+exec run_keybase
 exec --no-startup-id syncthing
 exec --no-startup-id numlockx
 exec --no-startup-id albert
