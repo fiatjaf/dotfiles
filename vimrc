@@ -18,7 +18,7 @@ Plug 'groenewege/vim-less'
 Plug 'millermedeiros/vim-esformatter'
 Plug 'wavded/vim-stylus'
 Plug 'vim-scripts/fish-syntax'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'lambdatoast/elm.vim'
 Plug 'martingms/vipsql'
 call plug#end()
