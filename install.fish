@@ -21,7 +21,7 @@ sudo add-apt-repository ppa:canonical-chromium-builds/stage -y
 sudo apt-add-repository ppa:fish-shell/release-2 -y
 sudo add-apt-repository ppa:nilarimogard/webupd8
 sudo apt-get update
-sudo apt-get install albert -y
+sudo apt-get install rofi -y
 sudo apt-get install chromium-browser -y
 sudo apt-get install fish -y
 sudo apt-get install pandoc -y # why not?
