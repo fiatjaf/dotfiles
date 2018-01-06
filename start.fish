@@ -13,14 +13,14 @@ ln -sf "$here/vimrc" $HOME/.vimrc
 ln -sf "$here/bashrc" $HOME/.bashrc
 ln -sf "$here/mailcap" $HOME/.mailcap
 ln -sf "$here/muttrc" $HOME/.muttrc
+mkdir -p $HOME/.config/hexchat
+ln -sf "$here/hexchat/servlist.conf" $HOME/.config/hexchat/servlist.conf
 ln -sf "$here/eslintrc.json" $HOME/.eslintrc.json
 ln -sf "$here/tmux.conf" $HOME/.tmux.conf
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
 ln -sf "$here/i3blocks" $HOME/.i3blocks.conf
 ln -sf "$here/urxvt" $HOME/.Xdefaults
-mkdir -p $HOME/.config/twtxt
-ln -sf "$here/twtxt" $HOME/.config/twtxt/config
 ln -sf "$here/icons" $HOME/.icons
 
 vim +PlugInstall +qall
