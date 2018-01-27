@@ -13,6 +13,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'isRuslan/vim-es6'
 Plug 'fatih/vim-go'
+Plug 'jasontbradshaw/pigeon.vim'
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
 Plug 'millermedeiros/vim-esformatter'
@@ -21,6 +22,7 @@ Plug 'vim-scripts/fish-syntax'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'lambdatoast/elm.vim'
 Plug 'martingms/vipsql'
+Plug 'junegunn/goyo.vim'
 call plug#end()
 
 " Enable syntax highlighting
@@ -31,7 +33,6 @@ let g:jsx_ext_required = 0
 let g:syntastic_aggregate_errors = 1
 " python
 let g:syntastic_python_python_exec = 'python3'
-let g:syntastic_python_checkers = ['python', 'flake8']
 " javascript
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
