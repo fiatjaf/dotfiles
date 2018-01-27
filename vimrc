@@ -68,9 +68,16 @@ au BufNewFile,BufRead *.tpl :set ft=html
 " for airline to work
 set laststatus=2
 
-" vipsql bindings
-vnoremap <leader>psql :VipsqlSendSelection<CR>
-nnoremap <leader>psql :VipsqlSendCurrentLine<CR>
+" vipsql
+let g:vipsql_separator_enabled = 1
+let g:vipsql_separator = '===================================================================='
+vnoremap <leader>ssql :VipsqlSendSelection<CR>
+nnoremap <leader>lsql :VipsqlSendCurrentLine<CR>
+nnoremap <leader>fsql :VipsqlSendBuffer<CR>
+nnoremap <leader>psql :VipsqlShell<CR>
+
+" make backspace work
+set backspace=indent,eol,start
 
 " remove autoindent, autocomment, autobizarrethings
 filetype plugin off

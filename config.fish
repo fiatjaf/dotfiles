@@ -48,3 +48,11 @@ function r
   end
   rm $tempfile
 end
+
+function vipsql
+  if [ (echo $argv | wc -w) = 1 ]  
+    vim -c 'setlocal buftype=nofile | setlocal ft=sql | VipsqlOpenSession '"$argv"
+  else
+    vim -c 'VipsqlOpenSession '"$argv[2]" "$argv[1]"
+  end
+end
