@@ -53,9 +53,9 @@ if [ ! (which entr) ]
   cd /tmp
   mkdir entr
   cd entr
-  wget http://entrproject.org/code/entr-3.5.tar.gz
-  tar -xvf entr-3.5.tar.gz
-  rm entr-3.5.tar.gz
+  wget http://entrproject.org/code/entr-4.0.tar.gz
+  tar -xvf entr-4.0.tar.gz
+  rm entr-4.0.tar.gz
   cd *
   ./configure
   make
