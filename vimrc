@@ -23,6 +23,7 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'lambdatoast/elm.vim'
 Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
+Plug 'vito-c/jq.vim'
 call plug#end()
 
 " Enable syntax highlighting
