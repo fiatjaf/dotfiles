@@ -159,7 +159,6 @@ bar {
   status_command i3blocks
 }
 
-exec x-www-browser
 exec --no-startup-id syncthing
 exec --no-startup-id numlockx
 exec --no-startup-id rofi
