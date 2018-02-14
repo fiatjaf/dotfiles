@@ -159,6 +159,7 @@ bar {
   status_command i3blocks
 }
 
+exec --no-startup-id pavucontrol
 exec --no-startup-id syncthing
 exec --no-startup-id numlockx
 exec --no-startup-id rofi
