@@ -152,6 +152,7 @@ bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
+bindsym $mod+Shift+v exec ~/.vim-anywhere/bin/run
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -164,3 +165,4 @@ exec --no-startup-id syncthing
 exec --no-startup-id numlockx
 exec --no-startup-id rofi
 exec --no-startup-id redshift -l -19:-43
+exec --no-startup-id x-www-browser
