@@ -165,4 +165,4 @@ exec --no-startup-id syncthing
 exec --no-startup-id numlockx
 exec --no-startup-id rofi
 exec --no-startup-id redshift -l -19:-43
-exec --no-startup-id x-www-browser
+exec --no-startup-id sleep 2 && x-www-browser

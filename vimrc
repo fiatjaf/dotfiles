@@ -24,6 +24,8 @@ Plug 'lambdatoast/elm.vim'
 Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
 Plug 'vito-c/jq.vim'
+Plug 'prettier/vim-prettier'
+Plug 'ambv/black'
 call plug#end()
 
 " Enable syntax highlighting
@@ -44,6 +46,19 @@ let g:syntastic_go_checkers = ['go', 'golint']
 
 " go.vim
 let g:go_fmt_command = "goimports"
+
+" prettier
+nmap <Leader>pp <Plug>(Prettier)
+let g:prettier#autoformat = 0
+let g:prettier#exec_cmd_async = 0
+let g:prettier#quickfix_enabled = 1
+let g:prettier#quickfix_auto_focus = 0
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue call prettier#Autoformat()
+
+" black
+let g:black_virtualenv = "/home/fiatjaf/.local/venvs/black"
+autocmd BufWritePre *.py execute ':Black'
 
 " Theme
 set t_Co=256

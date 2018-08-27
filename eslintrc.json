@@ -1,11 +1,12 @@
 {
   "parserOptions": {
-    "ecmaVersion": 8,
+    "ecmaVersion": 9,
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "jsx": true
     },
-    "sourceType": "module"
+    "sourceType": "module",
+    "allowImportExportEverywhere": false
   },
 
   "env": {
@@ -14,7 +15,8 @@
   },
 
   "plugins": [
-    "react"
+    "react",
+    "babel"
   ],
 
   "globals": {
@@ -35,7 +37,7 @@
     "comma-spacing": [2, { "before": false, "after": true }],
     "comma-style": [2, "last"],
     "constructor-super": 2,
-    "curly": [2, "multi-line"],
+    "curly": [0, "multi-line"],
     "dot-location": [2, "property"],
     "eol-last": 2,
     "eqeqeq": [2, "allow-null"],
@@ -112,7 +114,7 @@
     "no-unexpected-multiline": 2,
     "no-unneeded-ternary": [2, { "defaultAssignment": false }],
     "no-unreachable": 2,
-    "no-unused-vars": [2, { "vars": "all", "args": "none", "varsIgnorePattern": "^_"}], 
+    "no-unused-vars": [2, { "vars": "local", "args": "none", "varsIgnorePattern": "^_"}], 
     "react/jsx-uses-vars": 2,
     "no-useless-call": 2,
     "no-useless-constructor": 2,
@@ -124,7 +126,7 @@
     "semi": [2, "never"],
     "semi-spacing": [2, { "before": false, "after": true }],
     "space-before-blocks": [2, "always"],
-    "space-before-function-paren": [2, "always"],
+    "space-before-function-paren": 0,
     "space-in-parens": [2, "never"],
     "space-infix-ops": 2,
     "space-unary-ops": [2, { "words": true, "nonwords": false }],

@@ -1,2 +1,47 @@
 auto_view text/html
 set folder=~
+
+set imap_user           = "fiatjaf@gmail.com"
+set imap_keepalive      = 30
+unset imap_passive
+set folder              = "imaps://imap.gmail.com"
+set spoolfile           = "+INBOX"
+set postponed           = "+[Gmail]/Drafts"
+set header_cache        = ~/.mutt/fiatjaf/headers
+set message_cachedir    = ~/.mutt/fiatjaf/bodies
+set certificate_file    = ~/.mutt/certificates
+set smtp_url            = "smtp://fiatjaf@smtp.gmail.com:587/"
+set move                = no
+set realname = "Giovanni"
+set from = "fiatjaf@gmail.com"
+set use_from = yes
+set envelope_from = yes
+set ssl_force_tls = yes
+
+bind index G imap-fetch-mail
+set editor = "vim"
+set charset = "utf-8"
+set record = ''
+
+set sort="threads"
+set strict_threads="yes"
+set sort_browser="reverse-date"
+set sort_aux="last-date-received"
+unset collapse_unread
+bind index - collapse-thread
+bind index _ collapse-all
+
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+bind editor <space> noop
+macro index,pager A "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
+macro index,pager d "<save-message>=[Gmail]/Trash<enter><enter>" "Trash"
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+macro index gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
+macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+
+folder-hook +INBOX 'macro index,pager y "=[Gmail]/All Mail" "Archive conversation"'
+folder-hook +[Gmail]/Trash macro index,pager y =INBOX "Move to inbox"
+folder-hook +[Gmail]/Starred bind  index,pager y flag-message #"Toggle star"

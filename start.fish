@@ -17,6 +17,7 @@ ln -sf "$here/mailcap" $HOME/.mailcap
 ln -sf "$here/muttrc" $HOME/.muttrc
 ln -sf "$here/eslintrc.json" $HOME/.eslintrc.json
 ln -sf "$here/tmux.conf" $HOME/.tmux.conf
+ln -sf "$here/prettierrc.yaml" $HOME/.prettierrc.yaml
 
 mkdir -p $HOME/.config/hexchat
 ln -sf "$here/hexchat/servlist.conf" $HOME/.config/hexchat/servlist.conf
