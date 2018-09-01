@@ -135,3 +135,15 @@ if [ ! (which ipfs) ]
   set t (ls go-ipfs*)
   tar -xvf $t
 end
+
+# fzf
+if [ ! (which fzf) ]
+  cd /usr/local
+  sudo rm -r fzf
+  sudo wget https://github.com/junegunn/fzf/archive/master.zip -O fzf.zip
+  sudo unzip fzf.zip
+  sudo rm fzf.zip
+  sudo mv fzf-master fzf
+  sudo ./fzf/install --all --no-zsh --no-bash
+  cd -
+end
