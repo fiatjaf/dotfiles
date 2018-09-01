@@ -23,8 +23,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+Q kill
 
-# start dmenu (a program launcher)
+# start rofi (a program launcher)
 bindsym $mod+d exec rofi -show run
+bindsym $mod+b exec buku_run
 
 # change focus
 bindsym $mod+j focus left

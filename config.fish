@@ -9,10 +9,6 @@ set -x GOROOT /usr/local/go
 set -x PATH $PATH $GOROOT/bin
 set -x PATH $PATH $GOPATH/bin
 
-if [ (ls /usr/local/firefox 2> /dev/null) ]
-  set -x PATH $PATH /usr/local/firefox
-end
-
 set -x NPM_PACKAGES $HOME/npm_modules
 set -x PATH $PATH $HOME/npm_modules/bin $HOME/node_modules/bin
 set -e MANPATH
