@@ -42,7 +42,8 @@ sudo chown -R fiatjaf.fiatjaf /usr/local/lib/
 
 # npm global packages
 npm install --global pnpm
-pnpm install --global eslint_d
+pnpm install --global @bitwarden/cli js-yaml netlify-cli cloudflare-cli prettier
+pnpm install --global --shamefully-flatten eslint_d eslint-plugin-babel eslint-plugin-react
 
 # entr
 if [ ! (which entr) ]
