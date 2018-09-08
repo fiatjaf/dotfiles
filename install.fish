@@ -61,7 +61,7 @@ if [ ! (which entr) ]
 end
 
 # i3
-sudo aptitude install xinit i3 rxvt-unicode -y
+sudo aptitude install xinit i3 -y
 if [ ! (which i3blocks) ]
   git clone git://github.com/vivien/i3blocks
   cd i3blocks
