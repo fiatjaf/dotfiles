@@ -9,7 +9,7 @@ sudo apt-add-repository ppa:fish-shell/release-2 -y
 sudo apt update
 
 # basic things from apt
-sudo aptitude install w3m numlockx ttf-ubuntu-font-family rxvt-unicode-256color curl tmux mosh silversearcher-ag vim git moreutils ncdu scrot jq tree xsel w3m-img redshift mediainfo poppler-utils hexchat build-essential make software-properties-common ubuntu-restricted-extras fish -y
+sudo aptitude install w3m numlockx ttf-ubuntu-font-family curl tmux mosh silversearcher-ag vim git moreutils ncdu scrot jq tree xsel redshift mediainfo poppler-utils build-essential make software-properties-common ubuntu-restricted-extras fish -y
 
 # vim-plug
 curl -s -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -26,8 +26,7 @@ if [ -n "$DISPLAY" ]
   sudo add-apt-repository ppa:canonical-chromium-builds/stage -y
   sudo add-apt-repository ppa:nilarimogard/webupd8 -y
   sudo apt update
-  sudo aptitude install rofi -y
-  sudo aptitude install chromium-browser -y
+  sudo aptitude install hexchat rofi chromium-browser rxvt-unicode-256color w3m-img -y
 
   # i3
   sudo aptitude install xinit i3 -y
