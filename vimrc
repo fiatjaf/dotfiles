@@ -56,11 +56,6 @@ let g:prettier#quickfix_auto_focus = 0
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue call prettier#Autoformat()
 
-" black
-let g:black_virtualenv = "/home/fiatjaf/.local/venvs/black"
-nmap <Leader>bl <Plug>(Black)
-" autocmd BufWritePre *.py execute ':Black'
-
 " prettier
 nmap <Leader>pp <Plug>(Prettier)
 let g:prettier#autoformat = 0
@@ -72,7 +67,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 
 " black
 let g:black_virtualenv = "/home/fiatjaf/.local/venvs/black"
-autocmd BufWritePre *.py execute ':Black'
+" autocmd BufWritePre *.py execute ':Black'
 
 " Theme
 set t_Co=256
