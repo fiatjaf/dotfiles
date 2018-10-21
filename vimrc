@@ -25,7 +25,9 @@ Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
 Plug 'vito-c/jq.vim'
 Plug 'prettier/vim-prettier'
+Plug 'sbdchd/neoformat'
 Plug 'ambv/black'
+Plug 'LnL7/vim-nix'
 call plug#end()
 
 " Enable syntax highlighting
@@ -47,14 +49,8 @@ let g:syntastic_go_checkers = ['go', 'golint']
 " go.vim
 let g:go_fmt_command = "goimports"
 
-" prettier
-nmap <Leader>pp <Plug>(Prettier)
-let g:prettier#autoformat = 0
-let g:prettier#exec_cmd_async = 0
-let g:prettier#quickfix_enabled = 1
-let g:prettier#quickfix_auto_focus = 0
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue call prettier#Autoformat()
+" neoformat
+nnoremap <leader>ff :Neoformat<CR>
 
 " prettier
 nmap <Leader>pp <Plug>(Prettier)
@@ -63,7 +59,7 @@ let g:prettier#exec_cmd_async = 0
 let g:prettier#quickfix_enabled = 1
 let g:prettier#quickfix_auto_focus = 0
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue call prettier#Autoformat()
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html call prettier#Autoformat()
 
 " black
 let g:black_virtualenv = "/home/fiatjaf/.local/venvs/black"
@@ -111,3 +107,6 @@ filetype indent off
 
 " don't let the cursor be at the top or at the bottom
 set scrolloff=10
+
+" remove clipboard stuff
+set clipboard=
