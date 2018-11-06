@@ -9,7 +9,7 @@ sudo apt-add-repository ppa:fish-shell/release-2 -y
 sudo apt update
 
 # basic things from apt
-sudo aptitude install w3m numlockx ttf-ubuntu-font-family curl tmux mosh silversearcher-ag vim git moreutils ncdu scrot jq tree xsel redshift mediainfo poppler-utils build-essential make software-properties-common ubuntu-restricted-extras fish -y
+sudo aptitude install w3m zip unzip numlockx curl tmux mosh silversearcher-ag vim git moreutils ncdu scrot jq tree xsel redshift mediainfo poppler-utils build-essential make software-properties-common fish -y
 
 # vim-plug
 curl -s -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -26,7 +26,7 @@ if [ -n "$DISPLAY" ]
   sudo add-apt-repository ppa:canonical-chromium-builds/stage -y
   sudo add-apt-repository ppa:nilarimogard/webupd8 -y
   sudo apt update
-  sudo aptitude install hexchat rofi chromium-browser rxvt-unicode-256color w3m-img -y
+  sudo aptitude install hexchat rofi chromium-browser rxvt-unicode-256color w3m-img ttf-ubuntu-font-family ubuntu-restricted-extras -y
 
   # i3
   sudo aptitude install xinit i3 -y
@@ -36,6 +36,17 @@ if [ -n "$DISPLAY" ]
     make clean debug
     sudo make install
     cd -
+  end
+
+  # buku_run
+  if [ ! (which buku_run) ]
+    wget https://github.com/carnager/buku_run/archive/master.zip -O buku_run.zip
+    unzip buku_run.zip
+    rm buku_run.zip
+    cd buku_run-master
+    sudo make install
+    cd ..
+    rm -r buku_run-master
   end
 end
 
@@ -73,9 +84,15 @@ if [ ! (which entr) ]
   cd /tmp
 end
 
-# python useful modules
+# python stuff
+if [ ! (which pip) ]
+  curl https://bootstrap.pypa.io/get-pip.py | sudo python3
+end
+if [ ! (which virtualenv) ]
+  sudo pip2 install virtualenv
+end
 if [ ! (which pipsi) ]
-  curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
+  curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python2
 end
 if [ ! (which ranger) ]
   pipsi install --python (which python3) git+git://git.savannah.nongnu.org/ranger.git#egg=ranger
@@ -84,27 +101,16 @@ if [ ! (which icdiff) ]
   pipsi install icdiff
 end
 if [ ! (which buku) ]
-  pipsi install buku
+  pipsi install --python (which python3) buku
 end
 if [ ! (which black) ]
-  pipsi install black
+  pipsi install  --python (which python3) black
 end
 if [ ! (which pythonpy) ]
   pipsi install pythonpy
 end
 
 # standalone programs
-
-# buku_run
-if [ ! (which buku_run) ]
-  wget https://github.com/carnager/buku_run/archive/master.zip -O buku_run.zip
-  unzip buku_run.zip
-  rm buku_run.zip
-  cd buku_run-master
-  sudo make install
-  cd ..
-  rm -r buku_run-master
-end
 
 # youtube-dl
 if [ ! (which youtube-dl) ]
@@ -143,7 +149,7 @@ end
 # fzf
 if [ ! (which fzf) ]
   cd /usr/local
-  sudo rm -r fzf
+  sudo rm -fr fzf
   sudo wget https://github.com/junegunn/fzf/archive/master.zip -O fzf.zip
   sudo unzip fzf.zip
   sudo rm fzf.zip
