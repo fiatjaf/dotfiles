@@ -28,6 +28,7 @@ Plug 'prettier/vim-prettier'
 Plug 'sbdchd/neoformat'
 Plug 'ambv/black'
 Plug 'LnL7/vim-nix'
+Plug 'zxqfl/tabnine-vim'
 call plug#end()
 
 " Enable syntax highlighting
