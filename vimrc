@@ -35,6 +35,7 @@ let g:jsx_ext_required = 0
 " Syntastic specific options
 let g:syntastic_aggregate_errors = 1
 " python
+let g:syntastic_python_checkers = ['python']
 let g:syntastic_python_python_exec = 'python3'
 " javascript
 let g:syntastic_javascript_checkers = ['eslint']
