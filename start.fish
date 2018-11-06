@@ -28,4 +28,4 @@ mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
 ln -sf "$here/i3blocks" $HOME/.i3blocks.conf
 ln -sf "$here/urxvt" $HOME/.Xdefaults
-ln -sf "$here/icons" $HOME/.icons
+ln -sfT "$here/icons" $HOME/.icons
