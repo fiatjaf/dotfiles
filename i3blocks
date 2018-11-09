@@ -2,6 +2,11 @@ command=$SCRIPT_DIR/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
+[ipfs swarm]
+command=/usr/local/bin/ipfs swarm peers | wc -l
+label=ipfs
+interval=7
+
 [volume]
 command=/usr/local/libexec/i3blocks/volume
 label=♪
@@ -32,13 +37,6 @@ label=CPU
 interval=10
 min_width=CPU: 100.00%
 command=/usr/local/libexec/i3blocks/cpu_usage
-
-#[battery]
-command=/usr/local/libexec/i3blocks/battery
-#label=BAT
-##label=⚡
-##instance=1
-#interval=30
 
 [time]
 command=date '+%d/%h/%Y %H:%M'
