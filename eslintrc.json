@@ -28,6 +28,8 @@
   },
 
   "rules": {
+    "react/jsx-uses-vars": 2,
+    "react/jsx-no-undef": 2,
     "accessor-pairs": 2,
     "arrow-spacing": [2, { "before": true, "after": true }],
     "block-spacing": [2, "always"],
@@ -114,7 +116,6 @@
     "no-unneeded-ternary": [2, { "defaultAssignment": false }],
     "no-unreachable": 2,
     "no-unused-vars": [2, { "vars": "local", "args": "none", "varsIgnorePattern": "^_"}], 
-    "react/jsx-uses-vars": 2,
     "no-useless-call": 2,
     "no-useless-constructor": 2,
     "no-with": 2,

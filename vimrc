@@ -38,6 +38,7 @@ let g:jsx_ext_required = 0
 " Syntastic specific options
 let g:syntastic_aggregate_errors = 1
 " python
+let g:syntastic_python_checkers = ['python']
 let g:syntastic_python_python_exec = 'python3'
 " javascript
 let g:syntastic_javascript_checkers = ['eslint']
@@ -64,7 +65,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 
 " black
 let g:black_virtualenv = "/home/fiatjaf/.local/venvs/black"
-" autocmd BufWritePre *.py execute ':Black'
+autocmd BufWritePre *.py execute ':Black'
 
 " Theme
 set t_Co=256
