@@ -112,3 +112,6 @@ set scrolloff=10
 
 " remove clipboard stuff
 set clipboard=
+
+" yank to clipboard (even over ssh) with \y
+vnoremap <silent><Leader>y "yy <Bar> :call system('xclip', @y)<CR>
