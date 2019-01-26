@@ -29,6 +29,7 @@ Plug 'ambv/black'
 Plug 'LnL7/vim-nix'
 Plug 'zxqfl/tabnine-vim'
 Plug 'scrooloose/nerdtree'
+Plug 'reasonml-editor/vim-reason-plus'
 call plug#end()
 
 " Enable syntax highlighting
