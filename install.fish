@@ -137,15 +137,6 @@ if [ ! (which go) ]
   rm $t
 end
 
-# latest ipfs
-if [ ! (which ipfs) ]
-  set u (curl -s dist.ipfs.io/ | pup 'a[href*="go-ipfs"] json{}' | jq -r 'map(select((.href | contains("64")) and (.href | contains("linux")))) | .[0].href')
-  set u "https://dist.ipfs.io/$u"
-  wget $u
-  set t (ls go-ipfs*)
-  tar -xvf $t
-end
-
 # fzf
 if [ ! (which fzf) ]
   cd /usr/local

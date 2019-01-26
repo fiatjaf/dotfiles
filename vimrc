@@ -6,13 +6,12 @@ endif
 set nocompatible
 call plug#begin('~/.vim/plugged')
 Plug 'alunny/pegjs-vim'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'bling/vim-airline'
 Plug 'kchmck/vim-coffee-script'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'isRuslan/vim-es6'
-Plug 'fatih/vim-go'
 Plug 'jasontbradshaw/pigeon.vim'
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
@@ -29,27 +28,27 @@ Plug 'sbdchd/neoformat'
 Plug 'ambv/black'
 Plug 'LnL7/vim-nix'
 Plug 'zxqfl/tabnine-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'reasonml-editor/vim-reason-plus'
 call plug#end()
 
 " Enable syntax highlighting
 syntax enable
 let g:jsx_ext_required = 0
 
-" Syntastic specific options
-let g:syntastic_aggregate_errors = 1
-" python
-let g:syntastic_python_checkers = ['python']
-let g:syntastic_python_python_exec = 'python3'
-" javascript
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-" haskell
-let g:syntastic_haskell_checkers = ['hlint', 'hdevtools']
-" go
-let g:syntastic_go_checkers = ['go', 'golint']
+let g:ale_linters = {
+\   'javascript': ['eslint_d'],
+\   'python': ['python3'],
+\   'haskell': ['hlint', 'hdevtools'],
+\   'go': ['gofmt', 'go mod', 'go vet', 'go lint', 'gotype', 'go build', 'gosimple', 'staticcheck', 'golangserver', 'golangci-lint' ]
+\}
 
-" go.vim
-let g:go_fmt_command = "goimports"
+let g:ale_fixers = {
+\   'go': ['goimports']
+\}
+
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 0
 
 " neoformat
 nnoremap <leader>ff :Neoformat<CR>
@@ -66,6 +65,13 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " black
 let g:black_virtualenv = "/home/fiatjaf/.local/venvs/black"
 autocmd BufWritePre *.py execute ':Black'
+
+" nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeQuitOnOpen=1
+nmap <Leader>n :NERDTreeFind<CR>
 
 " Theme
 set t_Co=256
