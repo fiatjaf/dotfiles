@@ -2,11 +2,6 @@ command=$SCRIPT_DIR/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-[ipfs swarm]
-command=/usr/local/bin/ipfs swarm peers | wc -l
-label=ipfs
-interval=7
-
 [volume]
 command=/usr/local/libexec/i3blocks/volume
 label=♪
