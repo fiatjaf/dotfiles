@@ -40,11 +40,14 @@ let g:ale_linters = {
 \   'javascript': ['eslint_d'],
 \   'python': ['python3'],
 \   'haskell': ['hlint', 'hdevtools'],
-\   'go': ['gofmt', 'go mod', 'go vet', 'go lint', 'gotype', 'go build', 'gosimple', 'staticcheck', 'golangserver', 'golangci-lint' ]
+\   'go': ['gofmt', 'go mod', 'go build'],
+\   'reason': ['ols']
 \}
 
 let g:ale_fixers = {
-\   'go': ['goimports']
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'go': ['goimports'],
+\   'reason': ['refmt']
 \}
 
 let g:ale_fix_on_save = 1
@@ -117,7 +120,7 @@ filetype indent off
 set scrolloff=10
 
 " remove clipboard stuff
-set clipboard=
+set clipboard=exclude:.*
 
 " yank to clipboard (even over ssh) with \y
 vnoremap <silent><Leader>y "yy <Bar> :call system('xclip', @y)<CR>
