@@ -5,8 +5,8 @@ endif
 " vim-plug
 set nocompatible
 call plug#begin('~/.vim/plugged')
-Plug 'alunny/pegjs-vim'
 Plug 'w0rp/ale'
+Plug 'alunny/pegjs-vim'
 Plug 'bling/vim-airline'
 Plug 'kchmck/vim-coffee-script'
 Plug 'hail2u/vim-css3-syntax'
@@ -23,7 +23,6 @@ Plug 'lambdatoast/elm.vim'
 Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
 Plug 'vito-c/jq.vim'
-Plug 'prettier/vim-prettier'
 Plug 'sbdchd/neoformat'
 Plug 'ambv/black'
 Plug 'LnL7/vim-nix'
@@ -47,7 +46,8 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'go': ['goimports'],
-\   'reason': ['refmt']
+\   'reason': ['refmt'],
+\   'javascript': ['prettier']
 \}
 
 let g:ale_fix_on_save = 1
@@ -56,14 +56,6 @@ let g:ale_completion_enabled = 0
 " neoformat
 nnoremap <leader>ff :Neoformat<CR>
 
-" prettier
-nmap <Leader>pp <Plug>(Prettier)
-let g:prettier#autoformat = 0
-let g:prettier#exec_cmd_async = 0
-let g:prettier#quickfix_enabled = 1
-let g:prettier#quickfix_auto_focus = 0
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html call prettier#Autoformat()
 
 " black
 let g:black_virtualenv = "/home/fiatjaf/.local/venvs/black"
