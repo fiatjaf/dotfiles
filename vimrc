@@ -24,12 +24,12 @@ Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
 Plug 'vito-c/jq.vim'
 Plug 'sbdchd/neoformat'
-Plug 'ambv/black'
 Plug 'LnL7/vim-nix'
 Plug 'zxqfl/tabnine-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'mechatroner/rainbow_csv'
+Plug 'linkinpark342/xonsh-vim'
 call plug#end()
 
 " Enable syntax highlighting
@@ -38,29 +38,37 @@ let g:jsx_ext_required = 0
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'python': ['pyflakes'],
 \   'haskell': ['hlint', 'hdevtools'],
 \   'go': ['gofmt', 'go mod', 'go build'],
-\   'reason': ['ols']
+\   'python': ['pyflakes'],
+\   'fish': []
 \}
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'go': ['goimports'],
 \   'reason': ['refmt'],
+\   'python': ['black'],
 \   'javascript': ['prettier']
 \}
 
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_delay = 1000
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 0
+let g:ale_use_global_executables = 1
+let g:ale_echo_cursor = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_info_str = 'I'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+let g:ale_reasonml_refmt_executable = 'bsrefmt'
 
 " neoformat
 nnoremap <leader>ff :Neoformat<CR>
 
-
-" black
-let g:black_virtualenv = "/home/fiatjaf/.local/venvs/black"
-autocmd BufWritePre *.py execute ':Black'
 
 " nerdtree
 autocmd StdinReadPre * let s:std_in=1
