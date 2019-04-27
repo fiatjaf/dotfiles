@@ -30,6 +30,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'mechatroner/rainbow_csv'
 Plug 'linkinpark342/xonsh-vim'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " Enable syntax highlighting
@@ -41,7 +42,8 @@ let g:ale_linters = {
 \   'haskell': ['hlint', 'hdevtools'],
 \   'go': ['gofmt', 'go mod', 'go build'],
 \   'python': ['pyflakes'],
-\   'fish': []
+\   'fish': [],
+\   'rust': ['cargo']
 \}
 
 let g:ale_fixers = {
@@ -49,7 +51,8 @@ let g:ale_fixers = {
 \   'go': ['goimports'],
 \   'reason': ['refmt'],
 \   'python': ['black'],
-\   'javascript': ['prettier']
+\   'javascript': ['prettier'],
+\   'rust': ['rustfmt']
 \}
 
 let g:ale_lint_on_save = 0
