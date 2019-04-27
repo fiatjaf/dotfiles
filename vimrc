@@ -29,6 +29,7 @@ Plug 'LnL7/vim-nix'
 Plug 'zxqfl/tabnine-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'reasonml-editor/vim-reason-plus'
+Plug 'mechatroner/rainbow_csv'
 call plug#end()
 
 " Enable syntax highlighting
@@ -36,8 +37,8 @@ syntax enable
 let g:jsx_ext_required = 0
 
 let g:ale_linters = {
-\   'javascript': ['eslint_d'],
-\   'python': ['python3'],
+\   'javascript': ['eslint'],
+\   'python': ['pyflakes'],
 \   'haskell': ['hlint', 'hdevtools'],
 \   'go': ['gofmt', 'go mod', 'go build'],
 \   'reason': ['ols']

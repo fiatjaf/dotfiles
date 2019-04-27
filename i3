@@ -65,6 +65,10 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout default
 
+# printscreen
+bindsym Print exec scrot
+bindsym $mod+Print exec scrot -u
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
