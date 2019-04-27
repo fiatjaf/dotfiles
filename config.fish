@@ -9,6 +9,8 @@ set -x GOROOT /usr/local/go
 set -x PATH $PATH $GOROOT/bin
 set -x PATH $PATH $GOPATH/bin
 
+set -x PATH $PATH $HOME/.cargo/bin
+
 set -x NPM_PACKAGES $HOME/npm_modules
 set -x PATH $PATH $HOME/npm_modules/bin $HOME/node_modules/bin
 set -e MANPATH
@@ -33,7 +35,7 @@ function settitle
 end
 
 function vipsql
-  if [ (echo $argv | wc -w) = 1 ]  
+  if [ (echo $argv | wc -w) = 1 ]
     vim -c 'setlocal buftype=nofile | setlocal ft=sql | VipsqlOpenSession '"$argv"
   else
     vim -c 'VipsqlOpenSession '"$argv[2]" "$argv[1]"
