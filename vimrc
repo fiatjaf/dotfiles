@@ -6,29 +6,19 @@ endif
 set nocompatible
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
-Plug 'alunny/pegjs-vim'
 Plug 'bling/vim-airline'
-Plug 'kchmck/vim-coffee-script'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'isRuslan/vim-es6'
-Plug 'jasontbradshaw/pigeon.vim'
-Plug 'mxw/vim-jsx'
-Plug 'groenewege/vim-less'
-Plug 'millermedeiros/vim-esformatter'
 Plug 'wavded/vim-stylus'
 Plug 'vim-scripts/fish-syntax'
-Plug 'dart-lang/dart-vim-plugin'
 Plug 'lambdatoast/elm.vim'
 Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
 Plug 'vito-c/jq.vim'
-Plug 'sbdchd/neoformat'
 Plug 'LnL7/vim-nix'
 Plug 'zxqfl/tabnine-vim'
-Plug 'scrooloose/nerdtree'
 Plug 'reasonml-editor/vim-reason-plus'
-Plug 'mechatroner/rainbow_csv'
 Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
 call plug#end()
@@ -68,17 +58,6 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 let g:ale_reasonml_refmt_executable = 'bsrefmt'
-
-" neoformat
-nnoremap <leader>ff :Neoformat<CR>
-
-
-" nerdtree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let NERDTreeQuitOnOpen=1
-nmap <Leader>n :NERDTreeFind<CR>
 
 " Theme
 set t_Co=256
