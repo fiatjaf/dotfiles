@@ -12,7 +12,6 @@ set message_cachedir    = ~/.mutt/fiatjaf/bodies
 set certificate_file    = ~/.mutt/certificates
 set smtp_url            = "smtp://fiatjaf@smtp.gmail.com:587/"
 set move                = no
-set realname = "Giovanni"
 set from = "fiatjaf@gmail.com"
 set use_from = yes
 set envelope_from = yes
