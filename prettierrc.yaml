@@ -8,3 +8,4 @@ semi: false
 singleQuote: true
 trailingComma: none
 useTabs: false
+pluginSearchDirs: ["/home/fiatjaf/npm_modules/pnpm-global/1", "/home/fiatjaf/npm_modules/pnpm-global/2"]

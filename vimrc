@@ -20,6 +20,9 @@ Plug 'zxqfl/tabnine-vim'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-expand-region'
+Plug 'mattn/emmet-vim'
 call plug#end()
 
 " Enable syntax highlighting
@@ -77,8 +80,10 @@ set tabstop=4
 set shell=bash
 set rtp+=$GOROOT/misc/vim
 
-" .tpl files as html
+" .tpl, .tera, .svelte files as html
 au BufNewFile,BufRead *.tpl :set ft=html
+au BufNewFile,BufRead *.svelte :set ft=html
+au BufNewFile,BufRead *.tera :set ft=html
 
 " for airline to work
 set laststatus=2
