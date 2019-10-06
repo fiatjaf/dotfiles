@@ -15,7 +15,7 @@ Plug 'vim-scripts/fish-syntax'
 Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
 Plug 'vito-c/jq.vim'
-Plug 'LnL7/vim-nix'
+Plug 'leafgarland/typescript-vim'
 Plug 'zxqfl/tabnine-vim'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'linkinpark342/xonsh-vim'
@@ -35,6 +35,7 @@ let g:ale_linters = {
 \   'go': ['gofmt', 'go mod', 'go build'],
 \   'python': ['pyflakes'],
 \   'fish': [],
+\   'typescript': [],
 \   'rust': ['cargo']
 \}
 
@@ -44,6 +45,7 @@ let g:ale_fixers = {
 \   'reason': ['refmt'],
 \   'python': ['black'],
 \   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
 \   'rust': ['rustfmt']
 \}
 
@@ -85,6 +87,9 @@ au BufNewFile,BufRead *.tpl :set ft=html
 au BufNewFile,BufRead *.svelte :set ft=html
 au BufNewFile,BufRead *.tera :set ft=html
 
+" remove bad typescript stuff
+let g:typescript_indent_disable = 1
+
 " for airline to work
 set laststatus=2
 
@@ -102,12 +107,7 @@ set backspace=indent,eol,start
 " remove autoindent, autocomment, autobizarrethings
 filetype plugin off
 filetype indent off
+set noautoindent
 
 " don't let the cursor be at the top or at the bottom
 set scrolloff=10
-
-" remove clipboard stuff
-set clipboard=exclude:.*
-
-" yank to clipboard (even over ssh) with \y
-vnoremap <silent><Leader>y "yy <Bar> :call system('xclip', @y)<CR>

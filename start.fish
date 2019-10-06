@@ -24,6 +24,9 @@ ln -sf "$here/hexchat/servlist.conf" $HOME/.config/hexchat/servlist.conf
 ln -sf "$here/hexchat/hexchat.conf" $HOME/.config/hexchat/hexchat.conf
 unzip -o "$here/hexchat/Monokai.hct" -d ~/.config/hexchat/
 
+mkdir -p $HOME/.config/nvim
+ln -sf "$here/nvim-init.vim" "$HOME/.config/nvim/init.vim"
+
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
 ln -sf "$here/i3blocks" $HOME/.i3blocks.conf
