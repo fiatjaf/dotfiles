@@ -101,6 +101,9 @@ nnoremap <leader>lsql :VipsqlSendCurrentLine<CR>
 nnoremap <leader>fsql :VipsqlSendBuffer<CR>
 nnoremap <leader>psql :VipsqlShell<CR>
 
+" emmet
+let g:user_emmet_settings = { 'indentation' : ' ' }
+
 " make backspace work
 set backspace=indent,eol,start
 
