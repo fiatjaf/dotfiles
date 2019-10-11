@@ -111,6 +111,7 @@ set backspace=indent,eol,start
 filetype plugin off
 filetype indent off
 set noautoindent
+set nosmarttab
 
 " don't let the cursor be at the top or at the bottom
 set scrolloff=10

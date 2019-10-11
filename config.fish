@@ -1,4 +1,4 @@
-set -x EDITOR vim
+set -x EDITOR nvim
 if [ -n "$DISPLAY" ]
   set -x TERMINAL urxvt
   set -x TERM rxvt-unicode-256color
