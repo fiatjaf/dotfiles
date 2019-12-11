@@ -12,7 +12,7 @@ signal=10
 
 [memory]
 command=free -mh | grep Mem | awk '{ print("mem="$2" free="$4) }'
-interval=5
+interval=60
 
 [disk]
 interval=30
@@ -24,15 +24,25 @@ interval=2
 #command=if ping -w 1 -c 1 8.8.8.8 >/dev/null 2>&1; then echo "UP"; else echo "DOWN"; fi
 
 [ip]
-interval=5
-command=ip route get 1 | awk '{print $NF}'
+interval=360
+command=ifconfig | grep 'inet ' | grep -v '127.0.0.1' | awk '{print($2)}' | sed -e :a  -e 'N;s/\n/ | /;ta'
 
 [cpu_usage]
 label=CPU
-interval=10
+interval=30
 min_width=CPU: 100.00%
 command=/usr/local/libexec/i3blocks/cpu_usage
 
+[btcusd]
+label=btc=
+command=curl https://www.bitstamp.net/api/ticker/ | jq -cr '.last'
+interval=600
+
 [time]
-command=date '+%d/%h/%Y %H:%M'
-interval=5
+command=date '+%d/%h/%Y %H:%M:%S'
+interval=3
+
+[block]
+label=block=
+command=curl -s https://blockstream.info/api/blocks/tip/height | jq -Rcr
+interval=60
