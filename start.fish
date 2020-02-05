@@ -2,7 +2,7 @@ set here (pwd)
 
 ln -sfT "$here/vim" $HOME/.vim
 ln -sf "$here/vimrc" $HOME/.vimrc
-vim +PlugInstall +qall
+nvim +PlugInstall +qall
 
 ln -sf "$here/config.fish" $HOME/.config/fish/config.fish
 ln -sfT "$here/fish_functions" $HOME/.config/fish/functions

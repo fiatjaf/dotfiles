@@ -1,10 +1,10 @@
 Xcursor.theme: DMZ-White
 
-URxvt.font:                xft:Ubuntu Mono:pixelsize=16
-URxvt.boldFont:            xft:Ubuntu Mono:pixelsize=16:bold
-URxvt.italicFont:          xft:Ubuntu Mono:pixelsize=16:italic
-URxvt.boldItalicFont:      xft:Ubuntu Mono:pixelsize=16:bold:italic
-URxvt.letterSpace:         -1
+URxvt.font:                xft:Ubuntu Mono:pixelsize=13
+URxvt.boldFont:            xft:Ubuntu Mono:pixelsize=13:bold
+URxvt.italicFont:          xft:Ubuntu Mono:pixelsize=13:italic
+URxvt.boldItalicFont:      xft:Ubuntu Mono:pixelsize=13:bold:italic
+URxvt.letterSpace:         -3
 
 URxvt*color0:              #101218
 URxvt*color1:              #ee829f

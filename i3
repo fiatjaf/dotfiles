@@ -9,6 +9,8 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+exec "setxkbmap -layout br"
+
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
@@ -18,7 +20,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -163,6 +165,7 @@ bindsym $mod+Shift+v exec ~/.vim-anywhere/bin/run
 # finds out, if available)
 bar {
   status_command i3blocks
+  tray_output none
 }
 
 exec --no-startup-id pavucontrol
@@ -170,4 +173,4 @@ exec --no-startup-id syncthing
 exec --no-startup-id numlockx
 exec --no-startup-id rofi
 exec --no-startup-id redshift -l -19:-43
-exec --no-startup-id sleep 2 && x-www-browser
+exec --no-startup-id sleep 2 && firefox

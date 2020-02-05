@@ -1,6 +1,6 @@
 set -x EDITOR nvim
 if [ -n "$DISPLAY" ]
-  set -x TERMINAL urxvt
+  set -x TERMINAL alacritty
   set -x TERM rxvt-unicode-256color
 end
 
@@ -22,10 +22,7 @@ set -x PYTHONSTARTUP ~/dotfiles/pythonrc
 mkdir -p $HOME/.local/bin
 set -x PATH $PATH $HOME/.local/bin
 
-alias 'git-icdiff' 'git difftool --no-prompt --extcmd icdiff ($@)'
 alias 'tmux' 'tmux -2'
-
-if test -f /home/fiatjaf/.autojump/share/autojump/autojump.fish; . /home/fiatjaf/.autojump/share/autojump/autojump.fish; end
 
 touch ~/.config/fish/local.fish
 source ~/.config/fish/local.fish

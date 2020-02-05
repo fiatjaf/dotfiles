@@ -17,12 +17,13 @@ Plug 'junegunn/goyo.vim'
 Plug 'vito-c/jq.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'zxqfl/tabnine-vim'
-Plug 'reasonml-editor/vim-reason-plus'
 Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
 Plug 'mattn/emmet-vim'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 " Enable syntax highlighting
@@ -32,8 +33,8 @@ let g:jsx_ext_required = 0
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'haskell': ['hlint', 'hdevtools'],
-\   'go': ['gofmt', 'go mod', 'go build'],
-\   'python': ['pyflakes'],
+\   'go': ['gobuild'],
+\   'python': ['pyflakes', 'pyre'],
 \   'fish': [],
 \   'typescript': [],
 \   'rust': ['cargo']
@@ -42,14 +43,16 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'go': ['goimports'],
-\   'reason': ['refmt'],
 \   'python': ['black'],
-\   'javascript': ['prettier'],
+\   'javascript': ['prettier', 'eslint'],
+\   'html': ['prettier'],
 \   'typescript': ['prettier'],
-\   'rust': ['rustfmt']
+\   'rust': ['rustfmt'],
+\   'dart': ['dartfmt']
 \}
+"   'scala': ['scalafmt'],
 
-let g:ale_lint_on_save = 0
+let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_delay = 1000
 let g:ale_fix_on_save = 1
@@ -60,8 +63,6 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_info_str = 'I'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-let g:ale_reasonml_refmt_executable = 'bsrefmt'
 
 " Theme
 set t_Co=256
@@ -82,10 +83,10 @@ set tabstop=4
 set shell=bash
 set rtp+=$GOROOT/misc/vim
 
-" .tpl, .tera, .svelte files as html
 au BufNewFile,BufRead *.tpl :set ft=html
 au BufNewFile,BufRead *.svelte :set ft=html
 au BufNewFile,BufRead *.tera :set ft=html
+au BufNewFile,BufRead *.tsx :set ft=typescript
 
 " remove bad typescript stuff
 let g:typescript_indent_disable = 1

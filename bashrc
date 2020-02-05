@@ -112,3 +112,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export TERMINAL=alacritty
+
+source /home/fiatjaf/.config/broot/launcher/bash/br

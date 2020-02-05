@@ -1,6 +1,6 @@
 arrowParens: avoid
 bracketSpacing: false
-insertPragma: true
+requirePragma: true
 jsxBracketSameLine: false
 printWidth: 80
 proseWrap: preserve
@@ -8,4 +8,4 @@ semi: false
 singleQuote: true
 trailingComma: none
 useTabs: false
-pluginSearchDirs: ["/home/fiatjaf/npm_modules/pnpm-global/1", "/home/fiatjaf/npm_modules/pnpm-global/2"]
+pluginSearchDirs: ["/home/fiatjaf/npm_modules/pnpm-global/3"]
