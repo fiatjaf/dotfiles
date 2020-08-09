@@ -9,6 +9,9 @@ set -x GOROOT /usr/local/go
 set -x PATH $PATH $GOROOT/bin
 set -x PATH $PATH $GOPATH/bin
 
+set -x DENO_INSTALL /home/fiatjaf/.deno
+set -x PATH $DENO_INSTALL/bin $PATH
+
 set -x PATH $PATH $HOME/.cargo/bin
 
 set -x NPM_PACKAGES $HOME/npm_modules
@@ -37,4 +40,8 @@ function vipsql
   else
     vim -c 'VipsqlOpenSession '"$argv[2]" "$argv[1]"
   end
+end
+
+function fish_right_prompt
+  date +'%R'
 end

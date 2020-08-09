@@ -23,8 +23,22 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
 Plug 'mattn/emmet-vim'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'vimwiki/vimwiki'
+Plug 'udalov/kotlin-vim'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
+
+" remove annoying preview windows from youcompleteme/tabnine
+set completeopt-=preview
+
+" firenvim
+let g:firenvim_config = {
+\   'localSettings': {
+\       '.*': {
+\           'selector': 'textarea',
+\           'takeover': 'once',
+\       },
+\   }
+\}
 
 " Enable syntax highlighting
 syntax enable
@@ -36,21 +50,21 @@ let g:ale_linters = {
 \   'go': ['gobuild'],
 \   'python': ['pyflakes', 'pyre'],
 \   'fish': [],
-\   'typescript': [],
+\   'typescript': ['eslint'],
 \   'rust': ['cargo']
 \}
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'go': ['goimports'],
+\   'javascript': ['prettier'],
 \   'python': ['black'],
-\   'javascript': ['prettier', 'eslint'],
 \   'html': ['prettier'],
 \   'typescript': ['prettier'],
 \   'rust': ['rustfmt'],
-\   'dart': ['dartfmt']
+\   'dart': ['dartfmt'],
+\   'scala': ['scalafmt']
 \}
-"   'scala': ['scalafmt'],
 
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'always'

@@ -3,10 +3,8 @@ separator_block_width=15
 markup=none
 
 [volume]
-command=/usr/local/libexec/i3blocks/volume
-label=♪
-instance=Master
-#instance=PCM
+command=amixer get Master | grep '%' | awk '{print($5)}' | head -n 1
+label=volume=
 interval=once
 signal=10
 

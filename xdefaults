@@ -1,0 +1,5 @@
+Xcursor.theme: DMZ-White
+
+! rofi with fish
+rofi.run-command: fish -c '{cmd}'
+rofi.run-list-command: 'fish -c functions'

@@ -19,5 +19,5 @@ ln -sf "$here/nvim-init.vim" "$HOME/.config/nvim/init.vim"
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
 ln -sf "$here/i3blocks" $HOME/.i3blocks.conf
-ln -sf "$here/urxvt" $HOME/.Xdefaults
+ln -sf "$here/xdefault " $HOME/.Xdefaults
 ln -sfT "$here/icons" $HOME/.icons

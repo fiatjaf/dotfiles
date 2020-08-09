@@ -9,8 +9,6 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-exec "setxkbmap -layout br"
-
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
@@ -26,26 +24,13 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec rofi -show run
-bindsym $mod+b exec buku_run
-
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ccedilla focus right
+bindsym $mod+d exec "rofi -show run -modi run,ssh,window,top,file-browser"
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+J move left
-bindsym $mod+Shift+K move down
-bindsym $mod+Shift+L move up
-bindsym $mod+Shift+Ccedilla move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -63,22 +48,25 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, default)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout default
 
 # printscreen
-bindsym Print exec scrot
-bindsym $mod+Print exec scrot -u
+# bindsym Print exec scrot
+# bindsym $mod+Print exec scrot -u
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+# bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
+
+# start at br layout
+exec setxkbmap -layout br
 
 # window colors
 client.focused          #222323 #444444 #888888
@@ -122,44 +110,12 @@ bindsym $mod+Shift+E exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # They resize the border in the direction you pressed, e.g.
-        # when pressing left, the window is resized so that it has
-        # more space on its left
-
-bindsym j resize shrink left 10 px or 10 ppt
-bindsym Shift+J resize grow   left 10 px or 10 ppt
-
-bindsym k resize shrink down 10 px or 10 ppt
-bindsym Shift+K resize grow   down 10 px or 10 ppt
-
-bindsym l resize shrink up 10 px or 10 ppt
-bindsym Shift+L resize grow   up 10 px or 10 ppt
-
-bindsym ccedilla resize shrink right 10 px or 10 ppt
-bindsym Shift+Ccedilla resize grow   right 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-bindsym Left resize shrink left 10 px or 10 ppt
-bindsym Shift+Left resize grow   left 10 px or 10 ppt
-
-bindsym Down resize shrink down 10 px or 10 ppt
-bindsym Shift+Down resize grow   down 10 px or 10 ppt
-
-bindsym Up resize shrink up 10 px or 10 ppt
-bindsym Shift+Up resize grow   up 10 px or 10 ppt
-
-bindsym Right resize shrink right 10 px or 10 ppt
-bindsym Shift+Right resize grow   right 10 px or 10 ppt
-
         # back to normal: Enter or Escape
 bindsym Return mode "default"
 bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
-bindsym $mod+Shift+v exec ~/.vim-anywhere/bin/run
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -171,6 +127,5 @@ bar {
 exec --no-startup-id pavucontrol
 exec --no-startup-id syncthing
 exec --no-startup-id numlockx
-exec --no-startup-id rofi
 exec --no-startup-id redshift -l -19:-43
 exec --no-startup-id sleep 2 && firefox
