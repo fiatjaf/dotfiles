@@ -29,6 +29,7 @@ alias 'tmux' 'tmux -2'
 
 touch ~/.config/fish/local.fish
 source ~/.config/fish/local.fish
+source ~/.config/fish/functions/forgit.plugin.fish
 
 function settitle
   printf "\033k$argv[1]\033\\"

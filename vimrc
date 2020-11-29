@@ -24,7 +24,10 @@ Plug 'terryma/vim-expand-region'
 Plug 'mattn/emmet-vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'udalov/kotlin-vim'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'junegunn/fzf.vim'
+Plug 'fiatjaf/neuron.vim'
+Plug 'liuchengxu/vista.vim'
+Plug 'rafi/awesome-vim-colorschemes'
 call plug#end()
 
 " remove annoying preview windows from youcompleteme/tabnine
@@ -35,7 +38,7 @@ let g:firenvim_config = {
 \   'localSettings': {
 \       '.*': {
 \           'selector': 'textarea',
-\           'takeover': 'once',
+\           'takeover': 'never',
 \       },
 \   }
 \}
@@ -48,18 +51,19 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'haskell': ['hlint', 'hdevtools'],
 \   'go': ['gobuild'],
-\   'python': ['pyflakes', 'pyre'],
+\   'python': ['pyflakes', 'mypy'],
 \   'fish': [],
 \   'typescript': ['eslint'],
 \   'rust': ['cargo']
 \}
 
+"   'javascript': ['prettier'],
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'go': ['goimports'],
-\   'javascript': ['prettier'],
 \   'python': ['black'],
 \   'html': ['prettier'],
+\   'vue': ['prettier'],
 \   'typescript': ['prettier'],
 \   'rust': ['rustfmt'],
 \   'dart': ['dartfmt'],
@@ -78,10 +82,14 @@ let g:ale_echo_msg_info_str = 'I'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
+map err :ALENextWrap<CR>
+
 " Theme
 set t_Co=256
 set background=dark
-colorscheme jellybeans
+colorscheme nord
+colorscheme challenger_deep
+colorscheme oceanic_material
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -130,3 +138,6 @@ set nosmarttab
 
 " don't let the cursor be at the top or at the bottom
 set scrolloff=10
+
+" ESC removes the highlighted matches that bother me after I search something with /
+nnoremap <esc> :noh<return><esc>

@@ -8,6 +8,10 @@ label=volume=
 interval=once
 signal=10
 
+[temperature]
+command=sensors -j | jq -rc 'to_entries | .[0].value.temp1.temp1_input | "temp=\(.)°C"'
+interval=120
+
 [memory]
 command=free -mh | grep Mem | awk '{ print("mem="$2" free="$4) }'
 interval=60
