@@ -3,11 +3,14 @@ if [ -n "$DISPLAY" ]
   set -x TERMINAL alacritty
   set -x TERM rxvt-unicode-256color
 end
+set -x PAGER less
 
 set -x GOPATH /home/fiatjaf/comp/go
 set -x GOROOT /usr/local/go
 set -x PATH $PATH $GOROOT/bin
 set -x PATH $PATH $GOPATH/bin
+set -x PATH $PATH $HOME/.pub-cache/bin
+set -x GOPHERJS_GOROOT (go1.12.16 env GOROOT)
 
 set -x DENO_INSTALL /home/fiatjaf/.deno
 set -x PATH $DENO_INSTALL/bin $PATH
@@ -37,9 +40,9 @@ end
 
 function vipsql
   if [ (echo $argv | wc -w) = 1 ]
-    vim -c 'setlocal buftype=nofile | setlocal ft=sql | VipsqlOpenSession '"$argv"
+    nvim -c 'setlocal buftype=nofile | setlocal ft=sql | VipsqlOpenSession '"$argv"
   else
-    vim -c 'VipsqlOpenSession '"$argv[2]" "$argv[1]"
+    nvim -c 'VipsqlOpenSession '"$argv[2]" "$argv[1]"
   end
 end
 

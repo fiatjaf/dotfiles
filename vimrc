@@ -21,13 +21,14 @@ Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
-Plug 'mattn/emmet-vim'
+Plug 'pechorin/any-jump.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'udalov/kotlin-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'fiatjaf/neuron.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'withgod/vim-sourcepawn'
 call plug#end()
 
 " remove annoying preview windows from youcompleteme/tabnine
@@ -48,23 +49,25 @@ syntax enable
 let g:jsx_ext_required = 0
 
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'flow-language-server'],
 \   'haskell': ['hlint', 'hdevtools'],
 \   'go': ['gobuild'],
 \   'python': ['pyflakes', 'mypy'],
 \   'fish': [],
 \   'typescript': ['eslint'],
-\   'rust': ['cargo']
+\   'rust': ['cargo'],
+\   'dart': ['dartanalyzer', 'analysis_server'],
 \}
 
-"   'javascript': ['prettier'],
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'html': ['prettier'],
 \   'go': ['goimports'],
 \   'python': ['black'],
-\   'html': ['prettier'],
+\   'css': ['prettier'],
 \   'vue': ['prettier'],
-\   'typescript': ['prettier'],
 \   'rust': ['rustfmt'],
 \   'dart': ['dartfmt'],
 \   'scala': ['scalafmt']
@@ -81,6 +84,9 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_info_str = 'I'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+let g:ale_javascript_flow_ls_use_global = 0
+let g:ale_javascript_eslint_use_global = 0
 
 map err :ALENextWrap<CR>
 

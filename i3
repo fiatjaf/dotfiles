@@ -54,11 +54,11 @@ bindsym $mod+f fullscreen
 # bindsym $mod+e layout default
 
 # printscreen
-# bindsym Print exec scrot
-# bindsym $mod+Print exec scrot -u
+bindsym Print exec scrot
+bindsym $mod+Print exec scrot -u
 
 # toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 # bindsym $mod+space focus mode_toggle
@@ -117,6 +117,8 @@ bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
+
+for_window [window_role="pop-up"] floating enable
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
