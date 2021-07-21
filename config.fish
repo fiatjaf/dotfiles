@@ -1,7 +1,7 @@
 set -x EDITOR nvim
 if [ -n "$DISPLAY" ]
   set -x TERMINAL alacritty
-  set -x TERM rxvt-unicode-256color
+  set -x TERM xterm-256color
 end
 set -x PAGER less
 

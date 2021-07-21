@@ -29,7 +29,13 @@ Plug 'fiatjaf/neuron.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'withgod/vim-sourcepawn'
+Plug 'junegunn/vader.vim'
+Plug 'cheap-glitch/vim-v'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 call plug#end()
+
+" v
+"autocmd BufRead,BufNewFile *.v set filetype=v
 
 " remove annoying preview windows from youcompleteme/tabnine
 set completeopt-=preview
@@ -50,27 +56,30 @@ let g:jsx_ext_required = 0
 
 let g:ale_linters = {
 \   'javascript': ['eslint', 'flow-language-server'],
+\   'typescript': ['eslint', 'deno'],
 \   'haskell': ['hlint', 'hdevtools'],
-\   'go': ['gobuild'],
 \   'python': ['pyflakes', 'mypy'],
 \   'fish': [],
-\   'typescript': ['eslint'],
 \   'rust': ['cargo'],
 \   'dart': ['dartanalyzer', 'analysis_server'],
+\   'go': ['gofmt', 'go build'],
+\   'v': ['v'],
 \}
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier'],
+\   'javascript': ['eslint', 'prettier'],
 \   'typescript': ['prettier'],
-\   'html': ['prettier'],
-\   'go': ['goimports'],
+\   'svelte': ['prettier'],
 \   'python': ['black'],
-\   'css': ['prettier'],
-\   'vue': ['prettier'],
+\   'scala': ['scalafmt'],
+\   'html': ['prettier'],
 \   'rust': ['rustfmt'],
 \   'dart': ['dartfmt'],
-\   'scala': ['scalafmt']
+\   'css': ['prettier'],
+\   'vue': ['prettier'],
+\   'go': ['goimports'],
+\   'v': ['vfmt'],
 \}
 
 let g:ale_lint_on_save = 1
@@ -87,15 +96,14 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 let g:ale_javascript_flow_ls_use_global = 0
 let g:ale_javascript_eslint_use_global = 0
+let g:ale_javascript_prettier_use_global = 0
 
 map err :ALENextWrap<CR>
 
 " Theme
 set t_Co=256
 set background=dark
-colorscheme nord
 colorscheme challenger_deep
-colorscheme oceanic_material
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -112,9 +120,9 @@ set shell=bash
 set rtp+=$GOROOT/misc/vim
 
 au BufNewFile,BufRead *.tpl :set ft=html
-au BufNewFile,BufRead *.svelte :set ft=html
 au BufNewFile,BufRead *.tera :set ft=html
 au BufNewFile,BufRead *.tsx :set ft=typescript
+au BufNewFile,BufRead *.svelte :set ft=svelte
 
 " remove bad typescript stuff
 let g:typescript_indent_disable = 1
@@ -147,3 +155,6 @@ set scrolloff=10
 
 " ESC removes the highlighted matches that bother me after I search something with /
 nnoremap <esc> :noh<return><esc>
+
+" U reruns the syntax highlighting to unfuck my screen, as per https://vi.stackexchange.com/questions/2172/why-i-am-losing-syntax-highlighting-when-folding-code-within-a-script-tag
+nnoremap U :syntax sync fromstart<cr>:redraw!<cr>

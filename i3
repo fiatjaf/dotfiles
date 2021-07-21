@@ -25,7 +25,6 @@ bindsym $mod+Shift+Q kill
 
 # start rofi (a program launcher)
 bindsym $mod+d exec "rofi -show run -modi run,ssh,window,top,file-browser"
-bindsym $mod+b exec "rofi -show b:rofi-bitcoin"
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -127,7 +126,6 @@ bar {
   tray_output none
 }
 
-exec --no-startup-id pavucontrol
 exec --no-startup-id syncthing
 exec --no-startup-id numlockx
 exec --no-startup-id redshift -l -19:-43
