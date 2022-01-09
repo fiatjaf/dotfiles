@@ -10,10 +10,10 @@ set -x GOROOT /usr/local/go
 set -x PATH $PATH $GOROOT/bin
 set -x PATH $PATH $GOPATH/bin
 set -x PATH $PATH $HOME/.pub-cache/bin
-set -x GOPHERJS_GOROOT (go1.12.16 env GOROOT)
 
 set -x DENO_INSTALL /home/fiatjaf/.deno
 set -x PATH $DENO_INSTALL/bin $PATH
+set -x PATH (yarn global bin) $PATH
 
 set -x PATH $PATH $HOME/.cargo/bin
 
@@ -32,7 +32,14 @@ alias 'tmux' 'tmux -2'
 
 touch ~/.config/fish/local.fish
 source ~/.config/fish/local.fish
-source ~/.config/fish/functions/forgit.plugin.fish
+
+function nvim
+  if [ "$IN_NEOVIM" = 'yes' ]
+    echo 'cannot nest nvim sessions'
+  else
+    /usr/bin/nvim $argv
+  end
+end
 
 function settitle
   printf "\033k$argv[1]\033\\"

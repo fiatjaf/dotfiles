@@ -1,3 +1,5 @@
+let $IN_NEOVIM = 'yes'
+
 if $SHELL =~ 'fish'
   set shell='/bin/sh'
 endif
@@ -6,6 +8,11 @@ endif
 set nocompatible
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
+Plug 'romgrk/barbar.nvim'
+Plug 'junegunn/fzf.vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'ms-jpq/chadtree', { 'branch': 'chad' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'bling/vim-airline'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -16,7 +23,6 @@ Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
 Plug 'vito-c/jq.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'zxqfl/tabnine-vim'
 Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -26,12 +32,9 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'udalov/kotlin-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'fiatjaf/neuron.vim'
-Plug 'liuchengxu/vista.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'withgod/vim-sourcepawn'
-Plug 'junegunn/vader.vim'
 Plug 'cheap-glitch/vim-v'
-Plug 'evanleck/vim-svelte', {'branch': 'main'}
 call plug#end()
 
 " v
@@ -158,3 +161,44 @@ nnoremap <esc> :noh<return><esc>
 
 " U reruns the syntax highlighting to unfuck my screen, as per https://vi.stackexchange.com/questions/2172/why-i-am-losing-syntax-highlighting-when-folding-code-within-a-script-tag
 nnoremap U :syntax sync fromstart<cr>:redraw!<cr>
+
+set termguicolors
+set mouse+=a
+
+" terminal mode to normal mode
+tnoremap <C-b> <C-\><C-n>
+tnoremap <ESC> <C-\><C-n>
+
+" search files with fzf
+nnoremap <C-p> :Files<CR>
+
+" open tree
+nnoremap <C-t> :CHADopen<CR>
+
+" barbar plugin with tmux-like things
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.animation = v:false
+let bufferline.icons = v:false
+let bufferline.auto_hide = v:true
+
+nnoremap <C-b>h :BufferPrevious<CR>
+nnoremap <C-b>l :BufferNext<CR>
+nnoremap <C-b>j <C-w><C-j><CR>
+nnoremap <C-b>k <C-w><C-k><CR>
+nnoremap <C-b><C-h> :BufferMovePrevious<CR>
+nnoremap <C-b><C-l> :BufferMoveNext<CR>
+nnoremap <C-b>1 :BufferGoto 1<CR>
+nnoremap <C-b>2 :BufferGoto 2<CR>
+nnoremap <C-b>3 :BufferGoto 3<CR>
+nnoremap <C-b>4 :BufferGoto 4<CR>
+nnoremap <C-b>5 :BufferGoto 5<CR>
+nnoremap <C-b>6 :BufferGoto 6<CR>
+nnoremap <C-b>7 :BufferGoto 7<CR>
+nnoremap <C-b>8 :BufferGoto 8<CR>
+nnoremap <C-b>9 :BufferGoto 9<CR>
+nnoremap <C-b>0 :BufferGoto 10<CR>
+nnoremap <C-b>x :BufferClose<CR>
+nnoremap <C-b>c :new term://fish<CR>
+
+" prevent closing with :q
+cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
