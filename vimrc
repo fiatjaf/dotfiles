@@ -196,8 +196,7 @@ nnoremap <C-b>6 :BufferGoto 6<CR>
 nnoremap <C-b>7 :BufferGoto 7<CR>
 nnoremap <C-b>8 :BufferGoto 8<CR>
 nnoremap <C-b>9 :BufferGoto 9<CR>
-nnoremap <C-b>0 :BufferGoto 10<CR>
-nnoremap <C-b>x :BufferClose<CR>
+nnoremap <C-x> :BufferClose<CR>
 nnoremap <C-b>c :new term://fish<CR>
 
 " prevent closing with :q
