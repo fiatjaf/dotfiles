@@ -1,9 +1,11 @@
+requirePragma: true
+semi: false
 arrowParens: avoid
-bracketSpacing: false
-jsxBracketSameLine: false
+insertPragma: false
 printWidth: 80
 proseWrap: preserve
-semi: false
 singleQuote: true
 trailingComma: none
 useTabs: false
+jsxBracketSameLine: false
+bracketSpacing: false

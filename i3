@@ -127,4 +127,4 @@ bar {
 }
 
 exec --no-startup-id numlockx
-exec --no-startup-id redshift -l -19:-43
+exec --no-startup-id redshift -l -19:-43 -r

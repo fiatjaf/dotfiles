@@ -13,6 +13,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'ms-jpq/chadtree', { 'branch': 'chad' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/vim-easy-align'
 Plug 'bling/vim-airline'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -27,7 +28,6 @@ Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
-Plug 'pechorin/any-jump.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'udalov/kotlin-vim'
 Plug 'junegunn/fzf.vim'
@@ -40,31 +40,18 @@ call plug#end()
 " v
 "autocmd BufRead,BufNewFile *.v set filetype=v
 
-" remove annoying preview windows from youcompleteme/tabnine
-set completeopt-=preview
-
-" firenvim
-let g:firenvim_config = {
-\   'localSettings': {
-\       '.*': {
-\           'selector': 'textarea',
-\           'takeover': 'never',
-\       },
-\   }
-\}
-
 " Enable syntax highlighting
 syntax enable
 let g:jsx_ext_required = 0
 
 let g:ale_linters = {
 \   'javascript': ['eslint', 'flow-language-server'],
-\   'typescript': ['eslint', 'deno'],
+\   'typescript': ['eslint'],
 \   'haskell': ['hlint', 'hdevtools'],
 \   'python': ['pyflakes', 'mypy'],
 \   'fish': [],
 \   'rust': ['cargo'],
-\   'dart': ['dartanalyzer', 'analysis_server'],
+\   'dart': ['dart_analyze'],
 \   'go': ['gofmt', 'go build'],
 \   'v': ['v'],
 \}
@@ -78,7 +65,7 @@ let g:ale_fixers = {
 \   'scala': ['scalafmt'],
 \   'html': ['prettier'],
 \   'rust': ['rustfmt'],
-\   'dart': ['dartfmt'],
+\   'dart': ['dart-format'],
 \   'css': ['prettier'],
 \   'vue': ['prettier'],
 \   'go': ['goimports'],
@@ -100,6 +87,11 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_javascript_flow_ls_use_global = 0
 let g:ale_javascript_eslint_use_global = 0
 let g:ale_javascript_prettier_use_global = 0
+
+let g:ale_dart_format_executable = '/opt/flutter/bin/dart'
+let g:ale_dart_analyze_executable = '/opt/flutter/bin/dart'
+
+let g:ale_go_gofmt_options = '-s'
 
 map err :ALENextWrap<CR>
 
@@ -141,9 +133,6 @@ nnoremap <leader>lsql :VipsqlSendCurrentLine<CR>
 nnoremap <leader>fsql :VipsqlSendBuffer<CR>
 nnoremap <leader>psql :VipsqlShell<CR>
 
-" emmet
-let g:user_emmet_settings = { 'indentation' : ' ' }
-
 " make backspace work
 set backspace=indent,eol,start
 
@@ -161,6 +150,9 @@ nnoremap <esc> :noh<return><esc>
 
 " U reruns the syntax highlighting to unfuck my screen, as per https://vi.stackexchange.com/questions/2172/why-i-am-losing-syntax-highlighting-when-folding-code-within-a-script-tag
 nnoremap U :syntax sync fromstart<cr>:redraw!<cr>
+
+" markdown tables
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 set termguicolors
 set mouse+=a

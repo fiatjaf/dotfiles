@@ -11,6 +11,8 @@ set -x PATH $PATH $GOROOT/bin
 set -x PATH $PATH $GOPATH/bin
 set -x PATH $PATH $HOME/.pub-cache/bin
 
+set -x GOPRIVATE git.zebedee.team
+
 set -x DENO_INSTALL /home/fiatjaf/.deno
 set -x PATH $DENO_INSTALL/bin $PATH
 set -x PATH (yarn global bin) $PATH

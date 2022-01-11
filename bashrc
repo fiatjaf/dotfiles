@@ -116,3 +116,4 @@ fi
 export TERMINAL=alacritty
 
 source /home/fiatjaf/.config/broot/launcher/bash/br
+source /usr/share/nvm/init-nvm.sh
