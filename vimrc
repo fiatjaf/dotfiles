@@ -1,5 +1,3 @@
-let $IN_NEOVIM = 'yes'
-
 if $SHELL =~ 'fish'
   set shell='/bin/sh'
 endif
@@ -58,6 +56,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascriptreact': ['eslint', 'prettier'],
 \   'javascript': ['eslint', 'prettier'],
 \   'typescript': ['prettier'],
 \   'svelte': ['prettier'],
@@ -159,10 +158,11 @@ set mouse+=a
 
 " terminal mode to normal mode
 tnoremap <C-b> <C-\><C-n>
-tnoremap <ESC> <C-\><C-n>
+" tnoremap <ESC> <C-\><C-n>
 
 " search files with fzf
 nnoremap <C-p> :Files<CR>
+nnoremap <C-a> :Ag<CR>
 
 " open tree
 nnoremap <C-t> :CHADopen<CR>
@@ -193,3 +193,5 @@ nnoremap <C-b>c :new term://fish<CR>
 
 " prevent closing with :q
 cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
+
+let $IN_NEOVIM = 'yes'
