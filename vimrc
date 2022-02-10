@@ -189,7 +189,7 @@ nnoremap <C-b>7 :BufferGoto 7<CR>
 nnoremap <C-b>8 :BufferGoto 8<CR>
 nnoremap <C-b>9 :BufferGoto 9<CR>
 nnoremap <C-x> :BufferClose<CR>
-nnoremap <C-b>c :new term://fish<CR>
+nnoremap <C-b>c :e term://fish<CR>
 
 " prevent closing with :q
 cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
