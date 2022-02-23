@@ -9,7 +9,7 @@ Plug 'w0rp/ale'
 Plug 'romgrk/barbar.nvim'
 Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'ms-jpq/chadtree', { 'branch': 'chad' }
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/vim-easy-align'
 Plug 'bling/vim-airline'
@@ -24,15 +24,14 @@ Plug 'vito-c/jq.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'terryma/vim-expand-region'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'udalov/kotlin-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'fiatjaf/neuron.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'withgod/vim-sourcepawn'
-Plug 'cheap-glitch/vim-v'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'scalameta/nvim-metals', {'branch': 'main'}
 call plug#end()
 
 " v
@@ -164,8 +163,13 @@ tnoremap <C-b> <C-\><C-n>
 nnoremap <C-p> :Files<CR>
 nnoremap <C-a> :Ag<CR>
 
-" open tree
-nnoremap <C-t> :CHADopen<CR>
+" nvim tree
+lua << endlua
+require'nvim-tree'.setup {
+  auto_close = true
+}
+endlua
+nnoremap <C-t> :NvimTreeOpen<CR>
 
 " barbar plugin with tmux-like things
 let bufferline = get(g:, 'bufferline', {})
