@@ -1,3 +1,9 @@
+let g:loaded_python_provider = 0
+let g:python3_host_prog = '/usr/bin/python'
+
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+
 if $SHELL =~ 'fish'
   set shell='/bin/sh'
 endif
@@ -10,25 +16,23 @@ Plug 'romgrk/barbar.nvim'
 Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'junegunn/vim-easy-align'
-Plug 'bling/vim-airline'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'isRuslan/vim-es6'
-Plug 'wavded/vim-stylus'
 Plug 'vim-scripts/fish-syntax'
 Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
-Plug 'vito-c/jq.vim'
-Plug 'leafgarland/typescript-vim'
 Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'udalov/kotlin-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'fiatjaf/neuron.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'withgod/vim-sourcepawn'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'scalameta/nvim-metals'
 call plug#end()
 
 " v
@@ -175,25 +179,14 @@ require'nvim-tree'.setup {
 local opts = { noremap=true, silent=true }
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-end
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+vim.api.nvim_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'metals', 'gopls' }
-for _, lsp in pairs(servers) do
+for _, lsp in pairs({ 'gopls', 'clangd' }) do
   require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
@@ -201,8 +194,29 @@ for _, lsp in pairs(servers) do
   }
 end
 
+-- nvim-metals
+metals_config = require("metals").bare_config()
+metals_config.settings = {
+  showImplicitArguments = true,
+  excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
+  showInferredType = true,
+  superMethodLensesEnabled = true,
+  showImplicitConversionsAndClasses = true,
+}
+metals_config.init_options.statusBarProvider = "on"
+vim.cmd([[augroup lsp]])
+vim.cmd([[autocmd!]])
+vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
+vim.cmd([[autocmd FileType java,scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
+vim.cmd([[augroup end]])
+
+-- status line copied from https://github.com/ckipp01/dots/blob/d1f85d93a800daabe0c6bbf32bbd4766429e2192/nvim/.config/nvim/init.lua#L83
+require("statusline")
+vim.opt.statusline = "%!luaeval('Super_custom_status_line()')"
+
 endlua
 
+" open nvim-tree
 nnoremap <C-t> :NvimTreeOpen<CR>
 
 " barbar plugin with tmux-like things
