@@ -17,6 +17,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 Plug 'junegunn/vim-easy-align'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -35,8 +40,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'scalameta/nvim-metals'
 call plug#end()
 
-" v
-"autocmd BufRead,BufNewFile *.v set filetype=v
+" cmp (autocomplete)
+set completeopt=menu,menuone,noselect
 
 " Enable syntax highlighting
 syntax enable
@@ -214,6 +219,26 @@ vim.cmd([[augroup end]])
 require("statusline")
 vim.opt.statusline = "%!luaeval('Super_custom_status_line()')"
 
+-- cmd (autocomplete)
+local cmp = require'cmp'
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  sources = {
+    { name = "nvim_lsp", priority = 10 },
+    { name = "buffer" },
+  },
+  mapping = {
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i'}),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+  }
+})
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+require('lspconfig')['metals'].setup { capabilities = capabilities }
+require('lspconfig')['gopls'].setup { capabilities = capabilities }
 endlua
 
 " open nvim-tree
