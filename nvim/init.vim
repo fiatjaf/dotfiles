@@ -13,7 +13,6 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
 Plug 'romgrk/barbar.nvim'
-Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -22,6 +21,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'junegunn/vim-easy-align'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -32,7 +32,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'junegunn/fzf.vim'
 Plug 'fiatjaf/neuron.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'withgod/vim-sourcepawn'
@@ -168,10 +167,6 @@ set mouse+=a
 tnoremap <C-b> <C-\><C-n>
 " tnoremap <ESC> <C-\><C-n>
 
-" search files with fzf
-nnoremap <C-p> :Files<CR>
-nnoremap <C-a> :Ag<CR>
-
 " LUA stuff
 lua << endlua
 -- nvim tree
@@ -239,6 +234,10 @@ cmp.setup({
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig')['metals'].setup { capabilities = capabilities }
 require('lspconfig')['gopls'].setup { capabilities = capabilities }
+
+-- telescope (find files)
+vim.api.nvim_set_keymap('n', '<C-p>', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<C-a>', "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
 endlua
 
 " open nvim-tree
