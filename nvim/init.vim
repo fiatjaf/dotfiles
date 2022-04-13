@@ -236,9 +236,8 @@ require('lspconfig')['gopls'].setup { capabilities = capabilities }
 -- telescope (find files)
 vim.api.nvim_set_keymap('n', '<C-p>', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<C-a>', "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<C-b>', "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<C-of>', "<cmd>lua require('telescope.builtin').oldfiles()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<C-cs>', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<C-n>', "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<C-v>', "<cmd>lua require('telescope.builtin').oldfiles()<CR>", opts)
   -- telescope lsp stuff
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
