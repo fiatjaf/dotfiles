@@ -33,7 +33,7 @@ Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'fiatjaf/neuron.vim'
-Plug 'rafi/awesome-vim-colorschemes'
+Plug 'rebelot/kanagawa.nvim'
 Plug 'withgod/vim-sourcepawn'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'scalameta/nvim-metals'
@@ -104,7 +104,7 @@ map err :ALENextWrap<CR>
 " Theme
 set t_Co=256
 set background=dark
-colorscheme parsec
+colorscheme kanagawa
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
