@@ -179,10 +179,8 @@ require'nvim-tree'.setup {
 local opts = { noremap=true, silent=true }
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-vim.api.nvim_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+-- see also the telescope settings as some of the lsp stuff will be done on telescope
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 for _, lsp in pairs({ 'gopls', 'clangd' }) do
@@ -238,6 +236,13 @@ require('lspconfig')['gopls'].setup { capabilities = capabilities }
 -- telescope (find files)
 vim.api.nvim_set_keymap('n', '<C-p>', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<C-a>', "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<C-b>', "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<C-of>', "<cmd>lua require('telescope.builtin').oldfiles()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<C-cs>', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", opts)
+  -- telescope lsp stuff
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
+vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
+vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
 endlua
 
 " open nvim-tree
