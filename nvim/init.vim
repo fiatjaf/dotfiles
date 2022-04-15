@@ -51,7 +51,7 @@ let g:ale_linters = {
 \   'typescript': ['eslint'],
 \   'haskell': ['hlint', 'hdevtools'],
 \   'python': ['pyflakes', 'mypy'],
-\   'scala': ['fsc', 'metals'],
+\   'scala': ['metals'],
 \   'fish': [],
 \   'rust': ['cargo'],
 \   'dart': ['dart_analyze'],
@@ -97,7 +97,7 @@ let g:ale_dart_analyze_executable = '/opt/flutter/bin/dart'
 
 let g:ale_go_gofmt_options = '-s'
 
-let g:ale_scala_metals_executable = '/usr/bin/metals'
+let g:ale_scala_metals_executable = '/home/fiatjaf/.local/share/coursier/bin/metals'
 
 map err :ALENextWrap<CR>
 
@@ -198,6 +198,7 @@ metals_config.settings = {
   showImplicitArguments = true,
   excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
   showInferredType = true,
+  useGlobalExecutable = false,
   superMethodLensesEnabled = true,
   showImplicitConversionsAndClasses = true,
 }
@@ -237,7 +238,7 @@ require('lspconfig')['gopls'].setup { capabilities = capabilities }
 vim.api.nvim_set_keymap('n', '<C-p>', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<C-a>', "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<C-n>', "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<C-v>', "<cmd>lua require('telescope.builtin').oldfiles()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<C-g>', "<cmd>lua require('telescope.builtin').oldfiles()<CR>", opts)
   -- telescope lsp stuff
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
