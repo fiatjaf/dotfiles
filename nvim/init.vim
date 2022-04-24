@@ -250,9 +250,14 @@ nnoremap <C-t> :NvimTreeOpen<CR>
 
 " barbar plugin with tmux-like things
 let bufferline = get(g:, 'bufferline', {})
-let bufferline.animation = v:false
+let bufferline.animation = v:true
+let bufferline.maximum_padding = 1
 let bufferline.icons = v:false
 let bufferline.auto_hide = v:true
+let bufferline.icon_separator_active = '> '
+let bufferline.icon_separator_inactive = ''
+let bufferline.icon_close_tab = '×'
+let bufferline.icon_close_tab_modified = ''
 
 nnoremap <C-b>h :BufferPrevious<CR>
 nnoremap <C-b>l :BufferNext<CR>
