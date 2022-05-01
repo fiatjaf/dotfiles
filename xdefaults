@@ -1,5 +1,11 @@
 Xcursor.theme: DMZ-White
 
+URxvt.font:                xft:Fira Mono:pixelsize=14
+URxvt.boldFont:            xft:Fira Mono:pixelsize=14:bold
+URxvt.italicFont:          xft:Fira Mono:pixelsize=14:italic
+URxvt.boldItalicFont:      xft:Fira Mono:pixelsize=14:bold:italic
+URxvt.letterSpace:         -1
+
 ! rofi with fish
 rofi.run-command: fish -c '{cmd}'
 rofi.run-list-command: 'fish -c functions'
