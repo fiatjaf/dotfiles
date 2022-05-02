@@ -215,6 +215,7 @@ vim.opt.statusline = "%!luaeval('Super_custom_status_line()')"
 
 -- cmd (autocomplete)
 local cmp = require'cmp'
+local cmp_types = require'cmp.types.cmp'
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -228,6 +229,8 @@ cmp.setup({
   mapping = {
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i'}),
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp_types.SelectBehavior.Select }),
+    ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp_types.SelectBehavior.Select }),
   }
 })
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
