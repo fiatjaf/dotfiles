@@ -6,9 +6,8 @@ end
 set -x PAGER less
 
 set -x GOPATH /home/fiatjaf/comp/go
-set -x GOROOT /usr/local/go
-set -x PATH $PATH $GOROOT/bin
 set -x PATH $PATH $GOPATH/bin
+
 set -x PATH $PATH $HOME/.pub-cache/bin
 
 set -x GOPRIVATE git.zebedee.team
