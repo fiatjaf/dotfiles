@@ -10,6 +10,42 @@ local function err_count(severity)
   end
 end
 
+local function status_filename()
+  local abs = vim.fn.expand("%F")
+  local home = vim.fn.expand("~")
+  local cwd = vim.fn.getcwd()
+
+  if abs:find("term://") == 1 then
+    return abs
+  end
+
+  local s, e = abs:find(cwd)
+  if s == 1 then
+    local suffix = abs:sub(e)
+    if suffix:sub(1, 2) == './' then
+      suffix = suffix:sub(2)
+    end
+    if suffix:sub(1, 1) == '/' then
+      suffix = suffix:sub(1)
+    end
+    return "> ./" .. suffix
+  end
+
+  local s, e = abs:find(home)
+  if s == 1 then
+    return "~" .. abs:sub(e + 1)
+  end
+
+  if abs:sub(0, 1) == "/" then
+    return "!" .. abs
+  end
+
+  if abs:sub(1, 2) == './' then
+    abs = abs:sub(2)
+  end
+  return "> ./" .. abs
+end
+
 local function get_modified()
   local well_are_are = opt.modified:get()
   if well_are_are then
@@ -57,7 +93,7 @@ end
 function Super_custom_status_line()
   return table.concat({
     "%#StatusBackground#",
-    " %t ", -- filename only
+    status_filename(),
     readonly(),
     get_modified(),
     "%#StatusError#",
