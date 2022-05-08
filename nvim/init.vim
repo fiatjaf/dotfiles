@@ -37,6 +37,7 @@ Plug 'rebelot/kanagawa.nvim'
 Plug 'withgod/vim-sourcepawn'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'scalameta/nvim-metals'
+Plug 'akinsho/toggleterm.nvim'
 call plug#end()
 
 " cmp (autocomplete)
@@ -184,12 +185,12 @@ vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 for _, lsp in pairs({ 'gopls', 'clangd', 'jedi_language_server', 'rust_analyzer' }) do
-  require('lspconfig')[lsp].setup {
+  require('lspconfig')[lsp].setup({
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
     }
-  }
+  })
 end
 
 -- nvim-metals
@@ -242,10 +243,24 @@ vim.api.nvim_set_keymap('n', '<C-p>', "<cmd>lua require('telescope.builtin').fin
 vim.api.nvim_set_keymap('n', '<C-a>', "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<C-n>', "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<C-g>', "<cmd>lua require('telescope.builtin').oldfiles()<CR>", opts)
-  -- telescope lsp stuff
+-- telescope lsp stuff
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
 vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
+
+-- toggle-terminal
+require("toggleterm").setup({
+  -- size can be a number or function which is passed the current terminal
+  size = function (term)
+    if term.direction == "horizontal" then
+      return 15
+    elseif term.direction == "vertical" then
+      return vim.o.columns * 0.4
+    end
+  end,
+  open_mapping = [[<c-\>]],
+})
+--
 endlua
 
 " open nvim-tree
