@@ -4,10 +4,6 @@ let g:python3_host_prog = '/usr/bin/python'
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
-if $SHELL =~ 'fish'
-  set shell='/bin/sh'
-endif
-
 " vim-plug
 set nocompatible
 call plug#begin('~/.vim/plugged')
@@ -171,9 +167,7 @@ tnoremap <C-b> <C-\><C-n>
 " LUA stuff
 lua << endlua
 -- nvim tree
-require'nvim-tree'.setup {
-  auto_close = true
-}
+require'nvim-tree'.setup()
 
 -- lspconfig stuff
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
