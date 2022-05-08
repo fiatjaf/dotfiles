@@ -56,7 +56,7 @@ let g:ale_linters = {
 \   'fish': [],
 \   'rust': ['cargo'],
 \   'dart': ['dart_analyze'],
-\   'go': ['gofmt', 'go build'],
+\   'go': ['go build'],
 \   'v': ['v'],
 \}
 
@@ -73,7 +73,7 @@ let g:ale_fixers = {
 \   'dart': ['dart-format'],
 \   'css': ['prettier'],
 \   'vue': ['prettier'],
-\   'go': ['goimports'],
+\   'go': ['goimports', 'gofumpt'],
 \   'v': ['vfmt'],
 \}
 
