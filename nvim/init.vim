@@ -166,6 +166,7 @@ tnoremap <C-b> <C-\><C-n>
 
 " LUA stuff
 lua << endlua
+
 -- nvim tree
 require'nvim-tree'.setup()
 
@@ -253,8 +254,10 @@ require("toggleterm").setup({
     end
   end,
   open_mapping = [[<c-\>]],
+  shell = '/usr/bin/fish'
 })
---
+
+---
 endlua
 
 " open nvim-tree
