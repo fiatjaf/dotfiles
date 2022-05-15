@@ -175,7 +175,7 @@ require'nvim-tree'.setup()
 local opts = { noremap=true, silent=true }
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 -- see also the telescope settings as some of the lsp stuff will be done on telescope
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -275,12 +275,12 @@ let bufferline.icon_close_tab = '×'
 let bufferline.icon_close_tab_modified = ''
 
 " navigate between tabs
-nnoremap K :BufferPrevious<CR>
-nnoremap J :BufferNext<CR>
+nnoremap H :BufferPrevious<CR>
+nnoremap L :BufferNext<CR>
 
 " move tab position
-nnoremap <C-k> :BufferMovePrevious<CR>
-nnoremap <C-j> :BufferMoveNext<CR>
+nnoremap <C-h> :BufferMovePrevious<CR>
+nnoremap <C-l> :BufferMoveNext<CR>
 
 nnoremap <C-b>1 :BufferGoto 1<CR>
 nnoremap <C-b>2 :BufferGoto 2<CR>

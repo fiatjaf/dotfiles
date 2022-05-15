@@ -25,12 +25,14 @@ c.completion.open_categories = [
 ]
 c.aliases["translate"] = "spawn --userscript translate"
 
-to_delete = ["<Ctrl+B>", "r", "<Ctrl+W>", "gm", "gK", "gJ"]
+to_delete = ["<Ctrl+B>", "r", "<Ctrl+W>", "gm", "gK", "gJ", "<Shift+J>", "<Shift+K>"]
 for key in to_delete:
     if key in c.bindings.default["normal"]:
         del c.bindings.default["normal"][key]
 
-config.bind("<Ctrl+j>", "tab-move +")
-config.bind("<Ctrl+k>", "tab-move -")
+config.bind("<Shift+H>", "tab-prev")
+config.bind("<Shift+L>", "tab-next")
+config.bind("<Ctrl+h>", "tab-move -")
+config.bind("<Ctrl+l>", "tab-move +")
 config.bind("<Ctrl+x>", "tab-close")
 config.bind("r", "spawn --userscript farside")
