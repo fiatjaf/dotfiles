@@ -274,12 +274,14 @@ let bufferline.icon_separator_inactive = ''
 let bufferline.icon_close_tab = '×'
 let bufferline.icon_close_tab_modified = ''
 
-nnoremap <C-b>h :BufferPrevious<CR>
-nnoremap <C-b>l :BufferNext<CR>
-nnoremap <C-b>j <C-w><C-j><CR>
-nnoremap <C-b>k <C-w><C-k><CR>
-nnoremap <C-b><C-h> :BufferMovePrevious<CR>
-nnoremap <C-b><C-l> :BufferMoveNext<CR>
+" navigate between tabs
+nnoremap K :BufferPrevious<CR>
+nnoremap J :BufferNext<CR>
+
+" move tab position
+nnoremap <C-k> :BufferMovePrevious<CR>
+nnoremap <C-j> :BufferMoveNext<CR>
+
 nnoremap <C-b>1 :BufferGoto 1<CR>
 nnoremap <C-b>2 :BufferGoto 2<CR>
 nnoremap <C-b>3 :BufferGoto 3<CR>
