@@ -13,6 +13,7 @@ def qute_command(command):
 
 title = os.getenv("QUTE_TITLE")
 url = urllib.parse.urlparse(os.getenv("QUTE_URL"))
+qs = urllib.parse.parse_qs(url.query)
 
 if (
     "youtube.com" in url.netloc
@@ -22,7 +23,24 @@ if (
     or "piped" in url.netloc
 ):
     alt = random.choice(["invidious", "piped"])
-    qute_command(f"open https://farside.link/{alt}{url.path}")
+    path = url.path + "?" + url.query
+
+    if alt == "invidious":
+        if url.path.startswith("/results"):
+            path = f'/search?q={qs["search_query"]}'
+        elif url.path.startswith("/search"):
+            pass
+        elif url.path.startswith("/watch"):
+            pass
+    elif alt == "piped":
+        if url.path.startswith("/results"):
+            pass
+        elif url.path.startswith("/search"):
+            path = f'/results?q={qs["q"]}'
+        elif url.path.startswith("/watch"):
+            pass
+
+    qute_command(f"open https://farside.link/{alt}{path}")
 
 if (
     "reddit.com" in url.netloc
@@ -39,7 +57,7 @@ if "medium.com" in url.netloc or "scribe" in title.lower() or "scribe" in url.ne
 
 if (
     "wikipedia.org" in url.netloc
-    or "wikiless" in title.lower()
+    or "Wikipedia" in title.lower()
     or "wikiless" in url.netloc
 ):
     qute_command(f"open https://farside.link/wikiless{url.path}")
@@ -49,6 +67,9 @@ if (
     or "bibliogram" in title.lower()
     or "bibliogram" in url.netloc
 ):
+    if "instagram.com" in url.netloc and not url.path.startswith("/p/"):
+        qute_command(f"open https://farside.link/bibliogram/u{url.path}")
+
     qute_command(f"open https://farside.link/bibliogram{url.path}")
 
 if "twitter.com" in url.netloc or "nitter" in title.lower() or "nitter" in url.netloc:

@@ -1,4 +1,4 @@
-config.load_autoconfig(False)
+config.load_autoconfig(True)
 
 c.colors.webpage.preferred_color_scheme = "dark"
 c.tabs.position = "top"
@@ -8,8 +8,8 @@ c.url.start_pages = [c.url.default_page]
 c.url.searchengines = {
     "DEFAULT": "https://farside.link/whoogle/search?q={}",
     "google": "https://google.com/search?q={}",
-    "wikipedia": "https://farside.link/wikiless/{}",
-    "youtube": "https://farside.link/invidious/search?q={}",
+    "wikipedia": "https://en.wikipedia.org/wiki/{}",
+    "youtube": "https://www.youtube.com/results?search_query={}",
     "github": "https://github.com/search?q={}",
     "twitter": "https://twitter.com/search?q={}",
     "ddg": "https://duckduckgo.com/?q={}",
@@ -36,3 +36,5 @@ config.bind("<Ctrl+h>", "tab-move -")
 config.bind("<Ctrl+l>", "tab-move +")
 config.bind("<Ctrl+x>", "tab-close")
 config.bind("r", "spawn --userscript farside")
+config.bind("<PgUp>", "back")
+config.bind("<PgDown>", "forward")
