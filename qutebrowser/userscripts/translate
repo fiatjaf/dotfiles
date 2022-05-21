@@ -16,4 +16,10 @@ if not word:
     sys.exit(0)
 
 alt = random.choice(["simplytranslate", "lingva"])
-qute_command(f"open -t https://farside.link/{alt}/auto/en/{word}")
+
+if alt == "lingva":
+    qute_command(f"open -t https://farside.link/lingva/auto/en/{word}")
+elif alt == "simplytranslate":
+    qute_command(
+        f"open -t https://farside.link/simplytranslate/?engine=google&text={word}&sl=auto&tl=en"
+    )

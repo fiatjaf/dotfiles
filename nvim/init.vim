@@ -178,14 +178,14 @@ vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', op
 vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 -- see also the telescope settings as some of the lsp stuff will be done on telescope
 
--- Use a loop to conveniently call 'setup' on multiple servers and
+-- Use a loop to conveniently call 'setup' on multiple servers
 for _, lsp in pairs({ 'gopls', 'clangd', 'jedi_language_server', 'rust_analyzer' }) do
-  require('lspconfig')[lsp].setup({
+  require('lspconfig')[lsp].setup {
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
-    }
-  })
+    },
+  }
 end
 
 -- nvim-metals
