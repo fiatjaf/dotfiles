@@ -36,9 +36,6 @@ Plug 'scalameta/nvim-metals'
 Plug 'akinsho/toggleterm.nvim'
 call plug#end()
 
-" cmp (autocomplete)
-set completeopt=menu,menuone,noselect
-
 " Enable syntax highlighting
 syntax enable
 let g:jsx_ext_required = 0
@@ -211,6 +208,7 @@ vim.opt.statusline = "%!luaeval('Super_custom_status_line()')"
 
 -- cmd (autocomplete)
 local cmp = require'cmp'
+local compare = require'cmp.config.compare'
 local cmp_types = require'cmp.types.cmp'
 cmp.setup({
   snippet = {
@@ -227,8 +225,30 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
     ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp_types.SelectBehavior.Select }),
     ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp_types.SelectBehavior.Select }),
+  },
+  sorting = {
+    comparators = {
+      compare.exact,
+      compare.score,
+      function (a, b)
+        if a:get_kind() == 5 and b:get_kind() == 2 then
+          return true
+        elseif a:get_kind() == 2 and b:get_kind() == 5 then
+          return false
+        end
+        return nil
+      end,
+      compare.kind,
+      compare.recently_used,
+      compare.locality,
+      compare.offset,
+      compare.sort_text,
+      compare.length,
+      compare.order
+    }
   }
 })
+
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig')['metals'].setup { capabilities = capabilities }
 require('lspconfig')['gopls'].setup { capabilities = capabilities }
