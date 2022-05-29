@@ -2,6 +2,8 @@ config.load_autoconfig(True)
 
 c.colors.webpage.preferred_color_scheme = "dark"
 c.tabs.position = "top"
+c.content.javascript.can_access_clipboard = True
+c.content.autoplay = False
 c.url.auto_search = "dns"
 c.url.start_pages = ["https://farside.link/whoogle"]
 c.url.searchengines = {
