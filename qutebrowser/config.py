@@ -19,10 +19,10 @@ c.zoom.default = "90%"
 c.editor.command = ["/usr/bin/nvim", "{}"]
 c.completion.open_categories = [
     "quickmarks",
+    "searchengines",
     "bookmarks",
     "history",
     "filesystem",
-    "searchengines",
 ]
 c.aliases["translate"] = "spawn --userscript translate"
 
