@@ -18,6 +18,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'junegunn/vim-easy-align'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -41,15 +42,16 @@ syntax enable
 let g:jsx_ext_required = 0
 
 let g:ale_linters = {
+\   'javascriptreact': ['eslint', 'flow-language-server'],
 \   'javascript': ['eslint', 'flow-language-server'],
 \   'typescript': ['eslint'],
 \   'haskell': ['hlint', 'hdevtools'],
 \   'python': ['pyflakes', 'mypy'],
-\   'scala': ['metals'],
+\   'scala': [],
 \   'fish': [],
 \   'rust': ['cargo'],
 \   'dart': ['dart_analyze'],
-\   'go': ['go build'],
+\   'go': [],
 \   'v': ['v'],
 \}
 
@@ -253,6 +255,15 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 require('lspconfig')['metals'].setup { capabilities = capabilities }
 require('lspconfig')['gopls'].setup { capabilities = capabilities }
 
+-- telescope setup
+require("telescope").setup {
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {}
+    }
+  }
+}
+require("telescope").load_extension("ui-select")
 -- telescope (find files)
 vim.api.nvim_set_keymap('n', '<C-p>', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<C-a>', "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
@@ -263,6 +274,7 @@ vim.api.nvim_set_keymap('n', '<C-s>', "<cmd>lua require('telescope.builtin').lsp
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
 vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
+vim.api.nvim_set_keymap("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 
 -- toggle-terminal
 require("toggleterm").setup({
