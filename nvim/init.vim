@@ -194,6 +194,7 @@ metals_config.settings = {
   excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
   showInferredType = true,
   useGlobalExecutable = false,
+  fallbackScalaVersion = "2.13.8",
   superMethodLensesEnabled = true,
   showImplicitConversionsAndClasses = true,
 }
@@ -252,7 +253,6 @@ cmp.setup({
 })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('lspconfig')['metals'].setup { capabilities = capabilities }
 require('lspconfig')['gopls'].setup { capabilities = capabilities }
 
 -- telescope setup
@@ -274,7 +274,7 @@ vim.api.nvim_set_keymap('n', '<C-s>', "<cmd>lua require('telescope.builtin').lsp
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
 vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
-vim.api.nvim_set_keymap("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<C-e>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 
 -- toggle-terminal
 require("toggleterm").setup({
