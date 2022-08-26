@@ -10,42 +10,6 @@ local function err_count(severity)
   end
 end
 
-local function status_filename()
-  local abs = vim.fn.expand("%F")
-  local home = vim.fn.expand("~")
-  local cwd = vim.fn.getcwd()
-
-  if abs:find("term://") == 1 then
-    return abs
-  end
-
-  local s, e = abs:find(cwd)
-  if s == 1 then
-    local suffix = abs:sub(e)
-    if suffix:sub(1, 2) == './' then
-      suffix = suffix:sub(2)
-    end
-    if suffix:sub(1, 1) == '/' then
-      suffix = suffix:sub(1)
-    end
-    return "> ./" .. suffix
-  end
-
-  local s, e = abs:find(home)
-  if s == 1 then
-    return "~" .. abs:sub(e + 1)
-  end
-
-  if abs:sub(0, 1) == "/" then
-    return "!" .. abs
-  end
-
-  if abs:sub(1, 2) == './' then
-    abs = abs:sub(2)
-  end
-  return "> ./" .. abs
-end
-
 local function get_modified()
   local well_are_are = opt.modified:get()
   if well_are_are then
@@ -89,11 +53,10 @@ local function readonly()
   end
 end
 
--- TODO is there a way to do this without making it global?
-function Super_custom_status_line()
+local function super_custom_status_line()
   return table.concat({
     "%#StatusBackground#",
-    status_filename(),
+    "%f",
     readonly(),
     get_modified(),
     "%#StatusError#",
@@ -101,7 +64,7 @@ function Super_custom_status_line()
     "%#StatusWarn#",
     err_count("Warn"),
     "%#StatusLine#",
-    metals_status(),
+    "%#" .. metals_status() .. "#",
     "%=", -- Left and Right divider
     "%l, ", -- line number
     "%c ", -- column number
@@ -109,3 +72,17 @@ function Super_custom_status_line()
     "%"
   })
 end
+
+local function super_custom_winbar()
+  return table.concat({
+    "%=", -- divider
+    "%#StatusLine#", -- get the colors right
+    "%m ",
+    "%t", -- filename only
+  })
+end
+
+return {
+  super_custom_status_line = super_custom_status_line,
+  super_custom_winbar = super_custom_winbar,
+}

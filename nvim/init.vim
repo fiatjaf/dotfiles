@@ -24,6 +24,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'isRuslan/vim-es6'
 Plug 'vim-scripts/fish-syntax'
+Plug 'udalov/kotlin-vim'
 Plug 'martingms/vipsql'
 Plug 'junegunn/goyo.vim'
 Plug 'linkinpark342/xonsh-vim'
@@ -92,8 +93,6 @@ let g:ale_dart_format_executable = '/opt/flutter/bin/dart'
 let g:ale_dart_analyze_executable = '/opt/flutter/bin/dart'
 
 let g:ale_go_gofmt_options = '-s'
-
-let g:ale_scala_metals_executable = '/home/fiatjaf/.local/share/coursier/bin/metals'
 
 map err :ALENextWrap<CR>
 
@@ -165,6 +164,20 @@ tnoremap <C-b> <C-\><C-n>
 
 " LUA stuff
 lua << endlua
+-- nvim-treesitter
+require("nvim-treesitter.configs").setup({
+  -- playground = { enable = true },
+  query_linter = {
+    enable = true,
+    use_virtual_text = true,
+    lint_events = { "BufWrite", "CursorHold" },
+  },
+  ensure_installed = "all",
+  highlight = {
+    enable = true,
+    --disable = { "scala" },
+  },
+})
 
 -- nvim tree
 require'nvim-tree'.setup()
@@ -190,11 +203,12 @@ end
 -- nvim-metals
 metals_config = require("metals").bare_config()
 metals_config.settings = {
+  serverVersion = "latest.snapshot",
+  -- useGlobalExecutable = true,
   showImplicitArguments = true,
-  excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
+  excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl", "android", "androidx" },
   showInferredType = true,
   useGlobalExecutable = false,
-  fallbackScalaVersion = "2.13.8",
   superMethodLensesEnabled = true,
   showImplicitConversionsAndClasses = true,
 }
@@ -205,9 +219,9 @@ vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 vim.cmd([[autocmd FileType java,scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
 vim.cmd([[augroup end]])
 
--- status line copied from https://github.com/ckipp01/dots/blob/d1f85d93a800daabe0c6bbf32bbd4766429e2192/nvim/.config/nvim/init.lua#L83
-require("statusline")
-vim.opt.statusline = "%!luaeval('Super_custom_status_line()')"
+-- status line copied from https://github.com/ckipp01/dots
+vim.opt.statusline = [[%!luaeval('require("statusline").super_custom_status_line()')]]
+-- vim.opt.winbar = [[%!luaeval('require("statusline").super_custom_winbar()')]]
 
 -- cmd (autocomplete)
 local cmp = require'cmp'
