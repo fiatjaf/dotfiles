@@ -31,11 +31,11 @@ Plug 'linkinpark342/xonsh-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'fiatjaf/neuron.vim'
-Plug 'rebelot/kanagawa.nvim'
 Plug 'withgod/vim-sourcepawn'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'scalameta/nvim-metals'
 Plug 'akinsho/toggleterm.nvim'
+Plug 'rebelot/kanagawa.nvim'
 call plug#end()
 
 " Enable syntax highlighting
@@ -43,8 +43,8 @@ syntax enable
 let g:jsx_ext_required = 0
 
 let g:ale_linters = {
-\   'javascriptreact': ['eslint', 'flow-language-server'],
-\   'javascript': ['eslint', 'flow-language-server'],
+\   'javascriptreact': ['eslint'],
+\   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
 \   'haskell': ['hlint', 'hdevtools'],
 \   'python': ['pyflakes', 'mypy'],
@@ -85,7 +85,6 @@ let g:ale_echo_msg_info_str = 'I'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-let g:ale_javascript_flow_ls_use_global = 0
 let g:ale_javascript_eslint_use_global = 0
 let g:ale_javascript_prettier_use_global = 0
 
@@ -183,21 +182,29 @@ require("nvim-treesitter.configs").setup({
 require'nvim-tree'.setup()
 
 -- lspconfig stuff
+local lspconfig = require('lspconfig')
+
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 -- see also the telescope settings as some of the lsp stuff will be done on telescope
 
 -- Use a loop to conveniently call 'setup' on multiple servers
-for _, lsp in pairs({ 'gopls', 'clangd', 'jedi_language_server', 'rust_analyzer' }) do
-  require('lspconfig')[lsp].setup {
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-    },
+local custom_opts = {
+  tsserver = {
+    root_dir = lspconfig.util.root_pattern('tsconfig.json')
   }
+}
+for _, lsp in pairs({ 'gopls', 'clangd', 'flow', 'jedi_language_server', 'tsserver', 'rust_analyzer' }) do
+  local opts = {}
+  local custom = custom_opts[lsp] or {}
+  for k, v in pairs(custom) do
+    print(k, v)
+    opts[k] = v
+  end
+  lspconfig[lsp].setup(opts)
 end
 
 -- nvim-metals
@@ -266,8 +273,9 @@ cmp.setup({
   }
 })
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require('lspconfig')['gopls'].setup { capabilities = capabilities }
+require('lspconfig')['flow'].setup { capabilities = capabilities }
 
 -- telescope setup
 require("telescope").setup {
