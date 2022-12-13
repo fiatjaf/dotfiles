@@ -95,20 +95,27 @@ let g:ale_go_gofmt_options = '-s'
 
 map err :ALENextWrap<CR>
 
-" Theme
+" theme
 set t_Co=256
 set background=dark
 colorscheme kanagawa
 
-" Set utf8 as standard encoding and en_US as the standard language
+" set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
-" Use spaces instead of tabs
+" turn TAB into spaces
 set expandtab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
+set shiftwidth=0 " match tabstop
 set tabstop=4
+
+" except on C files
+autocmd Filetype c,cpp setlocal tabstop=8
+
+" show these characters in place of tabs
+set list
+set listchars=tab:\|>
 
 " for go syntax
 set shell=bash
