@@ -122,6 +122,7 @@ lua << endlua
 local null_ls = require("null-ls")
 
 null_ls.setup {
+  diagnostics_format = "[#{c}] #{m} (#{s})",
   sources = {
     null_ls.builtins.formatting.trim_whitespace,
     null_ls.builtins.formatting.goimports,
