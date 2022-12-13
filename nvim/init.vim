@@ -7,7 +7,8 @@ let &packpath = &runtimepath
 " vim-plug
 set nocompatible
 call plug#begin('~/.vim/plugged')
-Plug 'w0rp/ale'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'lukas-reineke/lsp-format.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -41,59 +42,6 @@ call plug#end()
 " Enable syntax highlighting
 syntax enable
 let g:jsx_ext_required = 0
-
-let g:ale_linters = {
-\   'javascriptreact': ['eslint'],
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\   'haskell': ['hlint', 'hdevtools'],
-\   'python': ['pyflakes', 'mypy'],
-\   'scala': [],
-\   'fish': [],
-\   'rust': ['cargo'],
-\   'dart': ['dart_analyze'],
-\   'go': [],
-\   'v': ['v'],
-\}
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascriptreact': ['eslint', 'prettier'],
-\   'javascript': ['eslint', 'prettier'],
-\   'typescript': ['prettier'],
-\   'svelte': ['prettier'],
-\   'python': ['black'],
-\   'scala': ['scalafmt'],
-\   'html': ['prettier'],
-\   'rust': ['rustfmt'],
-\   'dart': ['dart-format'],
-\   'css': ['prettier'],
-\   'vue': ['prettier'],
-\   'go': ['goimports', 'gofumpt'],
-\   'v': ['vfmt'],
-\}
-
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'always'
-let g:ale_lint_delay = 1000
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 0
-let g:ale_use_global_executables = 1
-let g:ale_echo_cursor = 1
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_info_str = 'I'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-let g:ale_javascript_eslint_use_global = 0
-let g:ale_javascript_prettier_use_global = 0
-
-let g:ale_dart_format_executable = '/opt/flutter/bin/dart'
-let g:ale_dart_analyze_executable = '/opt/flutter/bin/dart'
-
-let g:ale_go_gofmt_options = '-s'
-
-map err :ALENextWrap<CR>
 
 " theme
 set t_Co=256
@@ -170,6 +118,28 @@ tnoremap <C-b> <C-\><C-n>
 
 " LUA stuff
 lua << endlua
+-- null-ls (linters and formatters)
+local null_ls = require("null-ls")
+
+null_ls.setup {
+  sources = {
+    null_ls.builtins.formatting.trim_whitespace,
+    null_ls.builtins.formatting.goimports,
+    null_ls.builtins.formatting.gofumpt,
+    null_ls.builtins.formatting.scalafmt,
+    null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.black,
+    null_ls.builtins.diagnostics.fish,
+    null_ls.builtins.formatting.rustfmt,
+    null_ls.builtins.formatting.dart_format,
+    null_ls.builtins.formatting.zigfmt,
+  },
+  on_attach = require("lsp-format").on_attach
+}
+
+require("lsp-format").setup {}
+
 -- nvim-treesitter
 require("nvim-treesitter.configs").setup({
   -- playground = { enable = true },
