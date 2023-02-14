@@ -67,11 +67,6 @@ set listchars=tab:\|>
 set shell=bash
 set rtp+=$GOROOT/misc/vim
 
-au BufNewFile,BufRead *.tpl :set ft=html
-au BufNewFile,BufRead *.tera :set ft=html
-au BufNewFile,BufRead *.tsx :set ft=typescript
-au BufNewFile,BufRead *.svelte :set ft=svelte
-
 " remove bad typescript stuff
 let g:typescript_indent_disable = 1
 
@@ -169,13 +164,24 @@ vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 local custom_opts = {
   tsserver = {
     root_dir = lspconfig.util.root_pattern('tsconfig.json')
+  },
+  kotlin_language_server = {
+    root_dir = lspconfig.util.root_pattern('build.gradle')
   }
 }
-for _, lsp in pairs({ 'gopls', 'clangd', 'flow', 'jedi_language_server', 'tsserver', 'rust_analyzer' }) do
+for _, lsp in pairs({
+  'gopls',
+  'clangd',
+  'flow',
+  'jedi_language_server',
+  'tsserver',
+  'svelte',
+  'rust_analyzer',
+  'kotlin_language_server'
+}) do
   local opts = {}
   local custom = custom_opts[lsp] or {}
   for k, v in pairs(custom) do
-    print(k, v)
     opts[k] = v
   end
   lspconfig[lsp].setup(opts)
