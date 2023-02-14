@@ -11,7 +11,6 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lukas-reineke/lsp-format.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -156,9 +155,6 @@ require("nvim-treesitter.configs").setup({
     --disable = { "scala" },
   },
 })
-
--- nvim tree
-require'nvim-tree'.setup()
 
 -- lspconfig stuff
 local lspconfig = require('lspconfig')
