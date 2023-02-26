@@ -123,7 +123,10 @@ null_ls.setup {
     null_ls.builtins.formatting.scalafmt,
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.formatting.eslint,
-    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.prettier
+      .with({
+        extra_filetypes = { "svelte" }
+      }),
     null_ls.builtins.formatting.black,
     null_ls.builtins.diagnostics.fish,
     null_ls.builtins.formatting.dart_format,
