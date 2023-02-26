@@ -194,7 +194,8 @@ for _, lsp in pairs({
   'tsserver',
   'svelte',
   'rust_analyzer',
-  'kotlin_language_server'
+  'kotlin_language_server',
+  'dartls'
 }) do
   local opts = {}
   local custom = custom_opts[lsp] or {}
