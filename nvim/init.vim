@@ -314,41 +314,44 @@ require("toggleterm").setup({
   shell = '/usr/bin/fish'
 })
 
+-- barbar plugin with tmux-like things
+require('barbar').setup({
+  animation = true,
+  auto_hide = true,
+  maximum_padding = 1,
+  icons = {
+    filetype = { enabled = false },
+    button = '×',
+    modified = {
+      button = ''
+    },
+    separator = {
+      left = '> '
+    },
+    inactive = {
+      separator = {
+        left = ''
+      }
+    },
+  }
+})
+
+-- barbar keybindings
+local opts = { noremap = true, silent = true }
+-- navigate between tabs
+vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', opts)
+vim.api.nvim_set_keymap('n', 'L', '<Cmd>BufferNext<CR>', opts)
+-- move tab position
+vim.api.nvim_set_keymap('n', '<C-h>', '<Cmd>BufferMovePrevious<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-l>', '<Cmd>BufferMoveNext<CR>', opts)
+-- close buffer and open new terminal window
+vim.api.nvim_set_keymap('n', '<C-x>', '<Cmd>BufferClose<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-b>c', '<Cmd>e term://fish<CR>', opts)
+
 ---
 endlua
 
 " open nvim-tree
 nnoremap <C-t> :NvimTreeOpen<CR>
-
-" barbar plugin with tmux-like things
-let bufferline = get(g:, 'bufferline', {})
-let bufferline.animation = v:true
-let bufferline.maximum_padding = 1
-let bufferline.icons = v:false
-let bufferline.auto_hide = v:true
-let bufferline.icon_separator_active = '> '
-let bufferline.icon_separator_inactive = ''
-let bufferline.icon_close_tab = '×'
-let bufferline.icon_close_tab_modified = ''
-
-" navigate between tabs
-nnoremap H :BufferPrevious<CR>
-nnoremap L :BufferNext<CR>
-
-" move tab position
-nnoremap <C-h> :BufferMovePrevious<CR>
-nnoremap <C-l> :BufferMoveNext<CR>
-
-nnoremap <C-b>1 :BufferGoto 1<CR>
-nnoremap <C-b>2 :BufferGoto 2<CR>
-nnoremap <C-b>3 :BufferGoto 3<CR>
-nnoremap <C-b>4 :BufferGoto 4<CR>
-nnoremap <C-b>5 :BufferGoto 5<CR>
-nnoremap <C-b>6 :BufferGoto 6<CR>
-nnoremap <C-b>7 :BufferGoto 7<CR>
-nnoremap <C-b>8 :BufferGoto 8<CR>
-nnoremap <C-b>9 :BufferGoto 9<CR>
-nnoremap <C-x> :BufferClose<CR>
-nnoremap <C-b>c :e term://fish<CR>
 
 let $IN_NEOVIM = 'yes'
