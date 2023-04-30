@@ -3,3 +3,4 @@ vim/.netrwhist
 *.pyo
 *.pyc
 icons/ROX
+nvim/lazy-lock.json

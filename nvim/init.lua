@@ -1,117 +1,133 @@
-let g:loaded_python_provider = 0
-let g:python3_host_prog = '/usr/bin/python'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
+require("lazy").setup({
+  'jose-elias-alvarez/null-ls.nvim',
+  'lukas-reineke/lsp-format.nvim',
+  {'romgrk/barbar.nvim',
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      animation = true,
+      auto_hide = true,
+      maximum_padding = 1,
+      icons = {
+        filetype = { enabled = false },
+        button = '×',
+        modified = {
+          button = ''
+        },
+        separator = {
+          left = '> '
+        },
+        inactive = {
+          separator = {
+            left = ''
+          }
+        },
+      }
+    }
+  },
+  'neovim/nvim-lspconfig',
+  'kyazdani42/nvim-tree.lua',
+  'nvim-treesitter/nvim-treesitter',
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-vsnip',
+  'hrsh7th/vim-vsnip',
+  'nvim-telescope/telescope.nvim',
+  'nvim-telescope/telescope-ui-select.nvim',
+  'junegunn/vim-easy-align',
+  'hail2u/vim-css3-syntax',
+  'ap/vim-css-color',
+  'isRuslan/vim-es6',
+  'NoahTheDuke/vim-just',
+  'vim-scripts/fish-syntax',
+  'udalov/kotlin-vim',
+  'martingms/vipsql',
+  'junegunn/goyo.vim',
+  'linkinpark342/xonsh-vim',
+  'rust-lang/rust.vim',
+  'dart-lang/dart-vim-plugin',
+  'nvim-lua/plenary.nvim',
+  'scalameta/nvim-metals',
+  'akinsho/toggleterm.nvim',
+  'rebelot/kanagawa.nvim',
+})
 
-" vim-plug
-set nocompatible
-call plug#begin('~/.vim/plugged')
-Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'lukas-reineke/lsp-format.nvim'
-Plug 'romgrk/barbar.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-ui-select.nvim'
-Plug 'junegunn/vim-easy-align'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'ap/vim-css-color'
-Plug 'isRuslan/vim-es6'
-Plug 'NoahTheDuke/vim-just'
-Plug 'vim-scripts/fish-syntax'
-Plug 'udalov/kotlin-vim'
-Plug 'martingms/vipsql'
-Plug 'junegunn/goyo.vim'
-Plug 'linkinpark342/xonsh-vim'
-Plug 'rust-lang/rust.vim'
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'scalameta/nvim-metals'
-Plug 'akinsho/toggleterm.nvim'
-Plug 'rebelot/kanagawa.nvim'
-call plug#end()
+-- options for vim.api.nvim_set_keymap
+local noremap = { noremap = true, silent = true }
 
-" Enable syntax highlighting
-syntax enable
-let g:jsx_ext_required = 0
+-- enable syntax highlighting
+vim.opt.syntax = "on"
 
-" theme
-set t_Co=256
-set background=dark
-colorscheme kanagawa
+-- theme
+vim.opt.compatible = false
+vim.opt.background = "dark"
+vim.cmd.colorscheme("kanagawa")
 
-" set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+-- set utf8 as standard encoding and en_US as the standard language
+vim.opt.encoding="utf-8"
 
-" turn TAB into spaces
-set expandtab
+-- turn TAB into spaces
+vim.opt.expandtab = true
 
-" 1 tab == 4 spaces
-set shiftwidth=0 " match tabstop
-set tabstop=4
+-- 1 tab == 4 spaces
+vim.opt.shiftwidth = 0 -- match tabstop
+vim.opt.tabstop = 4
 
-" except on C files
-autocmd Filetype c,cpp setlocal tabstop=8
+-- show these characters in place of tabs
+vim.opt.list = true
+vim.opt.listchars = { tab = "|>" }
 
-" show these characters in place of tabs
-set list
-set listchars=tab:\|>
+-- for airline to work
+vim.opt.laststatus = 2
 
-" for go syntax
-set shell=bash
-set rtp+=$GOROOT/misc/vim
-
-" remove bad typescript stuff
-let g:typescript_indent_disable = 1
-
-" for airline to work
-set laststatus=2
-
-" vipsql
+-- vipsql
+vim.cmd([[
 let g:vipsql_separator_enabled = 1
 let g:vipsql_separator = '===================================================================='
 vnoremap <leader>ssql :VipsqlSendSelection<CR>
 nnoremap <leader>lsql :VipsqlSendCurrentLine<CR>
 nnoremap <leader>fsql :VipsqlSendBuffer<CR>
 nnoremap <leader>psql :VipsqlShell<CR>
+]])
 
-" make backspace work
-set backspace=indent,eol,start
+-- don't let the cursor be at the top or at the bottom
+vim.opt.scrolloff = 10
 
-" remove autoindent, autocomment, autobizarrethings
+-- remove autoindent, autocomment, autobizarrethings
+vim.opt.autoindent = false
+vim.opt.smarttab = false
+vim.cmd([[
 filetype plugin off
 filetype indent off
-set noautoindent
-set nosmarttab
+]])
 
-" don't let the cursor be at the top or at the bottom
-set scrolloff=10
+-- ESC removes the highlighted matches that bother me after I search something with /
+vim.api.nvim_set_keymap('n', '<esc>', ':noh<return><esc>', noremap)
 
-" ESC removes the highlighted matches that bother me after I search something with /
-nnoremap <esc> :noh<return><esc>
+-- U reruns the syntax highlighting to unfuck my screen, as per https://vi.stackexchange.com/questions/2172/why-i-am-losing-syntax-highlighting-when-folding-code-within-a-script-tag
+vim.api.nvim_set_keymap('n', 'U', ':syntax sync fromstart<cr>:redraw!<cr>', noremap)
 
-" U reruns the syntax highlighting to unfuck my screen, as per https://vi.stackexchange.com/questions/2172/why-i-am-losing-syntax-highlighting-when-folding-code-within-a-script-tag
-nnoremap U :syntax sync fromstart<cr>:redraw!<cr>
-
-" markdown tables
+-- markdown tables
+vim.cmd([[
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+]])
 
-set termguicolors
-set mouse+=a
+vim.opt.termguicolors = true
+vim.opt.mouse = 'a'
 
-" terminal mode to normal mode
-tnoremap <C-b> <C-\><C-n>
-" tnoremap <ESC> <C-\><C-n>
-
-" LUA stuff
-lua << endlua
 -- null-ls (linters and formatters)
 local null_ls = require("null-ls")
 
@@ -161,24 +177,21 @@ require("nvim-treesitter.configs").setup({
     use_virtual_text = true,
     lint_events = { "BufWrite", "CursorHold" },
   },
-  ensure_installed = "all",
+  ensure_installed = { "scala", "javascript", "go", "rust" },
+  sync_install = false,
+  auto_install = true,
   highlight = {
     enable = true,
-    --disable = { "scala" },
   },
 })
-
--- nvim tree
-require'nvim-tree'.setup()
 
 -- lspconfig stuff
 local lspconfig = require('lspconfig')
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', noremap)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', noremap)
+vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', noremap)
 -- see also the telescope settings as some of the lsp stuff will be done on telescope
 
 -- Use a loop to conveniently call 'setup' on multiple servers
@@ -289,16 +302,16 @@ require("telescope").setup {
 }
 require("telescope").load_extension("ui-select")
 -- telescope (find files)
-vim.api.nvim_set_keymap('n', '<C-p>', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<C-a>', "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<C-n>', "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<C-g>', "<cmd>lua require('telescope.builtin').oldfiles()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<C-p>', "<cmd>lua require('telescope.builtin').find_files()<CR>", noremap)
+vim.api.nvim_set_keymap('n', '<C-a>', "<cmd>lua require('telescope.builtin').live_grep()<CR>", noremap)
+vim.api.nvim_set_keymap('n', '<C-n>', "<cmd>lua require('telescope.builtin').buffers()<CR>", noremap)
+vim.api.nvim_set_keymap('n', '<C-g>', "<cmd>lua require('telescope.builtin').oldfiles()<CR>", noremap)
 -- telescope lsp stuff
-vim.api.nvim_set_keymap('n', '<C-s>', "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>", opts)
-vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
-vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
-vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-e>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<C-s>', "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>", noremap)
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", noremap)
+vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", noremap)
+vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", noremap)
+vim.api.nvim_set_keymap("n", "<C-e>", "<cmd>lua vim.lsp.buf.code_action()<CR>", noremap)
 
 -- toggle-terminal
 require("toggleterm").setup({
@@ -311,47 +324,24 @@ require("toggleterm").setup({
     end
   end,
   open_mapping = [[<c-\>]],
-  shell = '/usr/bin/fish'
-})
-
--- barbar plugin with tmux-like things
-require('barbar').setup({
-  animation = true,
-  auto_hide = true,
-  maximum_padding = 1,
-  icons = {
-    filetype = { enabled = false },
-    button = '×',
-    modified = {
-      button = ''
-    },
-    separator = {
-      left = '> '
-    },
-    inactive = {
-      separator = {
-        left = ''
-      }
-    },
-  }
+  shell = '/usr/bin/fish',
 })
 
 -- barbar keybindings
-local opts = { noremap = true, silent = true }
 -- navigate between tabs
-vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', opts)
-vim.api.nvim_set_keymap('n', 'L', '<Cmd>BufferNext<CR>', opts)
+vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', noremap)
+vim.api.nvim_set_keymap('n', 'L', '<Cmd>BufferNext<CR>', noremap)
 -- move tab position
-vim.api.nvim_set_keymap('n', '<C-h>', '<Cmd>BufferMovePrevious<CR>', opts)
-vim.api.nvim_set_keymap('n', '<C-l>', '<Cmd>BufferMoveNext<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-h>', '<Cmd>BufferMovePrevious<CR>', noremap)
+vim.api.nvim_set_keymap('n', '<C-l>', '<Cmd>BufferMoveNext<CR>', noremap)
 -- close buffer and open new terminal window
-vim.api.nvim_set_keymap('n', '<C-x>', '<Cmd>BufferClose<CR>', opts)
-vim.api.nvim_set_keymap('n', '<C-b>c', '<Cmd>e term://fish<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-x>', '<Cmd>BufferClose<CR>', noremap)
+vim.api.nvim_set_keymap('n', '<C-b>c', '<Cmd>e term://fish<CR>', noremap)
 
----
-endlua
+-- nvim tree
+require('nvim-tree').setup()
+vim.api.nvim_set_keymap('n', '<C-t>', '<Cmd>NvimTreeOpen<CR>', noremap)
 
-" open nvim-tree
-nnoremap <C-t> :NvimTreeOpen<CR>
-
-let $IN_NEOVIM = 'yes'
+-- this is so we can prevent neovim from opening new neovim windows
+-- inside neovim terminals
+vim.env.IN_NEOVIM = 'yes'
