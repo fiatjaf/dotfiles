@@ -1,3 +1,4 @@
+-- install lazy.nvim package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -120,7 +121,7 @@ vim.api.nvim_set_keymap('n', '<esc>', ':noh<return><esc>', noremap)
 -- U reruns the syntax highlighting to unfuck my screen, as per https://vi.stackexchange.com/questions/2172/why-i-am-losing-syntax-highlighting-when-folding-code-within-a-script-tag
 vim.api.nvim_set_keymap('n', 'U', ':syntax sync fromstart<cr>:redraw!<cr>', noremap)
 
--- markdown tables
+-- autoformat markdown tables `vip` to select the table, then \\ to format
 vim.cmd([[
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 ]])
@@ -130,7 +131,6 @@ vim.opt.mouse = 'a'
 
 -- null-ls (linters and formatters)
 local null_ls = require("null-ls")
-
 null_ls.setup {
   diagnostics_format = "[#{c}] #{m} (#{s})",
   sources = {
@@ -167,6 +167,7 @@ null_ls.setup {
   on_attach = require("lsp-format").on_attach
 }
 
+-- make lsps format code
 require("lsp-format").setup {}
 
 -- nvim-treesitter
@@ -245,10 +246,10 @@ vim.cmd([[augroup end]])
 vim.opt.statusline = [[%!luaeval('require("statusline").super_custom_status_line()')]]
 -- vim.opt.winbar = [[%!luaeval('require("statusline").super_custom_winbar()')]]
 
--- cmd (autocomplete)
-local cmp = require'cmp'
-local compare = require'cmp.config.compare'
-local cmp_types = require'cmp.types.cmp'
+-- cmp (autocomplete)
+local cmp = require('cmp')
+local compare = require('cmp.config.compare')
+local cmp_types = require('cmp.types.cmp')
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -328,7 +329,7 @@ require("toggleterm").setup({
 })
 
 -- barbar keybindings
--- navigate between tabs
+-- navigate through tabs
 vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', noremap)
 vim.api.nvim_set_keymap('n', 'L', '<Cmd>BufferNext<CR>', noremap)
 -- move tab position
