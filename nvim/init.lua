@@ -198,7 +198,12 @@ vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', noremap)
 -- Use a loop to conveniently call 'setup' on multiple servers
 local custom_opts = {
   tsserver = {
-    root_dir = lspconfig.util.root_pattern('tsconfig.json')
+    root_dir = function (fname)
+      return lspconfig.util.root_pattern('tsconfig.json')(fname)
+        or not lspconfig.util.root_pattern('.flowconfig')(fname)
+        and lspconfig.util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
+    end,
+    single_file_support = false
   },
   kotlin_language_server = {
     root_dir = lspconfig.util.root_pattern('build.gradle')
