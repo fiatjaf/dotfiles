@@ -145,6 +145,7 @@ null_ls.setup {
         extra_filetypes = { "svelte" }
       }),
     null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.ocamlformat,
     null_ls.builtins.diagnostics.fish,
     null_ls.builtins.formatting.dart_format,
     null_ls.builtins.formatting.rustfmt.with({
@@ -178,7 +179,7 @@ require("nvim-treesitter.configs").setup({
     use_virtual_text = true,
     lint_events = { "BufWrite", "CursorHold" },
   },
-  ensure_installed = { "scala", "javascript", "go", "rust" },
+  ensure_installed = { "scala", "javascript", "go", "rust", "ocaml" },
   sync_install = false,
   auto_install = true,
   highlight = {
@@ -218,7 +219,8 @@ for _, lsp in pairs({
   'svelte',
   'rust_analyzer',
   'kotlin_language_server',
-  'dartls'
+  'dartls',
+  'ocamllsp',
 }) do
   local opts = {}
   local custom = custom_opts[lsp] or {}
