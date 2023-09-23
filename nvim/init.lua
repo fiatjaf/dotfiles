@@ -164,6 +164,16 @@ null_ls.setup {
         return { "--edition=2021" }
       end,
     }),
+    require("null-ls.helpers").make_builtin({
+      name = "templ fmt",
+      method = require("null-ls.methods").internal.FORMATTING,
+      filetypes = { "templ" },
+      generator_opts = {
+        command = {"templ", "fmt"},
+        to_stdin = true,
+      },
+      factory = require("null-ls.helpers").formatter_factory,
+    })
   },
   on_attach = require("lsp-format").on_attach
 }
@@ -172,6 +182,17 @@ null_ls.setup {
 require("lsp-format").setup {}
 
 -- nvim-treesitter
+-- add custom config for templ
+require ("nvim-treesitter.parsers").get_parser_configs().templ = {
+  install_info = {
+    url = "https://github.com/vrischmann/tree-sitter-templ.git",
+    files = {"src/parser.c", "src/scanner.c"},
+    branch = "master",
+  },
+}
+vim.treesitter.language.register('templ', 'templ')
+
+-- treesitter setup
 require("nvim-treesitter.configs").setup({
   -- playground = { enable = true },
   query_linter = {
@@ -196,6 +217,17 @@ vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', no
 vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', noremap)
 -- see also the telescope settings as some of the lsp stuff will be done on telescope
 
+-- add templ (golang templates) configuration.
+vim.cmd([[autocmd BufRead,BufNewFile *.templ setfiletype templ]])
+require('lspconfig.configs').templ = {
+  default_config = {
+    cmd = {"templ", "lsp"},
+    filetypes = {'templ'},
+    root_dir = lspconfig.util.root_pattern("go.mod"),
+    settings = {},
+  };
+}
+
 -- Use a loop to conveniently call 'setup' on multiple servers
 local custom_opts = {
   tsserver = {
@@ -208,10 +240,11 @@ local custom_opts = {
   },
   kotlin_language_server = {
     root_dir = lspconfig.util.root_pattern('build.gradle')
-  }
+  },
 }
 for _, lsp in pairs({
   'gopls',
+  'templ',
   'clangd',
   'flow',
   'jedi_language_server',
