@@ -11,6 +11,7 @@ ln -sf "$here/muttrc" $HOME/.muttrc
 ln -sf "$here/eslintrc.json" $HOME/.eslintrc.json
 ln -sf "$here/tmux.conf" $HOME/.tmux.conf
 ln -sf "$here/prettierrc.yaml" $HOME/.prettierrc.yaml
+ln -sf "$here/jq" $HOME/.jq
 
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
