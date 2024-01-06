@@ -96,3 +96,7 @@ set -g fish_pager_color_description $comment
 
 # opam configuration
 source /home/fiatjaf/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
