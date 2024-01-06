@@ -12,6 +12,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.filetype.add({ extension = { templ = "templ" } })
+
 require("lazy").setup({
   'jose-elias-alvarez/null-ls.nvim',
   'lukas-reineke/lsp-format.nvim',
@@ -158,6 +160,16 @@ null_ls.setup {
         return { "--edition=2021" }
       end,
     }),
+    require("null-ls.helpers").make_builtin({
+      name = "templ fmt",
+      method = require("null-ls.methods").internal.FORMATTING,
+      filetypes = { "templ" },
+      generator_opts = {
+        command = {"templ", "fmt"},
+        to_stdin = true,
+      },
+      factory = require("null-ls.helpers").formatter_factory,
+    })
   },
   on_attach = require("lsp-format").on_attach
 }
@@ -212,12 +224,18 @@ local custom_opts = {
     end,
     single_file_support = false
   },
+  tailwindcss = {
+    filetypes = { "templ", "javascript", "typescript", "react", "svelte" },
+    init_options = { userLanguages = { templ = "html" } },
+  },
   kotlin_language_server = {
     root_dir = lspconfig.util.root_pattern('build.gradle')
   }
 }
 for _, lsp in pairs({
   'gopls',
+  'templ',
+  'tailwindcss',
   'clangd',
   'flow',
   'jedi_language_server',
