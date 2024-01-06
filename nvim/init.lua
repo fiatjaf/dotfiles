@@ -138,7 +138,8 @@ null_ls.setup {
     null_ls.builtins.formatting.eslint,
     null_ls.builtins.formatting.prettier
       .with({
-        extra_filetypes = { "svelte" }
+        extra_filetypes = { "svelte" },
+        disabled_filetypes = { "markdown", "markdown.mdx" }
       }),
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.ocamlformat,
