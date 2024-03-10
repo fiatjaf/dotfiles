@@ -14,7 +14,6 @@ set -x GOPRIVATE git.zebedee.team
 
 set -x DENO_INSTALL /home/fiatjaf/.deno
 set -x PATH $DENO_INSTALL/bin $PATH
-set -x PATH (yarn global bin) $PATH
 
 set -x PATH $PATH $HOME/.cargo/bin
 
