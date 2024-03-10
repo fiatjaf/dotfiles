@@ -133,9 +133,6 @@ null_ls.setup {
     null_ls.builtins.formatting.goimports,
     null_ls.builtins.formatting.gofumpt,
     null_ls.builtins.formatting.scalafmt,
-    null_ls.builtins.formatting.zigfmt,
-    null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.formatting.eslint,
     null_ls.builtins.formatting.prettier
       .with({
         extra_filetypes = { "svelte" },
@@ -145,22 +142,6 @@ null_ls.setup {
     null_ls.builtins.formatting.ocamlformat,
     null_ls.builtins.diagnostics.fish,
     null_ls.builtins.formatting.dart_format,
-    null_ls.builtins.formatting.rustfmt.with({
-      extra_args = function(params)
-        local Path = require("plenary.path")
-        local cargo_toml = Path:new(params.root .. "/" .. "Cargo.toml")
-        if cargo_toml:exists() and cargo_toml:is_file() then
-            for _, line in ipairs(cargo_toml:readlines()) do
-                local edition = line:match([[^edition%s*=%s*%"(%d+)%"]])
-                if edition then
-                    return { "--edition=" .. edition }
-                end
-            end
-        end
-        -- default edition when we don't find `Cargo.toml` or the `edition` in it.
-        return { "--edition=2021" }
-      end,
-    }),
     require("null-ls.helpers").make_builtin({
       name = "templ fmt",
       method = require("null-ls.methods").internal.FORMATTING,
@@ -220,10 +201,15 @@ local custom_opts = {
   tsserver = {
     root_dir = function (fname)
       return lspconfig.util.root_pattern('tsconfig.json')(fname)
-        or not lspconfig.util.root_pattern('.flowconfig')(fname)
-        and lspconfig.util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
+        or (
+              not lspconfig.util.root_pattern('.flowconfig')(fname)
+          and lspconfig.util.root_pattern('package.json')(fname)
+        )
     end,
     single_file_support = false
+  },
+  denols = {
+    root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
   },
   tailwindcss = {
     filetypes = { "templ", "javascript", "typescript", "react", "svelte" },
@@ -240,7 +226,9 @@ for _, lsp in pairs({
   'clangd',
   'flow',
   'jedi_language_server',
+  'eslint',
   'tsserver',
+  'denols',
   'zls',
   'svelte',
   'rust_analyzer',
