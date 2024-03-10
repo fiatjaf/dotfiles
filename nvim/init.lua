@@ -133,6 +133,8 @@ null_ls.setup {
     null_ls.builtins.formatting.goimports,
     null_ls.builtins.formatting.gofumpt,
     null_ls.builtins.formatting.scalafmt,
+    null_ls.builtins.formatting.eslint,
+    null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.formatting.prettier
       .with({
         extra_filetypes = { "svelte" },
@@ -226,7 +228,6 @@ for _, lsp in pairs({
   'clangd',
   'flow',
   'jedi_language_server',
-  'eslint',
   'tsserver',
   'denols',
   'zls',
