@@ -24,7 +24,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec "rofi -combi-modi run,drun -show combi"
+bindsym $mod+d exec "rofi -cache-dir=$HOME/.config/rofi -combi-modi run,drun -show combi"
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
