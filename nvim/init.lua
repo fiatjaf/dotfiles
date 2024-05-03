@@ -169,19 +169,6 @@ require("nvim-treesitter.configs").setup({
     use_virtual_text = true,
     lint_events = { "BufWrite", "CursorHold" },
   },
-  ensure_installed = {
-    "scala",
-    "javascript",
-    "go",
-    "rust",
-    "ocaml",
-    "zig",
-    "kotlin",
-    "dart",
-    "fish",
-    "ocaml",
-    "css"
-  },
   sync_install = false,
   auto_install = true,
   highlight = {

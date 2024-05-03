@@ -25,7 +25,6 @@ set -x MANPATH (manpath) $NPM_PACKAGES/share/man
 set -x MAIL /home/fiatjaf/Maildir/
 set -x PYTHONSTARTUP ~/dotfiles/pythonrc
 
-set -x PATH $PATH $HOME/.local/share/coursier/bin
 
 mkdir -p $HOME/.local/bin
 set -x PATH $PATH $HOME/.local/bin
