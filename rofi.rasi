@@ -1,0 +1,5 @@
+configuration {
+  modes: [run,drun,combi];
+  combi-modes: [run,drun];
+  cache-dir: "/home/fiatjaf/.config/rofi/";
+}

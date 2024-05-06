@@ -2,7 +2,7 @@ set here (pwd)
 
 ln -sfT "$here/vim" $HOME/.vim
 ln -sfT "$here/nvim" "$HOME/.config/nvim"
-ln -sfT "$here/qutebrowser" "$HOME/.config/qutebrowser"
+ln -sfT "$here/rofi.rasi" "$HOME/.config/rofi/config.rasi"
 ln -sfT "$here/fish_functions" $HOME/.config/fish/functions
 ln -sf "$here/config.fish" $HOME/.config/fish/config.fish
 ln -sf "$here/bashrc" $HOME/.bashrc
