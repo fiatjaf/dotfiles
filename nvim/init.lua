@@ -14,6 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
+require("globals")
+
 require("lazy").setup({
   'jose-elias-alvarez/null-ls.nvim',
   'lukas-reineke/lsp-format.nvim',
