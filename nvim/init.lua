@@ -61,6 +61,7 @@ require("lazy").setup({
   'scalameta/nvim-metals',
   'akinsho/toggleterm.nvim',
   'rebelot/kanagawa.nvim',
+  'folke/flash.nvim',
 })
 
 -- options for vim.api.nvim_set_keymap
@@ -338,6 +339,10 @@ require("toggleterm").setup({
   open_mapping = [[<c-\>]],
   shell = '/usr/bin/fish',
 })
+
+-- flash on `/` search
+require('flash').setup()
+require('flash').toggle(true)
 
 -- barbar keybindings
 -- navigate through tabs
