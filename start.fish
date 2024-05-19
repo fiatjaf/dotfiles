@@ -2,6 +2,7 @@ set here (pwd)
 
 ln -sfT "$here/vim" $HOME/.vim
 ln -sfT "$here/nvim" "$HOME/.config/nvim"
+mkdir -p "$HOME/.config/rofi/"
 ln -sfT "$here/rofi.rasi" "$HOME/.config/rofi/config.rasi"
 ln -sfT "$here/fish_functions" $HOME/.config/fish/functions
 ln -sf "$here/config.fish" $HOME/.config/fish/config.fish
