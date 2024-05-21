@@ -1,3 +1,6 @@
+-- luacheck: globals vim
+-- LuaFormatter off
+
 -- install lazy.nvim package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -16,35 +19,10 @@ vim.filetype.add({ extension = { templ = "templ" } })
 
 require("globals")
 
+-- options for vim.api.nvim_set_keymap
+local noremap = { noremap = true, silent = true }
+
 require("lazy").setup({
-  'jose-elias-alvarez/null-ls.nvim',
-  'lukas-reineke/lsp-format.nvim',
-  {'romgrk/barbar.nvim',
-    init = function() vim.g.barbar_auto_setup = false end,
-    opts = {
-      animation = true,
-      auto_hide = true,
-      maximum_padding = 1,
-      icons = {
-        filetype = { enabled = false },
-        button = '×',
-        modified = {
-          button = ''
-        },
-        separator = {
-          left = '> '
-        },
-        inactive = {
-          separator = {
-            left = ''
-          }
-        },
-      }
-    }
-  },
-  'neovim/nvim-lspconfig',
-  'kyazdani42/nvim-tree.lua',
-  'nvim-treesitter/nvim-treesitter',
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',
@@ -52,20 +30,268 @@ require("lazy").setup({
   'hrsh7th/vim-vsnip',
   'nvim-telescope/telescope.nvim',
   'nvim-telescope/telescope-ui-select.nvim',
-  'junegunn/vim-easy-align',
   'NoahTheDuke/vim-just',
-  'martingms/vipsql',
   'junegunn/goyo.vim',
   'linkinpark342/xonsh-vim',
   'nvim-lua/plenary.nvim',
-  'scalameta/nvim-metals',
-  'akinsho/toggleterm.nvim',
-  'rebelot/kanagawa.nvim',
-  'folke/flash.nvim',
-})
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function ()
+      local null_ls = require("null-ls")
+      null_ls.setup {
+        diagnostics_format = "[#{c}] #{m} (#{s})",
+        sources = {
+          null_ls.builtins.formatting.trim_whitespace,
+          null_ls.builtins.formatting.goimports,
+          null_ls.builtins.formatting.gofumpt,
+          null_ls.builtins.formatting.lua_format,
+          null_ls.builtins.formatting.zigfmt,
+          null_ls.builtins.formatting.rustfmt.with({
+            extra_args = function(params)
+              local Path = require("plenary.path")
+              local cargo_toml = Path:new(params.root .. "/" .. "Cargo.toml")
+              if cargo_toml:exists() and cargo_toml:is_file() then
+                  for _, line in ipairs(cargo_toml:readlines()) do
+                      local edition = line:match([[^edition%s*=%s*%"(%d+)%"]])
+                      if edition then
+                          return { "--edition=" .. edition }
+                      end
+                  end
+              end
+              -- default edition when we don't find `Cargo.toml` or the `edition` in it.
+              return { "--edition=2021" }
+            end,
+          }),
+          null_ls.builtins.formatting.eslint,
+          null_ls.builtins.diagnostics.eslint,
+          null_ls.builtins.diagnostics.luacheck,
+          null_ls.builtins.formatting.prettier
+            .with({
+              extra_filetypes = { "svelte" },
+              disabled_filetypes = { "markdown", "markdown.mdx" }
+            }),
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.ocamlformat,
+          null_ls.builtins.diagnostics.fish,
+          null_ls.builtins.formatting.dart_format,
+          require("null-ls.helpers").make_builtin({
+            name = "templ fmt",
+            method = require("null-ls.methods").internal.FORMATTING,
+            filetypes = { "templ" },
+            generator_opts = {
+              command = {"templ", "fmt"},
+              to_stdin = true,
+            },
+            factory = require("null-ls.helpers").formatter_factory,
+          })
+        },
+        on_attach = require("lsp-format").on_attach
+      }
+    end
+  },
+  {
+    'lukas-reineke/lsp-format.nvim',
+    config = function ()
+      -- make lsps format code
+      require("lsp-format").setup {}
+    end
+  },
+  {
+    'romgrk/barbar.nvim',
+    init = function() vim.g.barbar_auto_setup = false end,
+    config = function ()
+      require('barbar').setup({
+        animation = true,
+        auto_hide = true,
+        maximum_padding = 1,
+        icons = {
+          filetype = { enabled = false },
+          button = '×',
+          modified = {
+            button = ''
+          },
+          separator = {
+            left = '> '
+          },
+          inactive = {
+            separator = {
+              left = ''
+            }
+          },
+        }
+      })
 
--- options for vim.api.nvim_set_keymap
-local noremap = { noremap = true, silent = true }
+      -- navigate through tabs
+      vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', noremap)
+      vim.api.nvim_set_keymap('n', 'L', '<Cmd>BufferNext<CR>', noremap)
+      -- move tab position
+      vim.api.nvim_set_keymap('n', '<C-h>', '<Cmd>BufferMovePrevious<CR>', noremap)
+      vim.api.nvim_set_keymap('n', '<C-l>', '<Cmd>BufferMoveNext<CR>', noremap)
+      -- close buffer and open new terminal window
+      vim.api.nvim_set_keymap('n', '<C-x>', '<Cmd>BufferClose<CR>', noremap)
+      vim.api.nvim_set_keymap('n', '<C-b>c', '<Cmd>e term://fish<CR>', noremap)
+    end
+  },
+  {
+    'stevearc/oil.nvim',
+    config = function ()
+      require('oil').setup({ default_file_explorer = true })
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    end
+  },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    config = function ()
+      require("nvim-treesitter.configs").setup({
+        -- playground = { enable = true },
+        modules = {},
+        ensure_installed = {},
+        ignore_install = {},
+        query_linter = {
+          enable = true,
+          use_virtual_text = true,
+          lint_events = { "BufWrite", "CursorHold" },
+        },
+        sync_install = false,
+        auto_install = true,
+        highlight = {
+          enable = true,
+        },
+      })
+    end
+  },
+  {
+    'junegunn/vim-easy-align',
+    config = function ()
+      -- autoformat markdown tables `vip` to select the table, then \\ to format
+      vim.cmd([[
+        au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+      ]])
+    end
+  },
+  {
+    'martingms/vipsql',
+    config = function ()
+      vim.cmd([[
+      let g:vipsql_separator_enabled = 1
+      let g:vipsql_separator = '===================================================================='
+      vnoremap <leader>ssql :VipsqlSendSelection<CR>
+      nnoremap <leader>lsql :VipsqlSendCurrentLine<CR>
+      nnoremap <leader>fsql :VipsqlSendBuffer<CR>
+      nnoremap <leader>psql :VipsqlShell<CR>
+      ]])
+    end
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    config = function ()
+      require("toggleterm").setup({
+        -- size can be a number or function which is passed the current terminal
+        size = function (term)
+          if term.direction == "horizontal" then
+            return 15
+          elseif term.direction == "vertical" then
+            return vim.o.columns * 0.4
+          end
+        end,
+        open_mapping = [[<c-\>]],
+        shell = '/usr/bin/fish',
+      })
+    end
+  },
+  'rebelot/kanagawa.nvim',
+  'rcarriga/nvim-notify',
+  'zk-org/zk-nvim',
+  {
+    'MunifTanjim/nui.nvim',
+    config = function ()
+      require('zk').setup({
+        picker = 'telescope',
+      })
+    end
+  },
+  {
+    'folke/flash.nvim',
+    event = "VeryLazy",
+    config = function ()
+      require('flash').setup()
+      require('flash').toggle(true)
+    end
+  },
+  {
+    'neovim/nvim-lspconfig',
+    config = function ()
+      local lspconfig = require('lspconfig')
+
+      lspconfig['templ'].setup({})
+      lspconfig['gopls'].setup({})
+      lspconfig['tailwindcss'].setup({
+        filetypes = { "templ", "javascript", "typescript", "react", "svelte" },
+        init_options = { userLanguages = { templ = "html" } },
+      })
+      lspconfig['clangd'].setup({})
+      lspconfig['flow'].setup({})
+      lspconfig['tsserver'].setup({
+        root_dir = function (fname)
+          return lspconfig.util.root_pattern('tsconfig.json')(fname)
+            or (
+                  not lspconfig.util.root_pattern('.flowconfig')(fname)
+              and lspconfig.util.root_pattern('package.json')(fname)
+            )
+        end,
+        single_file_support = false
+      })
+      lspconfig['denols'].setup({ root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc") })
+      lspconfig['zls'].setup({})
+      lspconfig['svelte'].setup({})
+      lspconfig['rust_analyzer'].setup({})
+      lspconfig['kotlin_language_server'].setup({ root_dir = lspconfig.util.root_pattern('build.gradle') })
+      lspconfig['ocamllsp'].setup({})
+      lspconfig['dartls'].setup({})
+      lspconfig['lua_ls'].setup({
+        on_init = function(client)
+          local path = client.workspace_folders[1].name
+          if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+            return
+          end
+          client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+              version = 'LuaJIT'
+            },
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.env.VIMRUNTIME,
+                vim.env.HOME .. "/.local/share/nvim/lazy"
+              }
+            }
+          })
+        end,
+        settings = {
+          Lua = {}
+        }
+      })
+
+      -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+      vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', noremap)
+      vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', noremap)
+      vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', noremap)
+      -- see also the telescope settings as some of the lsp stuff will be done on telescope
+    end
+  },
+  {
+    'vhyrro/luarocks.nvim',
+    priority = 1000,
+    opts = {
+      rocks = { "http", "cqueues", "rapidjson" },
+    }
+  },
+
+  {
+    'nvim-nostr',
+    dir = '~/comp/nvim-nostr'
+  }
+})
 
 -- enable syntax highlighting
 vim.opt.syntax = "on"
@@ -92,16 +318,6 @@ vim.opt.listchars = { tab = "|>" }
 -- for airline to work
 vim.opt.laststatus = 2
 
--- vipsql
-vim.cmd([[
-let g:vipsql_separator_enabled = 1
-let g:vipsql_separator = '===================================================================='
-vnoremap <leader>ssql :VipsqlSendSelection<CR>
-nnoremap <leader>lsql :VipsqlSendCurrentLine<CR>
-nnoremap <leader>fsql :VipsqlSendBuffer<CR>
-nnoremap <leader>psql :VipsqlShell<CR>
-]])
-
 -- don't let the cursor be at the top or at the bottom
 vim.opt.scrolloff = 10
 
@@ -116,143 +332,8 @@ filetype indent off
 -- ESC removes the highlighted matches that bother me after I search something with /
 vim.api.nvim_set_keymap('n', '<esc>', ':noh<return><esc>', noremap)
 
--- U reruns the syntax highlighting to unfuck my screen, as per https://vi.stackexchange.com/questions/2172/why-i-am-losing-syntax-highlighting-when-folding-code-within-a-script-tag
-vim.api.nvim_set_keymap('n', 'U', ':syntax sync fromstart<cr>:redraw!<cr>', noremap)
-
--- autoformat markdown tables `vip` to select the table, then \\ to format
-vim.cmd([[
-au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
-]])
-
 vim.opt.termguicolors = true
 vim.opt.mouse = 'a'
-
--- null-ls (linters and formatters)
-local null_ls = require("null-ls")
-null_ls.setup {
-  diagnostics_format = "[#{c}] #{m} (#{s})",
-  sources = {
-    null_ls.builtins.formatting.trim_whitespace,
-    null_ls.builtins.formatting.goimports,
-    null_ls.builtins.formatting.gofumpt,
-    null_ls.builtins.formatting.scalafmt,
-    null_ls.builtins.formatting.eslint,
-    null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.formatting.prettier
-      .with({
-        extra_filetypes = { "svelte" },
-        disabled_filetypes = { "markdown", "markdown.mdx" }
-      }),
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.formatting.ocamlformat,
-    null_ls.builtins.diagnostics.fish,
-    null_ls.builtins.formatting.dart_format,
-    require("null-ls.helpers").make_builtin({
-      name = "templ fmt",
-      method = require("null-ls.methods").internal.FORMATTING,
-      filetypes = { "templ" },
-      generator_opts = {
-        command = {"templ", "fmt"},
-        to_stdin = true,
-      },
-      factory = require("null-ls.helpers").formatter_factory,
-    })
-  },
-  on_attach = require("lsp-format").on_attach
-}
-
--- make lsps format code
-require("lsp-format").setup {}
-
--- nvim-treesitter
-require("nvim-treesitter.configs").setup({
-  -- playground = { enable = true },
-  query_linter = {
-    enable = true,
-    use_virtual_text = true,
-    lint_events = { "BufWrite", "CursorHold" },
-  },
-  sync_install = false,
-  auto_install = true,
-  highlight = {
-    enable = true,
-  },
-})
-
--- lspconfig stuff
-local lspconfig = require('lspconfig')
-
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', noremap)
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', noremap)
-vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', noremap)
--- see also the telescope settings as some of the lsp stuff will be done on telescope
-
--- Use a loop to conveniently call 'setup' on multiple servers
-local custom_opts = {
-  tsserver = {
-    root_dir = function (fname)
-      return lspconfig.util.root_pattern('tsconfig.json')(fname)
-        or (
-              not lspconfig.util.root_pattern('.flowconfig')(fname)
-          and lspconfig.util.root_pattern('package.json')(fname)
-        )
-    end,
-    single_file_support = false
-  },
-  denols = {
-    root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-  },
-  tailwindcss = {
-    filetypes = { "templ", "javascript", "typescript", "react", "svelte" },
-    init_options = { userLanguages = { templ = "html" } },
-  },
-  kotlin_language_server = {
-    root_dir = lspconfig.util.root_pattern('build.gradle')
-  }
-}
-for _, lsp in pairs({
-  'gopls',
-  'templ',
-  'tailwindcss',
-  'clangd',
-  'flow',
-  'jedi_language_server',
-  'tsserver',
-  'denols',
-  'zls',
-  'svelte',
-  'rust_analyzer',
-  'kotlin_language_server',
-  'dartls',
-  'ocamllsp',
-}) do
-  local opts = {}
-  local custom = custom_opts[lsp] or {}
-  for k, v in pairs(custom) do
-    opts[k] = v
-  end
-  lspconfig[lsp].setup(opts)
-end
-
--- nvim-metals
-metals_config = require("metals").bare_config()
-metals_config.settings = {
-  serverVersion = "latest.snapshot",
-  -- useGlobalExecutable = true,
-  showImplicitArguments = true,
-  excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl", "android", "androidx" },
-  showInferredType = true,
-  useGlobalExecutable = false,
-  superMethodLensesEnabled = true,
-  showImplicitConversionsAndClasses = true,
-}
-metals_config.init_options.statusBarProvider = "on"
-vim.cmd([[augroup lsp]])
-vim.cmd([[autocmd!]])
-vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
-vim.cmd([[autocmd FileType java,scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
-vim.cmd([[augroup end]])
 
 -- status line copied from https://github.com/ckipp01/dots
 vim.opt.statusline = [[%!luaeval('require("statusline").super_custom_status_line()')]]
@@ -320,45 +401,15 @@ vim.api.nvim_set_keymap('n', '<C-a>', "<cmd>lua require('telescope.builtin').liv
 vim.api.nvim_set_keymap('n', '<C-n>', "<cmd>lua require('telescope.builtin').buffers()<CR>", noremap)
 vim.api.nvim_set_keymap('n', '<C-g>', "<cmd>lua require('telescope.builtin').oldfiles()<CR>", noremap)
 -- telescope lsp stuff
-vim.api.nvim_set_keymap('n', '<C-s>', "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>", noremap)
+vim.api.nvim_set_keymap('n', '<C-s>', "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>",
+  noremap)
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<CR>", noremap)
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", noremap)
 vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", noremap)
 vim.api.nvim_set_keymap("n", "<C-e>", "<cmd>lua vim.lsp.buf.code_action()<CR>", noremap)
 
--- toggle-terminal
-require("toggleterm").setup({
-  -- size can be a number or function which is passed the current terminal
-  size = function (term)
-    if term.direction == "horizontal" then
-      return 15
-    elseif term.direction == "vertical" then
-      return vim.o.columns * 0.4
-    end
-  end,
-  open_mapping = [[<c-\>]],
-  shell = '/usr/bin/fish',
-})
-
--- flash on `/` search
-require('flash').setup()
-require('flash').toggle(true)
-
--- barbar keybindings
--- navigate through tabs
-vim.api.nvim_set_keymap('n', 'H', '<Cmd>BufferPrevious<CR>', noremap)
-vim.api.nvim_set_keymap('n', 'L', '<Cmd>BufferNext<CR>', noremap)
--- move tab position
-vim.api.nvim_set_keymap('n', '<C-h>', '<Cmd>BufferMovePrevious<CR>', noremap)
-vim.api.nvim_set_keymap('n', '<C-l>', '<Cmd>BufferMoveNext<CR>', noremap)
--- close buffer and open new terminal window
-vim.api.nvim_set_keymap('n', '<C-x>', '<Cmd>BufferClose<CR>', noremap)
-vim.api.nvim_set_keymap('n', '<C-b>c', '<Cmd>e term://fish<CR>', noremap)
-
--- nvim tree
-require('nvim-tree').setup()
-vim.api.nvim_set_keymap('n', '<C-t>', '<Cmd>NvimTreeOpen<CR>', noremap)
-
 -- this is so we can prevent neovim from opening new neovim windows
 -- inside neovim terminals
 vim.env.IN_NEOVIM = 'yes'
+
+-- LuaFormatter on
