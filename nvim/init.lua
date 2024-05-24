@@ -17,6 +17,9 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
+vim.opt.termguicolors = true
+vim.opt.mouse = 'a'
+
 require("globals")
 
 -- options for vim.api.nvim_set_keymap
@@ -331,9 +334,6 @@ filetype indent off
 
 -- ESC removes the highlighted matches that bother me after I search something with /
 vim.api.nvim_set_keymap('n', '<esc>', ':noh<return><esc>', noremap)
-
-vim.opt.termguicolors = true
-vim.opt.mouse = 'a'
 
 -- status line copied from https://github.com/ckipp01/dots
 vim.opt.statusline = [[%!luaeval('require("statusline").super_custom_status_line()')]]
