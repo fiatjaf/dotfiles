@@ -289,10 +289,9 @@ require("lazy").setup({
       rocks = { "http", "cqueues", "rapidjson" },
     }
   },
-
   {
     'nvim-nostr',
-    dir = '~/comp/nvim-nostr'
+    dir = '~/comp/nostr.nvim'
   }
 })
 
@@ -304,15 +303,12 @@ vim.opt.compatible = false
 vim.opt.background = "dark"
 vim.cmd.colorscheme("kanagawa")
 
--- set utf8 as standard encoding and en_US as the standard language
+-- set utf8 as standard encoding
 vim.opt.encoding="utf-8"
 
--- turn TAB into spaces
-vim.opt.expandtab = true
-
--- 1 tab == 4 spaces
 vim.opt.shiftwidth = 0 -- match tabstop
-vim.opt.tabstop = 4
+vim.opt.tabstop = 4 -- 1 tab == 4 spaces
+vim.opt.expandtab = true -- turn TAB into spaces
 
 -- show these characters in place of tabs
 vim.opt.list = true
