@@ -13,6 +13,7 @@ ln -sf "$here/eslintrc.json" $HOME/.eslintrc.json
 ln -sf "$here/tmux.conf" $HOME/.tmux.conf
 ln -sf "$here/prettierrc.yaml" $HOME/.prettierrc.yaml
 ln -sf "$here/jq" $HOME/.jq
+ln -sf "$here/mpv.conf" $HOME/.config/mpv/mpv.conf
 
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
