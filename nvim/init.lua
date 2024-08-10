@@ -281,17 +281,6 @@ require("lazy").setup({
       vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', noremap)
       -- see also the telescope settings as some of the lsp stuff will be done on telescope
     end
-  },
-  {
-    'vhyrro/luarocks.nvim',
-    priority = 1000,
-    opts = {
-      rocks = { "http", "cqueues", "rapidjson" },
-    }
-  },
-  {
-    'nvim-nostr',
-    dir = '~/comp/nostr.nvim'
   }
 })
 
