@@ -26,6 +26,7 @@ require("globals")
 local noremap = { noremap = true, silent = true }
 
 require("lazy").setup({
+  'rebelot/kanagawa.nvim',
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',
@@ -200,25 +201,6 @@ require("lazy").setup({
         open_mapping = [[<c-\>]],
         shell = '/usr/bin/fish',
       })
-    end
-  },
-  'rebelot/kanagawa.nvim',
-  'rcarriga/nvim-notify',
-  'zk-org/zk-nvim',
-  {
-    'MunifTanjim/nui.nvim',
-    config = function ()
-      require('zk').setup({
-        picker = 'telescope',
-      })
-    end
-  },
-  {
-    'folke/flash.nvim',
-    event = "VeryLazy",
-    config = function ()
-      require('flash').setup()
-      require('flash').toggle(true)
     end
   },
   {
