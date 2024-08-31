@@ -17,6 +17,8 @@ mkdir -p $HOME/.config/mpv
 ln -sf "$here/mpv.conf" $HOME/.config/mpv/mpv.conf
 mkdir -p $HOME/.config/btop
 ln -sf "$here/btop.conf" $HOME/.config/btop/btop.conf
+mkdir -p "$HOME/npm_modules"
+ln -sf "$here/npmrc" $HOME/.npmrc
 
 mkdir -p $HOME/.i3
 ln -sf "$here/i3" $HOME/.i3/config
