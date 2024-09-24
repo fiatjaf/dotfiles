@@ -39,6 +39,13 @@ require("lazy").setup({
   'linkinpark342/xonsh-vim',
   'nvim-lua/plenary.nvim',
   {
+    'AckslD/nvim-neoclip.lua',
+    config = function ()
+      require('neoclip').setup({ history = 10 })
+      vim.api.nvim_set_keymap("n", "<C-y>", "<cmd>Telescope neoclip<CR>", noremap)
+    end,
+  },
+  {
     'jose-elias-alvarez/null-ls.nvim',
     config = function ()
       local null_ls = require("null-ls")
