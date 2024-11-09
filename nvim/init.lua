@@ -381,6 +381,7 @@ vim.api.nvim_set_keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_de
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<CR>", noremap)
 vim.api.nvim_set_keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", noremap)
 vim.api.nvim_set_keymap("n", "<C-e>", "<cmd>lua vim.lsp.buf.code_action()<CR>", noremap)
+vim.api.nvim_set_keymap("n", "gl", "<cmd>lua vim.lsp.codelens.run()<CR>", noremap)
 
 -- this is so we can prevent neovim from opening new neovim windows
 -- inside neovim terminals
