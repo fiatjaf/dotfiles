@@ -1,3 +1,6 @@
+global:
+    echo 'this command hit the global justfile'
+
 hotel:
     tmux new -s hotel -c ~/hotel-data -d
     tmux send-keys -t hotel 'just watch' ENTER
@@ -6,4 +9,4 @@ hotel:
 
 servers:
     #!/usr/bin/env fish
-    i3-msg 'workspace "7"; split h; exec "alacritty -e fish --login --init-command \'ssh njump journalctl -f --output cat\'"; exec "alacritty -e fish --login --init-command \'ssh erhard journalctl -f --output cat\'"; exec "alacritty -e fish --login --init-command \'ssh cantillon journalctl -f --output cat\'"'
+    i3-msg 'workspace "5"; split h; exec "alacritty -e fish --login --init-command \'ssh njump journalctl -f --output cat\'"; exec "alacritty -e fish --login --init-command \'ssh erhard journalctl -f --output cat\'"; exec "alacritty -e fish --login --init-command \'ssh cantillon journalctl -f --output cat\'"'
