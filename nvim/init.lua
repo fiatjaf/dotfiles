@@ -73,14 +73,72 @@ require("lazy").setup({
               return { "--edition=2021" }
             end,
           }),
-          null_ls.builtins.formatting.eslint,
-          null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.diagnostics.luacheck,
+          -- null_ls.builtins.formatting.eslint,
+          null_ls.builtins.diagnostics.eslint.with({
+            condition = function (utils)
+              return utils.root_has_file({
+                'eslint.config.js',
+                'eslint.config.mjs',
+                'eslint.config.cjs',
+                '.eslintrc.json',
+                '.eslintrc.yml',
+                '.eslintrc.js',
+                '.eslintrc.cjs',
+                '.eslintrc',
+              })
+            end
+          }),
+          null_ls.builtins.diagnostics.deno_lint.with({
+            condition = function (utils)
+              return utils.root_has_file({
+                'deno.json',
+                'deno.jsonc',
+              }) and not utils.root_has_file({
+                'eslint.config.js',
+                'eslint.config.mjs',
+                'eslint.config.cjs',
+                '.eslintrc.json',
+                '.eslintrc.yml',
+                '.eslintrc.js',
+                '.eslintrc.cjs',
+                '.eslintrc',
+              })
+            end
+          }),
           null_ls.builtins.formatting.prettier
             .with({
               extra_filetypes = { "svelte" },
-              disabled_filetypes = { "markdown", "markdown.mdx" }
+              disabled_filetypes = { "markdown", "markdown.mdx" },
+              condition = function (utils)
+                return utils.root_has_file({
+                  '.prettierrc',
+                  '.prettierrc.yml',
+                  '.prettierrc.yaml',
+                  '.prettierrc.json',
+                  '.prettierrc.js',
+                  '.prettierrc.cjs',
+                  '.prettierrc.mjs',
+                })
+              end
             }),
+          null_ls.builtins.formatting.deno_fmt
+            .with({
+              condition = function (utils)
+                return utils.root_has_file({
+                  'deno.json',
+                  'deno.jsonc',
+                }) and not utils.root_has_file({
+                  '.prettierrc',
+                  '.prettierrc.yml',
+                  '.prettierrc.yaml',
+                  '.prettierrc.json',
+                  '.prettierrc.js',
+                  '.prettierrc.cjs',
+                  '.prettierrc.mjs',
+                })
+              end
+            }),
+          null_ls.builtins.diagnostics.luacheck,
           null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.ocamlformat,
           null_ls.builtins.diagnostics.fish,
@@ -212,28 +270,48 @@ require("lazy").setup({
   },
   {
     'neovim/nvim-lspconfig',
+    opts = {
+      codelens = { enabled = true }
+    },
     config = function ()
       local lspconfig = require('lspconfig')
 
+      vim.lsp.set_log_level("debug")
+
+      lspconfig['jqls'].setup({})
       lspconfig['templ'].setup({})
-      lspconfig['gopls'].setup({})
+      lspconfig['gopls'].setup({
+        settings = {
+          gopls = {
+            codelenses = {
+              gc_details = true
+            },
+            analyses = {
+              bligblug = true,
+              unusedparams = false,
+              nilness = false
+            }
+          }
+        }
+      })
       lspconfig['tailwindcss'].setup({
         filetypes = { "templ", "javascript", "typescript", "react", "svelte" },
         init_options = { userLanguages = { templ = "html" } },
       })
       lspconfig['clangd'].setup({})
-      lspconfig['flow'].setup({})
-      lspconfig['tsserver'].setup({
-        root_dir = function (fname)
-          return lspconfig.util.root_pattern('tsconfig.json')(fname)
-            or (
-                  not lspconfig.util.root_pattern('.flowconfig')(fname)
-              and lspconfig.util.root_pattern('package.json')(fname)
-            )
-        end,
-        single_file_support = false
+      lspconfig['ts_ls'].setup({
+        root_dir = lspconfig.util.root_pattern("package.json"),
+        single_file_support = false,
+        settings = {
+          typescript = {
+            implementationsCodeLens = { enabled = true },
+            referencesCodeLens = { enabled = true, showOnAllFunctions = true },
+          }
+        },
       })
-      lspconfig['denols'].setup({ root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc") })
+      lspconfig['denols'].setup({
+        root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
+      })
       lspconfig['zls'].setup({})
       lspconfig['svelte'].setup({})
       lspconfig['rust_analyzer'].setup({})
