@@ -14,3 +14,4 @@ def tag(tagName): tags(tagName) | .[0];
 def tag_value(tagName): tag(tagName)[1];
 def has_tag(tagName): (tags(tagName) | length) > 0;
 def hasnt_tag(tagName): (tags(tagName) | length) == 0;
+def has_tag_value(tagName; tagValue): tags(tagName) | map(select(.[1] == tagValue)) | length > 0;
