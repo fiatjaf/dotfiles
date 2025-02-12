@@ -69,10 +69,10 @@ bindsym $mod+Shift+space floating toggle
 exec setxkbmap -layout br
 
 # window colors
-client.focused          #222323 #444444 #888888
-client.focused_inactive #222323 #222323 #888888
-client.unfocused        #222323 #222323 #888888
-client.urgent           #2f343a #8c644c #888888
+client.focused          #62cc64 #62cc64 #000000
+client.focused_inactive #006142 #006142 #000000
+client.unfocused        #007b7b #007b7b #000000
+client.urgent           #a5b734 #a5b734 #000000
 
 # focus the child container
 #bindcode $mod+d focus child
