@@ -315,7 +315,7 @@ require("lazy").setup({
       lspconfig['zls'].setup({})
       lspconfig['svelte'].setup({})
       lspconfig['rust_analyzer'].setup({})
-      lspconfig['kotlin_language_server'].setup({ root_dir = lspconfig.util.root_pattern('build.gradle') })
+      lspconfig['kotlin_language_server'].setup({})
       lspconfig['ocamllsp'].setup({})
       lspconfig['dartls'].setup({})
       lspconfig['lua_ls'].setup({
