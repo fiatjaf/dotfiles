@@ -53,9 +53,9 @@ function vipsql
   end
 end
 
-function fish_right_prompt
-  date +'%R'
-end
+# function fish_right_prompt
+#   /usr/bin/date +'%R'
+# end
 
 # kanagawa theme
 set -l foreground DCD7BA

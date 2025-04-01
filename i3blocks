@@ -2,23 +2,17 @@ command=$SCRIPT_DIR/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-[volume]
-command=amixer get Master | grep '%' | awk '{print($5)}' | head -n 1
-label=volume=
-interval=once
-signal=10
-
-[temperature]
-command=sensors -j | jq -rc 'to_entries | .[0].value.edge.temp1_input | "temp=\(.)°C"'
-interval=120
-
-[memory]
-command=free -mh | grep Mem | awk '{ print("mem="$2" free="$4) }'
-interval=60
+[tasks]
+command=chrono status -f '{{ .Project }}={{ humanize .StartedAt }}'
+interval=4
 
 [disk]
 interval=30
 command=df -h | grep sda | awk '{ print("disk="$2" free="$4) }'
+
+[memory]
+command=free -mh | grep Mem | awk '{ print("mem="$2" free="$4) }'
+interval=60
 
 [netuptest]
 command=ping -w 10 -c 1 8.8.8.8 | grep time | awk '{ print($7) }' | sed 's/time/ping/'
@@ -36,7 +30,7 @@ min_width=CPU: 100.00%
 command=/usr/local/libexec/i3blocks/cpu_usage
 
 [btcusd]
-label=btc=
+label=$
 command=curl https://www.bitstamp.net/api/ticker/ | jq -cr '.last'
 interval=600
 
@@ -46,5 +40,5 @@ interval=3
 
 [block]
 label=block=
-command=curl -s https://blockstream.info/api/blocks/tip/height | jq -Rcr
+command=curl -s https://mempool.space/api/blocks/tip/height | jq -Rcr
 interval=60
